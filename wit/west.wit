@@ -1,0 +1,108 @@
+package west:test@0.1.0;
+
+interface http-test {
+    use wasi:http/types@0.2.0.{response-outparam, future-incoming-response, incoming-request, outgoing-request};
+
+    new-response-outparam: func() -> tuple<response-outparam, future-incoming-response>;
+    new-incoming-request: func(req: outgoing-request) -> incoming-request;
+}
+
+world imports {
+    import http-test;
+}
+
+world http-test-passthrough {
+    import http-test;
+    export http-test;
+}
+
+world wasi-passthrough {
+    export wasi:cli/environment@0.2.0;
+    export wasi:cli/stderr@0.2.0;
+    export wasi:cli/stdin@0.2.0;
+    export wasi:cli/stdout@0.2.0;
+    export wasi:cli/terminal-input@0.2.0;
+    export wasi:cli/terminal-output@0.2.0;
+    export wasi:cli/terminal-stderr@0.2.0;
+    export wasi:cli/terminal-stdin@0.2.0;
+    export wasi:cli/terminal-stdout@0.2.0;
+    export wasi:clocks/monotonic-clock@0.2.0;
+    export wasi:filesystem/preopens@0.2.0;
+    export wasi:filesystem/types@0.2.0;
+    export wasi:http/outgoing-handler@0.2.0;
+    export wasi:http/types@0.2.0;
+    export wasi:io/error@0.2.0;
+    export wasi:io/poll@0.2.0;
+    export wasi:io/streams@0.2.0;
+    export wasi:sockets/ip-name-lookup@0.2.0;
+    export wasi:sockets/tcp@0.2.0;
+    export wasi:sockets/udp@0.2.0;
+
+    import wasi:cli/environment@0.2.0;
+    import wasi:cli/stderr@0.2.0;
+    import wasi:cli/stdin@0.2.0;
+    import wasi:cli/stdout@0.2.0;
+    import wasi:cli/terminal-input@0.2.0;
+    import wasi:cli/terminal-output@0.2.0;
+    import wasi:cli/terminal-stderr@0.2.0;
+    import wasi:cli/terminal-stdin@0.2.0;
+    import wasi:cli/terminal-stdout@0.2.0;
+    import wasi:clocks/monotonic-clock@0.2.0;
+    import wasi:filesystem/preopens@0.2.0;
+    import wasi:filesystem/types@0.2.0;
+    import wasi:http/outgoing-handler@0.2.0;
+    import wasi:http/types@0.2.0;
+    import wasi:io/error@0.2.0;
+    import wasi:io/poll@0.2.0;
+    import wasi:io/streams@0.2.0;
+    import wasi:sockets/ip-name-lookup@0.2.0;
+    import wasi:sockets/tcp@0.2.0;
+    import wasi:sockets/udp@0.2.0;
+}
+
+world passthrough {
+    export wasi:cli/environment@0.2.0;
+    export wasi:cli/stderr@0.2.0;
+    export wasi:cli/stdin@0.2.0;
+    export wasi:cli/stdout@0.2.0;
+    export wasi:cli/terminal-input@0.2.0;
+    export wasi:cli/terminal-output@0.2.0;
+    export wasi:cli/terminal-stderr@0.2.0;
+    export wasi:cli/terminal-stdin@0.2.0;
+    export wasi:cli/terminal-stdout@0.2.0;
+    export wasi:clocks/monotonic-clock@0.2.0;
+    export wasi:filesystem/preopens@0.2.0;
+    export wasi:filesystem/types@0.2.0;
+    export wasi:http/outgoing-handler@0.2.0;
+    export wasi:http/types@0.2.0;
+    export wasi:io/error@0.2.0;
+    export wasi:io/poll@0.2.0;
+    export wasi:io/streams@0.2.0;
+    export wasi:sockets/ip-name-lookup@0.2.0;
+    export wasi:sockets/tcp@0.2.0;
+    export wasi:sockets/udp@0.2.0;
+
+    import wasi:cli/environment@0.2.0;
+    import wasi:cli/stderr@0.2.0;
+    import wasi:cli/stdin@0.2.0;
+    import wasi:cli/stdout@0.2.0;
+    import wasi:cli/terminal-input@0.2.0;
+    import wasi:cli/terminal-output@0.2.0;
+    import wasi:cli/terminal-stderr@0.2.0;
+    import wasi:cli/terminal-stdin@0.2.0;
+    import wasi:cli/terminal-stdout@0.2.0;
+    import wasi:clocks/monotonic-clock@0.2.0;
+    import wasi:filesystem/preopens@0.2.0;
+    import wasi:filesystem/types@0.2.0;
+    import wasi:http/outgoing-handler@0.2.0;
+    import wasi:http/types@0.2.0;
+    import wasi:io/error@0.2.0;
+    import wasi:io/poll@0.2.0;
+    import wasi:io/streams@0.2.0;
+    import wasi:sockets/ip-name-lookup@0.2.0;
+    import wasi:sockets/tcp@0.2.0;
+    import wasi:sockets/udp@0.2.0;
+
+    import http-test;
+    export http-test;
+}

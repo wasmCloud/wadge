@@ -1,0 +1,28 @@
+[workspace]
+resolver = "2"
+members = ["crates/*", "tests/components/*"]
+
+[workspace.package]
+authors = ["Roman Volosatovs <rvolosatovs@riseup.net>"]
+categories = ["wasm"]
+edition = "2021"
+homepage = "https://github.com/rvolosatovs/west"
+license = "Apache-2.0 WITH LLVM-exception"
+repository = "https://github.com/rvolosatovs/west"
+
+[workspace.dependencies]
+anyhow = "1"
+cbindgen = "0.26"
+http = "1"
+tokio = "1"
+tracing = "0.1"
+tracing-subscriber = "0.1"
+wasi-preview1-component-adapter-provider = "24"
+wasmparser = "0.216"
+wasmtime = "24"
+wasmtime-wasi = "24"
+wasmtime-wasi-http = "24"
+west = { path = "./crates/west" }
+west-passthrough = { path = "./crates/passthrough" }
+wit-bindgen = "0.27"
+wit-component = "0.216"

@@ -1,0 +1,4 @@
+/target
+*.wasm
+*.a
+*.h

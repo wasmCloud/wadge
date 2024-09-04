@@ -1,0 +1,5 @@
+go 1.23.0
+
+use ./go
+
+replace github.com/rvolosatovs/west/go v0.0.1 => ./go

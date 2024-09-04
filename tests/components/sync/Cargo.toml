@@ -1,0 +1,16 @@
+[package]
+name = "sync-test-component"
+version = "0.1.0"
+publish = false
+
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wit-bindgen = { workspace = true, features = ["realloc", "macros"] }

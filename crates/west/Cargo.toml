@@ -1,0 +1,20 @@
+[package]
+name = "west"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+http = { workspace = true }
+tokio = { workspace = true }
+wasi-preview1-component-adapter-provider = { workspace = true }
+wasmparser = { workspace = true }
+wasmtime = { workspace = true }
+wasmtime-wasi = { workspace = true }
+wasmtime-wasi-http = { workspace = true }
+wit-component = { workspace = true }
+
+[build-dependencies]
+anyhow = { workspace = true }
+wasi-preview1-component-adapter-provider = { workspace = true }
+wit-component = { workspace = true }
