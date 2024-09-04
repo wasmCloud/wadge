@@ -1,0 +1,54 @@
+[package]
+name = "west"
+version = "0.1.0-alpha.1"
+description = "WebAssembly component test runtime"
+
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[workspace]
+members = ["crates/*", "tests/components/*"]
+
+[workspace.package]
+authors = ["Roman Volosatovs <rvolosatovs@riseup.net>"]
+categories = ["wasm"]
+edition = "2021"
+homepage = "https://github.com/rvolosatovs/west"
+license = "Apache-2.0 WITH LLVM-exception"
+repository = "https://github.com/rvolosatovs/west"
+
+[dependencies]
+anyhow = { workspace = true }
+http = { workspace = true }
+tokio = { workspace = true }
+wasi-preview1-component-adapter-provider = { workspace = true }
+wasmparser = { workspace = true }
+wasmtime = { workspace = true }
+wasmtime-wasi = { workspace = true }
+wasmtime-wasi-http = { workspace = true }
+wit-component = { workspace = true }
+
+[build-dependencies]
+anyhow = { workspace = true }
+wasi-preview1-component-adapter-provider = { workspace = true }
+wit-component = { workspace = true }
+
+[workspace.dependencies]
+anyhow = "1"
+cbindgen = "0.27"
+http = "1"
+tokio = "1"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+wasi-preview1-component-adapter-provider = "24"
+wasmparser = "0.217"
+wasmtime = "24"
+wasmtime-wasi = "24"
+wasmtime-wasi-http = "24"
+west-passthrough = { version = "0.1.0-alpha.1", path = "./crates/passthrough" }
+west = { version = "0.1.0-alpha.1", path = "." }
+wit-bindgen = "0.32"
+wit-component = "0.217"

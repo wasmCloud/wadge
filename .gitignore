@@ -1,0 +1,5 @@
+/target
+*.wasm
+*.a
+west_bindings_test.go
+/go/internal/tests/*/bindings/*

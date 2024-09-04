@@ -1,0 +1,26 @@
+[package]
+name = "west-sys"
+version = "0.1.0-alpha.1"
+description = "WebAssembly component test runtime C bindings"
+
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+anyhow = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter", "fmt"] }
+wasmtime = { workspace = true }
+wasmtime-wasi = { workspace = true }
+wasmtime-wasi-http = { workspace = true }
+west = { workspace = true }
+
+[build-dependencies]
+anyhow = { workspace = true }
+cbindgen = { workspace = true }

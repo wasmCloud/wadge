@@ -1,0 +1,13 @@
+package west-test:fib;
+
+interface fib {
+    fib: func(n: u32) -> u64;
+}
+
+world guest {
+    import fib;
+}
+
+world host {
+    export fib;
+}

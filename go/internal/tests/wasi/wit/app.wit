@@ -1,0 +1,10 @@
+package west-test:wasi;
+
+world service {
+    export wasi:http/incoming-handler@0.2.0;
+
+    // Import all CLI interfaces, which are used by Go libraries
+    include wasi:cli/imports@0.2.0;
+
+    import west-test:fib/fib;
+}
