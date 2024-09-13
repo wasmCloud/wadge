@@ -1,4 +1,5 @@
 //go:generate cargo build -p west-sys --release
+//go:generate cp ../include/west.h west.h
 //go:generate go run github.com/ydnar/wasm-tools-go/cmd/wit-bindgen-go@v0.1.5 generate -w imports -o bindings ../wit
 
 package west
@@ -8,7 +9,7 @@ package west
 // #cgo linux,amd64   LDFLAGS: -L${SRCDIR}/../lib/x86_64-linux -lwest
 // #cgo linux,arm64   LDFLAGS: -L${SRCDIR}/../lib/aarch64-linux -lwest
 // #cgo windows,amd64 LDFLAGS: -L${SRCDIR}/../lib/x86_64-windows -lwest
-// #include "../include/west.h"
+// #include "./west.h"
 // #include <stdlib.h>
 import "C"
 
