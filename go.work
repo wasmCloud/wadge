@@ -1,5 +1,5 @@
 go 1.23.0
 
-use ./go
+use ./.
 
-replace github.com/rvolosatovs/west/go v0.0.1 => ./go
+replace github.com/rvolosatovs/west v0.0.1 => ./.
