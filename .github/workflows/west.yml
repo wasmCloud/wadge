@@ -45,13 +45,13 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/setup-go@v5
         with:
-          go-version-file: 'go/go.mod'
+          go-version-file: 'go.mod'
       - uses: cargo-bins/cargo-binstall@v1.10.5
       - run: rustup show
       #- run: cargo test --workspace --all-targets
       - run: cargo binstall -y wasm-tools@1.217
-      - run: go generate ./go/...
-      - run: go test ./go/...
+      - run: go generate ./...
+      - run: go test ./...
       - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: west-${{ matrix.config.target }}
