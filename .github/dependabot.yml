@@ -1,0 +1,24 @@
+version: 2
+updates:
+- package-ecosystem: "cargo"
+  directory: "/"
+  schedule:
+    interval: "daily"
+
+- package-ecosystem: "gomod"
+  directory: "/go"
+  schedule:
+    interval: "daily"
+
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "daily"
+- package-ecosystem: "github-actions"
+  directory: "/.github/actions/build-nix"
+  schedule:
+    interval: "daily"
+- package-ecosystem: "github-actions"
+  directory: "/.github/actions/install-nix"
+  schedule:
+    interval: "daily"

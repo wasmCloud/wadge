@@ -1,18 +1,18 @@
 {
   nixConfig.extra-substituters = [
-    "https://wrpc.cachix.org"
-    "https://wasmcloud.cachix.org"
+    "https://west.cachix.org"
     "https://nixify.cachix.org"
     "https://crane.cachix.org"
+    "https://wasmcloud.cachix.org"
     "https://bytecodealliance.cachix.org"
     "https://nix-community.cachix.org"
     "https://cache.garnix.io"
   ];
   nixConfig.extra-trusted-public-keys = [
-    "wrpc.cachix.org-1:J1xnzWo1nnhlzOmZCA10/5wz87LwCFwQtnqCibCy67w="
-    "wasmcloud.cachix.org-1:9gRBzsKh+x2HbVVspreFg/6iFRiD4aOcUQfXVDl3hiM="
+    "west.cachix.org-1:F8ZwKSRWiSCh+rMyZAP7xhgUP6ZW88AGXE7KOR30Fg0="
     "nixify.cachix.org-1:95SiUQuf8Ij0hwDweALJsLtnMyv/otZamWNRp1Q1pXw="
     "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="
+    "wasmcloud.cachix.org-1:9gRBzsKh+x2HbVVspreFg/6iFRiD4aOcUQfXVDl3hiM="
     "bytecodealliance.cachix.org-1:0SBgh//n2n0heh0sDFhTm+ZKBRy2sInakzFGfzN531Y="
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
@@ -137,8 +137,6 @@
               nativeCheckInputs =
                 nativeCheckInputs
                 ++ [
-                  pkgs.nats-server
-
                   pkgs.pkgsUnstable.go
                 ];
             };
@@ -152,7 +150,6 @@
             buildInputs = [
               pkgs.wit-deps
 
-              pkgs.pkgsUnstable.binaryen
               pkgs.pkgsUnstable.go_1_23
               pkgs.pkgsUnstable.wasm-tools
               pkgs.pkgsUnstable.wasmtime

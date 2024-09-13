@@ -1,0 +1,260 @@
+name: west
+
+on:
+  merge_group:
+  pull_request:
+  push:
+    branches:
+      - main
+    tags:
+      - 'crates/passthrough/v[0-9].[0-9]+.[0-9]+'
+      - 'crates/passthrough/v[0-9].[0-9]+.[0-9]+-*'
+      - 'crates/west-sys/v[0-9].[0-9]+.[0-9]+'
+      - 'crates/west-sys/v[0-9].[0-9]+.[0-9]+-*'
+      - 'crates/west/v[0-9].[0-9]+.[0-9]+'
+      - 'crates/west/v[0-9].[0-9]+.[0-9]+-*'
+      - 'v[0-9].[0-9]+.[0-9]+'
+      - 'v[0-9].[0-9]+.[0-9]+-*'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        target:
+        - aarch64-unknown-linux-musl
+        - aarch64-apple-darwin
+        - aarch64-linux-android
+        - x86_64-apple-darwin
+        - x86_64-pc-windows-gnu
+        - x86_64-unknown-linux-musl
+
+    name: west-${{ matrix.target }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ./.github/actions/install-nix
+        with:
+          cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - uses: ./.github/actions/build-nix
+        with:
+          package: west-${{ matrix.config.target }}
+
+  test-dev:
+    strategy:
+      matrix:
+        os:
+        - ubuntu-latest
+        - windows-latest
+        - macos-13
+        - macos-14
+    if: ${{ !startsWith(github.ref, 'refs/tags/go/') }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - run: rustup show
+      - run: go generate ./go/...
+      - run: go test -v ./go/...
+
+  test-lib:
+    strategy:
+      matrix:
+        config:
+        - os: ubuntu-latest
+          lib: x86_64-linux
+          target: west-x86_64-unknown-linux-musl
+
+        - os: windows-latest
+          lib: x86_64-windows
+          target: west-x86_64-pc-windows-gnu
+
+        - os: macos-13
+          lib: x86_64-darwin
+          target: west-x86_64-apple-darwin
+
+        - os: macos-14
+          lib: aarch64-darwin
+          target: west-aarch64-apple-darwin
+
+    if: ${{ !startsWith(github.ref, 'refs/tags/go/') }}
+    runs-on: ${{ matrix.config.os }}
+    needs: build
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - run: rustup show
+      - run: go generate ./go/...
+      - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          name: west-${{ matrix.config.target }}
+          path: lib/${{ matrix.config.lib }}
+      - run: go test ./go/...
+
+  cargo:
+    strategy:
+      matrix:
+        check:
+          - audit
+          - fmt
+          - clippy
+          - nextest
+
+    name: cargo ${{ matrix.check }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ./.github/actions/install-nix
+        with:
+          cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: go work vendor -e -v
+        if: ${{ matrix.check }} == "nextest" 
+      - run: git add .
+        if: ${{ matrix.check }} == "nextest" 
+      - run: nix build -L .#checks.x86_64-linux.${{ matrix.check }}
+
+  crates:
+    if: ${{ !startsWith(github.ref, 'refs/tags/go/') }}
+    strategy:
+      matrix:
+        include:
+          - crate: passthrough
+
+          - crate: west
+
+          - crate: west-sys
+            workspace-dependencies: true
+
+    name: publish ${{ matrix.crate }} to crates.io
+    needs: cargo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Extract tag context
+        id: ctx
+        run: |
+          version=${GITHUB_REF_NAME#crates/${{ matrix.crate }}/v}
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "version is ${version}"
+          if [[ $version == *"-"* ]]; then
+            echo "version ${version} is a pre-release"
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: dry-run publish ${{ matrix.crate }} to crates.io
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        continue-on-error: ${{ matrix.workspace-dependencies }} # publish may fail due to workspace crates not being published yet
+        run: cargo publish --dry-run
+        working-directory: ./crates/${{ matrix.crate }}
+
+      - name: publish ${{ matrix.crate }} to crates.io
+        if: startsWith(github.ref, format('refs/tags/crates/{0}/v', matrix.crate)) && !steps.ctx.outputs.prerelease
+        continue-on-error: ${{ github.repository_owner != 'rvolosatovs' }}
+        run: |
+          pkgver=$(cargo pkgid | cut -d '@' -f 2)
+          tagver="${{ steps.ctx.outputs.version }}"
+          if ! [ "$pkgver" = "$tagver" ]; then
+            echo "version mismatch, $pkgver (package) != $tagver (tag)"
+            exit 1
+          fi
+          cargo publish --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        working-directory: ./crates/${{ matrix.crate }}
+
+  build-doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ./.github/actions/install-nix
+        with:
+          cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix build -L .#checks.x86_64-linux.doc
+      - run: cp --no-preserve=mode -R ./result/share/doc ./doc
+      - run: rm -f doc/.lock
+      - name: Create `.nojekyll`
+        run: touch doc/.nojekyll
+      - name: Write `index.html`
+        run: |
+          cat <<EOF > doc/index.html
+            <!DOCTYPE html>
+            <meta charset="utf-8">
+            <title>Redirecting to west/index.html</title>
+            <meta http-equiv="refresh" content="0; URL=west/index.html">
+            <link rel="canonical" href="https://${{ github.repository_owner }}.github.io/west/west/index.html">
+          EOF
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: doc
+
+  deploy-doc:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: build-doc
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+        id: deployment
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs:
+      - build
+      - cargo
+      - crates
+      - test-bin
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Extract tag context
+        id: ctx
+        run: |
+          version=${GITHUB_REF_NAME#v}
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "version is ${version}"
+          if [[ $version == *"-"* ]]; then
+            echo "version ${version} is a pre-release"
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: publish west to crates.io
+        run: |
+          pkgver=$(cargo pkgid | cut -d '@' -f 2)
+          tagver="${{ steps.ctx.outputs.version }}"
+          if ![ "$pkgver" = "$tagver" ]; then
+            echo "version mismatch, $pkgver (package) != $tagver (tag)"
+            exit 1
+          fi
+          cargo publish --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+      - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          path: artifacts
+
+      - run: |
+          for dir in ./artifacts/west-*; do
+            target=${dir#./artifacts/west-}
+            for lib_path in $(find ${dir}/lib -type f); do
+              lib=$(basename ${lib_path})
+              mkdir -p ./${lib}
+              mv ${lib_path} ./${lib}/${lib}-${target}.a
+            done
+          done
+
+      - uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v2.0.8
+        with:
+          draft: true
+          prerelease: true
+          generate_release_notes: true
+          files: |
+            ./libwest/*
+
