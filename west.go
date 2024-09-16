@@ -1,4 +1,6 @@
 //go:generate cargo build -p west-sys --release
+//go:generate cargo build -p west-passthrough --target wasm32-unknown-unknown --release
+//go:generate wasm-tools component new target/wasm32-unknown-unknown/release/west_passthrough.wasm -o lib/passthrough.wasm
 //go:generate go run github.com/ydnar/wasm-tools-go/cmd/wit-bindgen-go@v0.1.5 generate -w imports -o bindings ./wit
 
 package west
@@ -13,6 +15,7 @@ package west
 import "C"
 
 import (
+	_ "embed"
 	"errors"
 	"fmt"
 	"log"
@@ -22,6 +25,9 @@ import (
 	"testing"
 	"unsafe"
 )
+
+//go:embed lib/passthrough.wasm
+var Passthrough []byte
 
 var (
 	errorHandlerMu sync.RWMutex
@@ -148,19 +154,20 @@ func NewInstance(conf *Config) (*Instance, error) {
 	var pinner runtime.Pinner
 	defer pinner.Unpin()
 
-	c := C.default_config()
+	wasm := Passthrough
 	if conf != nil {
 		if len(conf.Wasm) > 0 {
-			ptr := unsafe.SliceData(conf.Wasm)
-			pinner.Pin(ptr)
-
-			c.wasm = C.List_u8{
-				ptr: (*C.uchar)(ptr),
-				len: C.ulong(len(conf.Wasm)),
-			}
+			wasm = conf.Wasm
 		}
 	}
-	ptr := C.instance_new(c)
+	wasmPtr := unsafe.SliceData(wasm)
+	pinner.Pin(wasmPtr)
+	ptr := C.instance_new(C.Config{
+		wasm: C.List_u8{
+			ptr: (*C.uchar)(wasmPtr),
+			len: C.ulong(len(wasm)),
+		},
+	})
 	if ptr == nil {
 		n := C.error_len()
 		buf := make([]C.char, n)

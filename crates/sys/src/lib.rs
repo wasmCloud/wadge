@@ -21,9 +21,6 @@ mod ffi;
 
 static ENGINE: LazyLock<wasmtime::Engine> = LazyLock::new(wasmtime::Engine::default);
 
-pub const PASSTHROUGH_PTR: *const u8 = west::PASSTHROUGH.as_ptr();
-pub const PASSTHROUGH_LEN: usize = west::PASSTHROUGH.len();
-
 #[repr(C)]
 #[derive(Debug)]
 pub struct List<T> {

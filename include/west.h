@@ -12,8 +12,6 @@ typedef struct Config {
   struct List_u8 wasm;
 } Config;
 
-struct Config default_config(void);
-
 uintptr_t error_take(char *buf, uintptr_t len);
 
 uintptr_t error_len(void);

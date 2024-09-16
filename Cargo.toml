@@ -1,6 +1,6 @@
 [package]
 name = "west"
-version = "0.1.0-alpha.1"
+version = "0.1.0-alpha.2"
 description = "WebAssembly component test runtime"
 
 authors.workspace = true
@@ -31,11 +31,6 @@ wasmtime-wasi = { workspace = true }
 wasmtime-wasi-http = { workspace = true }
 wit-component = { workspace = true }
 
-[build-dependencies]
-anyhow = { workspace = true }
-wasi-preview1-component-adapter-provider = { workspace = true }
-wit-component = { workspace = true }
-
 [workspace.dependencies]
 anyhow = "1"
 cbindgen = "0.27"
@@ -49,6 +44,6 @@ wasmtime = "24"
 wasmtime-wasi = "24"
 wasmtime-wasi-http = "24"
 west-passthrough = { version = "0.1.0-alpha.1", path = "./crates/passthrough" }
-west = { version = "0.1.0-alpha.1", path = "." }
+west = { version = "0.1.0-alpha.2", path = "." }
 wit-bindgen = "0.32"
 wit-component = "0.217"
