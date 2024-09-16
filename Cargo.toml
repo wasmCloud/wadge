@@ -26,24 +26,24 @@ http = { workspace = true }
 tokio = { workspace = true }
 wasi-preview1-component-adapter-provider = { workspace = true }
 wasmparser = { workspace = true }
-wasmtime = { workspace = true }
+wasmtime = { workspace = true, features = ["cranelift"] }
 wasmtime-wasi = { workspace = true }
 wasmtime-wasi-http = { workspace = true }
 wit-component = { workspace = true }
 
 [workspace.dependencies]
-anyhow = "1"
-cbindgen = "0.27"
-http = "1"
-tokio = "1"
-tracing = "0.1"
-tracing-subscriber = "0.3"
-wasi-preview1-component-adapter-provider = "24"
-wasmparser = "0.217"
-wasmtime = "24"
-wasmtime-wasi = "24"
-wasmtime-wasi-http = "24"
+anyhow = { version = "1", default-features = false }
+cbindgen = { version = "0.27", default-features = false }
+http = { version = "1", default-features = false }
+tokio = { version = "1", default-features = false }
+tracing = { version = "0.1", default-features = false }
+tracing-subscriber = { version = "0.3", default-features = false }
+wasi-preview1-component-adapter-provider = { version = "24", default-features = false }
+wasmparser = { version = "0.217", default-features = false }
+wasmtime = { version = "24", default-features = false }
+wasmtime-wasi = { version = "24", default-features = false }
+wasmtime-wasi-http = { version = "24", default-features = false }
 west-passthrough = { version = "0.1.0-alpha.1", path = "./crates/passthrough" }
 west = { version = "0.1.0-alpha.2", path = "." }
-wit-bindgen = "0.32"
-wit-component = "0.217"
+wit-bindgen = { version = "0.32", default-features = false }
+wit-component = { version = "0.217", default-features = false }
