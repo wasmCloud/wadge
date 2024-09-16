@@ -9,6 +9,17 @@ edition.workspace = true
 license.workspace = true
 repository.workspace = true
 
+[profile.release.package.west-passthrough]
+opt-level = 's'
+strip = true
+
+[profile.release.package.west-sys]
+opt-level = 's'
+strip = true
+
+[profile.release]
+lto = true
+
 [workspace]
 members = ["crates/*", "tests/components/*"]
 
