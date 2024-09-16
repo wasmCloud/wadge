@@ -24,8 +24,6 @@ mod bindings {
     });
 }
 
-pub const PASSTHROUGH: &[u8] = include_bytes!(concat!(env!("OUT_DIR"), "/west_passthrough.wasm"));
-
 struct Ctx {
     wasi: WasiCtx,
     http: WasiHttpCtx,
@@ -173,15 +171,6 @@ impl bindings::west::test::http_test::Host for Ctx {
 pub struct Config<'a> {
     pub engine: Engine,
     pub wasm: &'a [u8],
-}
-
-impl Default for Config<'_> {
-    fn default() -> Self {
-        Self {
-            engine: Engine::default(),
-            wasm: PASSTHROUGH,
-        }
-    }
 }
 
 pub struct Func<'a> {

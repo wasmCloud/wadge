@@ -4,7 +4,7 @@ use core::ptr::{self, null_mut};
 use std::ffi::CString;
 use std::sync::{LazyLock, Mutex};
 
-use crate::{call, instantiate, Config, List, PASSTHROUGH_LEN, PASSTHROUGH_PTR};
+use crate::{call, instantiate, Config};
 
 static ERROR: LazyLock<Mutex<Option<CString>>> = LazyLock::new(Mutex::default);
 
@@ -13,16 +13,6 @@ fn store_error(err: anyhow::Error) {
         .lock()
         .unwrap()
         .insert(CString::new(format!("{err:?}")).expect("failed to construct error string"));
-}
-
-#[no_mangle]
-pub extern "C" fn default_config() -> Config {
-    Config {
-        wasm: List {
-            ptr: PASSTHROUGH_PTR,
-            len: PASSTHROUGH_LEN,
-        },
-    }
 }
 
 #[no_mangle]
