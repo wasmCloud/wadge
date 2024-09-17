@@ -1,0 +1,10 @@
+package west-test:wasi;
+
+world harness {
+    include west-test:fib/host;
+    include west-test:leftpad/host;
+
+    export wasi:io/error@0.2.1;
+    export wasi:io/poll@0.2.1;
+    export wasi:io/streams@0.2.1;
+}

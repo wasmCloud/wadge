@@ -1,4 +1,4 @@
-//go:generate go run github.com/ydnar/wasm-tools-go/cmd/wit-bindgen-go@v0.1.5 generate -w guest -o bindings ../../wit/sync
+//go:generate go run github.com/bytecodealliance/wasm-tools-go/cmd/wit-bindgen-go generate -w guest -o bindings ../../wit/sync
 
 package sync
 

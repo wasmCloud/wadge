@@ -3,9 +3,9 @@
 package tcp
 
 import (
+	"github.com/bytecodealliance/wasm-tools-go/cm"
 	"github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/io/streams"
 	"github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/sockets/network"
-	"github.com/ydnar/wasm-tools-go/cm"
 	"unsafe"
 )
 

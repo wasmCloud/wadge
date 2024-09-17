@@ -6,7 +6,7 @@ import (
 	"github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/http/types"
 )
 
-// Exports represents the caller-defined exports from "wasi:http/incoming-handler@0.2.0".
+// Exports represents the caller-defined exports from "wasi:http/incoming-handler@0.2.1".
 var Exports struct {
 	// Handle represents the caller-defined, exported function "handle".
 	//

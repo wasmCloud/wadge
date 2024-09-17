@@ -1589,6 +1589,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
 
 [[package]]
+name = "wasi-passthrough"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "75af629a58d64296102af2854e9b37a9341efd21984c8277326f8e921ef354e0"
+dependencies = [
+ "wit-bindgen",
+]
+
+[[package]]
 name = "wasi-preview1-component-adapter-provider"
 version = "24.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1598,7 +1607,7 @@ checksum = "36e6cadfa74538edd5409b6f8c79628436529138e9618b7373bec7aae7805835"
 name = "wasi-test-component"
 version = "0.1.0"
 dependencies = [
- "west-passthrough",
+ "wasi-passthrough",
  "wit-bindgen",
 ]
 
@@ -2011,6 +2020,7 @@ dependencies = [
  "anyhow",
  "http",
  "tokio",
+ "tracing",
  "wasi-preview1-component-adapter-provider",
  "wasmparser 0.217.0",
  "wasmtime",
@@ -2023,7 +2033,7 @@ dependencies = [
 name = "west-passthrough"
 version = "0.1.0-alpha.1"
 dependencies = [
- "wit-bindgen",
+ "wasi-passthrough",
 ]
 
 [[package]]

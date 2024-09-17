@@ -4,7 +4,7 @@
 package sync
 
 import (
-	"github.com/ydnar/wasm-tools-go/cm"
+	"github.com/bytecodealliance/wasm-tools-go/cm"
 )
 
 // Abc represents the flags "west-test:sync/sync#abc".

@@ -1,29 +1,36 @@
-//go:generate go run ../../../cmd/west-bindgen-go
-//go:generate cargo build -p sync-test-component --target wasm32-wasip1
-//go:generate cp ../../../target/wasm32-wasip1/debug/sync_test_component.wasm component.wasm
+//go:generate go run github.com/rvolosatovs/west/cmd/west-bindgen-go
+//go:generate cargo build -p sync-test-component --target wasm32-unknown-unknown
+//go:generate cp ../../../target/wasm32-unknown-unknown/debug/sync_test_component.wasm component.wasm
 
 package sync_test
 
 import (
 	_ "embed"
 	"log"
-	stdsync "sync"
+	"log/slog"
+	"os"
 	"testing"
 	"unsafe"
 
+	"github.com/bytecodealliance/wasm-tools-go/cm"
 	"github.com/rvolosatovs/west"
 	"github.com/rvolosatovs/west/tests/go/sync/bindings/west-test/sync/sync"
 	"github.com/stretchr/testify/assert"
-	"github.com/ydnar/wasm-tools-go/cm"
 )
-
-var errorMu stdsync.Mutex
 
 //go:embed component.wasm
 var component []byte
 
 func init() {
 	log.SetFlags(0)
+	slog.SetDefault(slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{
+		Level: slog.LevelDebug, ReplaceAttr: func(groups []string, a slog.Attr) slog.Attr {
+			if a.Key == slog.TimeKey {
+				return slog.Attr{}
+			}
+			return a
+		},
+	})))
 
 	instance, err := west.NewInstance(&west.Config{
 		Wasm: component,
