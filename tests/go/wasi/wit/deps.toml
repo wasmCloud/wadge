@@ -1,2 +1,3 @@
-fib = "../../../../../tests/wit/fib"
-http = "https://github.com/WebAssembly/wasi-http/archive/v0.2.0.tar.gz"
+fib = "../../../wit/fib"
+leftpad = "../../../wit/leftpad"
+http = "https://github.com/WebAssembly/wasi-http/archive/v0.2.1.tar.gz"

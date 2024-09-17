@@ -1,0 +1,8 @@
+package west-examples:http;
+
+world app {
+    include wasi:http/proxy@0.2.1;
+
+    // Import all CLI interfaces, which are used by Go libraries
+    include wasi:cli/imports@0.2.1;
+}

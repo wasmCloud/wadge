@@ -1,6 +1,7 @@
 use core::time::Duration;
 
 use anyhow::Context as _;
+use tracing::instrument;
 use wasi_preview1_component_adapter_provider::{
     WASI_SNAPSHOT_PREVIEW1_ADAPTER_NAME, WASI_SNAPSHOT_PREVIEW1_REACTOR_ADAPTER,
 };
@@ -14,13 +15,13 @@ mod bindings {
     wasmtime::component::bindgen!({
         trappable_imports: true,
         with: {
-            "wasi:http/types@0.2.0/fields": wasmtime_wasi_http::bindings::http::types::Fields,
-            "wasi:http/types@0.2.0/future-incoming-response": wasmtime_wasi_http::bindings::http::types::FutureIncomingResponse,
-            "wasi:http/types@0.2.0/incoming-request": wasmtime_wasi_http::bindings::http::types::IncomingRequest,
-            "wasi:http/types@0.2.0/outgoing-request": wasmtime_wasi_http::bindings::http::types::OutgoingRequest,
-            "wasi:http/types@0.2.0/response-outparam": wasmtime_wasi_http::bindings::http::types::ResponseOutparam,
+            "wasi:http/types@0.2.1/fields": wasmtime_wasi_http::bindings::http::types::Fields,
+            "wasi:http/types@0.2.1/future-incoming-response": wasmtime_wasi_http::bindings::http::types::FutureIncomingResponse,
+            "wasi:http/types@0.2.1/incoming-request": wasmtime_wasi_http::bindings::http::types::IncomingRequest,
+            "wasi:http/types@0.2.1/outgoing-request": wasmtime_wasi_http::bindings::http::types::OutgoingRequest,
+            "wasi:http/types@0.2.1/response-outparam": wasmtime_wasi_http::bindings::http::types::ResponseOutparam,
         },
-        world: "http-test-passthrough",
+        world: "imports",
     });
 }
 
@@ -48,7 +49,8 @@ impl WasiHttpView for Ctx {
     }
 }
 
-impl bindings::west::test::http_test::Host for Ctx {
+impl bindings::wasiext::http::ext::Host for Ctx {
+    #[instrument(level = "trace", skip_all, ret(level = "trace"))]
     fn new_response_outparam(
         &mut self,
     ) -> wasmtime::Result<(
@@ -77,6 +79,7 @@ impl bindings::west::test::http_test::Host for Ctx {
         Ok((out, res))
     }
 
+    #[instrument(level = "trace", skip_all, ret(level = "trace"))]
     fn new_incoming_request(
         &mut self,
         req: Resource<wasmtime_wasi_http::types::HostOutgoingRequest>,
@@ -284,7 +287,7 @@ pub fn instantiate(Config { engine, wasm }: Config) -> anyhow::Result<Instance> 
     wasmtime_wasi::add_to_linker_sync(&mut linker).context("failed to link WASI")?;
     wasmtime_wasi_http::add_only_http_to_linker_sync(&mut linker)
         .context("failed to link `wasi:http`")?;
-    bindings::west::test::http_test::add_to_linker(&mut linker, |cx| cx)?;
+    bindings::wasiext::http::ext::add_to_linker(&mut linker, |cx| cx)?;
 
     let wasi = WasiCtxBuilder::new()
         .inherit_env()

@@ -10,7 +10,7 @@ license.workspace = true
 repository.workspace = true
 
 [lib]
-crate-type = ["cdylib", "staticlib"]
+crate-type = ["staticlib"]
 
 [dependencies]
 anyhow = { workspace = true }

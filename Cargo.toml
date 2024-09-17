@@ -9,17 +9,6 @@ edition.workspace = true
 license.workspace = true
 repository.workspace = true
 
-[profile.release.package.west-passthrough]
-opt-level = 's'
-strip = true
-
-[profile.release.package.west-sys]
-opt-level = 's'
-strip = true
-
-[profile.release]
-lto = true
-
 [workspace]
 members = ["crates/*", "tests/components/*"]
 
@@ -31,10 +20,22 @@ homepage = "https://github.com/rvolosatovs/west"
 license = "Apache-2.0 WITH LLVM-exception"
 repository = "https://github.com/rvolosatovs/west"
 
+[profile.release.package.west-passthrough]
+opt-level = 's'
+strip = true
+
+[profile.release.package.west-sys]
+opt-level = 's'
+strip = true
+
+[profile.release]
+lto = true
+
 [dependencies]
 anyhow = { workspace = true }
 http = { workspace = true }
 tokio = { workspace = true }
+tracing = { workspace = true }
 wasi-preview1-component-adapter-provider = { workspace = true }
 wasmparser = { workspace = true }
 wasmtime = { workspace = true, features = ["cranelift"] }
@@ -49,12 +50,12 @@ http = { version = "1", default-features = false }
 tokio = { version = "1", default-features = false }
 tracing = { version = "0.1", default-features = false }
 tracing-subscriber = { version = "0.3", default-features = false }
+wasi-passthrough = { version = "0.1.1", default-features = false }
 wasi-preview1-component-adapter-provider = { version = "24", default-features = false }
 wasmparser = { version = "0.217", default-features = false }
 wasmtime = { version = "24", default-features = false }
 wasmtime-wasi = { version = "24", default-features = false }
 wasmtime-wasi-http = { version = "24", default-features = false }
-west-passthrough = { version = "0.1.0-alpha.1", path = "./crates/passthrough" }
 west = { version = "0.1.0-alpha.2", path = "." }
 wit-bindgen = { version = "0.32", default-features = false }
 wit-component = { version = "0.217", default-features = false }

@@ -1,0 +1,15 @@
+package west-test:leftpad;
+
+interface leftpad {
+    use wasi:io/streams@0.2.1.{input-stream, output-stream, stream-error};
+
+    leftpad: func(in: input-stream, out: borrow<output-stream>, len: u64, c: char) -> result<_, stream-error>;
+}
+
+world guest {
+    import leftpad;
+}
+
+world host {
+    export leftpad;
+}

@@ -10,7 +10,7 @@ license.workspace = true
 repository.workspace = true
 
 [lib]
-crate-type = ["rlib", "cdylib"]
+crate-type = ["cdylib"]
 
 [dependencies]
-wit-bindgen = { workspace = true, features = ["realloc", "macros"] }
+wasi-passthrough = { workspace = true }

@@ -3,12 +3,12 @@
 package bindings
 
 import (
+	github_com__bytecodealliance__wasm___tools___go__cm "github.com/bytecodealliance/wasm-tools-go/cm"
 	west "github.com/rvolosatovs/west"
 	github_com__rvolosatovs__west__bindings__wasi__clocks__monotonic___clock "github.com/rvolosatovs/west/bindings/wasi/clocks/monotonic-clock"
 	github_com__rvolosatovs__west__bindings__wasi__http__types "github.com/rvolosatovs/west/bindings/wasi/http/types"
 	github_com__rvolosatovs__west__bindings__wasi__io__poll "github.com/rvolosatovs/west/bindings/wasi/io/poll"
 	github_com__rvolosatovs__west__bindings__wasi__io__streams "github.com/rvolosatovs/west/bindings/wasi/io/streams"
-	github_com__ydnar__wasm___tools___go__cm "github.com/ydnar/wasm-tools-go/cm"
 	"runtime"
 	"unsafe"
 )
@@ -22,7 +22,7 @@ func wasmimport_Now() (result0 uint64) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:clocks/monotonic-clock@0.2.0", "now", func() unsafe.Pointer {
+		return __instance.Call("wasi:clocks/monotonic-clock@0.2.1", "now", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&result0)
 			__p.Pin(ptr)
 			return ptr
@@ -38,7 +38,7 @@ func wasmimport_Resolution() (result0 uint64) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:clocks/monotonic-clock@0.2.0", "resolution", func() unsafe.Pointer {
+		return __instance.Call("wasi:clocks/monotonic-clock@0.2.1", "resolution", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&result0)
 			__p.Pin(ptr)
 			return ptr
@@ -54,7 +54,7 @@ func wasmimport_SubscribeDuration(when0 uint64) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:clocks/monotonic-clock@0.2.0", "subscribe-duration", func() unsafe.Pointer {
+		return __instance.Call("wasi:clocks/monotonic-clock@0.2.1", "subscribe-duration", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&when0)
 			__p.Pin(ptr)
 			return ptr
@@ -74,7 +74,7 @@ func wasmimport_SubscribeInstant(when0 uint64) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:clocks/monotonic-clock@0.2.0", "subscribe-instant", func() unsafe.Pointer {
+		return __instance.Call("wasi:clocks/monotonic-clock@0.2.1", "subscribe-instant", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&when0)
 			__p.Pin(ptr)
 			return ptr
@@ -94,7 +94,7 @@ func wasmimport_NewFields() (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[constructor]fields", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[constructor]fields", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&result0)
 			__p.Pin(ptr)
 			return ptr
@@ -110,7 +110,7 @@ func wasmimport_NewOutgoingRequest(headers0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[constructor]outgoing-request", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[constructor]outgoing-request", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&headers0)
 			__p.Pin(ptr)
 			return ptr
@@ -130,7 +130,7 @@ func wasmimport_NewOutgoingResponse(headers0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[constructor]outgoing-response", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[constructor]outgoing-response", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&headers0)
 			__p.Pin(ptr)
 			return ptr
@@ -150,7 +150,7 @@ func wasmimport_NewRequestOptions() (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[constructor]request-options", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[constructor]request-options", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&result0)
 			__p.Pin(ptr)
 			return ptr
@@ -162,11 +162,11 @@ func wasmimport_NewRequestOptions() (result0 uint32) {
 }
 
 //go:linkname wasmimport_FieldsAppend github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_FieldsAppend
-func wasmimport_FieldsAppend(self0 uint32, name0 *uint8, name1 uint32, value0 *uint8, value1 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError, struct{}, github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError]) {
+func wasmimport_FieldsAppend(self0 uint32, name0 *uint8, name1 uint32, value0 *uint8, value1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError, struct{}, github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]fields.append", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]fields.append", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -202,7 +202,7 @@ func wasmimport_FieldsClone(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]fields.clone", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]fields.clone", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -218,11 +218,11 @@ func wasmimport_FieldsClone(self0 uint32) (result0 uint32) {
 }
 
 //go:linkname wasmimport_FieldsDelete github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_FieldsDelete
-func wasmimport_FieldsDelete(self0 uint32, name0 *uint8, name1 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError, struct{}, github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError]) {
+func wasmimport_FieldsDelete(self0 uint32, name0 *uint8, name1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError, struct{}, github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]fields.delete", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]fields.delete", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -246,11 +246,11 @@ func wasmimport_FieldsDelete(self0 uint32, name0 *uint8, name1 uint32, result *g
 }
 
 //go:linkname wasmimport_FieldsEntries github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_FieldsEntries
-func wasmimport_FieldsEntries(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.List[github_com__ydnar__wasm___tools___go__cm.Tuple[github_com__rvolosatovs__west__bindings__wasi__http__types.FieldKey, github_com__rvolosatovs__west__bindings__wasi__http__types.FieldValue]]) {
+func wasmimport_FieldsEntries(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[github_com__bytecodealliance__wasm___tools___go__cm.Tuple[github_com__rvolosatovs__west__bindings__wasi__http__types.FieldKey, github_com__rvolosatovs__west__bindings__wasi__http__types.FieldValue]]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]fields.entries", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]fields.entries", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -266,11 +266,11 @@ func wasmimport_FieldsEntries(self0 uint32, result *github_com__ydnar__wasm___to
 }
 
 //go:linkname wasmimport_FieldsGet github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_FieldsGet
-func wasmimport_FieldsGet(self0 uint32, name0 *uint8, name1 uint32, result *github_com__ydnar__wasm___tools___go__cm.List[github_com__rvolosatovs__west__bindings__wasi__http__types.FieldValue]) {
+func wasmimport_FieldsGet(self0 uint32, name0 *uint8, name1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[github_com__rvolosatovs__west__bindings__wasi__http__types.FieldValue]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]fields.get", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]fields.get", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -298,7 +298,7 @@ func wasmimport_FieldsHas(self0 uint32, name0 *uint8, name1 uint32) (result0 uin
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]fields.has", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]fields.has", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -322,11 +322,11 @@ func wasmimport_FieldsHas(self0 uint32, name0 *uint8, name1 uint32) (result0 uin
 }
 
 //go:linkname wasmimport_FieldsSet github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_FieldsSet
-func wasmimport_FieldsSet(self0 uint32, name0 *uint8, name1 uint32, value0 *github_com__rvolosatovs__west__bindings__wasi__http__types.FieldValue, value1 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError, struct{}, github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError]) {
+func wasmimport_FieldsSet(self0 uint32, name0 *uint8, name1 uint32, value0 *github_com__rvolosatovs__west__bindings__wasi__http__types.FieldValue, value1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError, struct{}, github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]fields.set", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]fields.set", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -358,11 +358,11 @@ func wasmimport_FieldsSet(self0 uint32, name0 *uint8, name1 uint32, value0 *gith
 }
 
 //go:linkname wasmimport_FutureIncomingResponseGet github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_FutureIncomingResponseGet
-func wasmimport_FutureIncomingResponseGet(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[github_com__ydnar__wasm___tools___go__cm.Result[github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCodeShape, github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingResponse, github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode], github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCodeShape, github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingResponse, github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode], struct{}]]) {
+func wasmimport_FutureIncomingResponseGet(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCodeShape, github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingResponse, github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode], github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCodeShape, github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingResponse, github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode], struct{}]]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]future-incoming-response.get", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]future-incoming-response.get", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -382,7 +382,7 @@ func wasmimport_FutureIncomingResponseSubscribe(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]future-incoming-response.subscribe", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]future-incoming-response.subscribe", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -398,11 +398,11 @@ func wasmimport_FutureIncomingResponseSubscribe(self0 uint32) (result0 uint32) {
 }
 
 //go:linkname wasmimport_FutureTrailersGet github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_FutureTrailersGet
-func wasmimport_FutureTrailersGet(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[github_com__ydnar__wasm___tools___go__cm.Result[github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCodeShape, github_com__ydnar__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__http__types.Fields], github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode], github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCodeShape, github_com__ydnar__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__http__types.Fields], github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode], struct{}]]) {
+func wasmimport_FutureTrailersGet(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCodeShape, github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__http__types.Fields], github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode], github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCodeShape, github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__http__types.Fields], github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode], struct{}]]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]future-trailers.get", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]future-trailers.get", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -422,7 +422,7 @@ func wasmimport_FutureTrailersSubscribe(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]future-trailers.subscribe", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]future-trailers.subscribe", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -438,11 +438,11 @@ func wasmimport_FutureTrailersSubscribe(self0 uint32) (result0 uint32) {
 }
 
 //go:linkname wasmimport_IncomingBodyStream github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_IncomingBodyStream
-func wasmimport_IncomingBodyStream(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.InputStream, github_com__rvolosatovs__west__bindings__wasi__io__streams.InputStream, struct{}]) {
+func wasmimport_IncomingBodyStream(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.InputStream, github_com__rvolosatovs__west__bindings__wasi__io__streams.InputStream, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]incoming-body.stream", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]incoming-body.stream", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -458,11 +458,11 @@ func wasmimport_IncomingBodyStream(self0 uint32, result *github_com__ydnar__wasm
 }
 
 //go:linkname wasmimport_IncomingRequestAuthority github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_IncomingRequestAuthority
-func wasmimport_IncomingRequestAuthority(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[string]) {
+func wasmimport_IncomingRequestAuthority(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]incoming-request.authority", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]incoming-request.authority", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -478,11 +478,11 @@ func wasmimport_IncomingRequestAuthority(self0 uint32, result *github_com__ydnar
 }
 
 //go:linkname wasmimport_IncomingRequestConsume github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_IncomingRequestConsume
-func wasmimport_IncomingRequestConsume(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingBody, github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingBody, struct{}]) {
+func wasmimport_IncomingRequestConsume(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingBody, github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingBody, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]incoming-request.consume", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]incoming-request.consume", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -502,7 +502,7 @@ func wasmimport_IncomingRequestHeaders(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]incoming-request.headers", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]incoming-request.headers", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -522,7 +522,7 @@ func wasmimport_IncomingRequestMethod(self0 uint32, result *github_com__rvolosat
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]incoming-request.method", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]incoming-request.method", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -538,11 +538,11 @@ func wasmimport_IncomingRequestMethod(self0 uint32, result *github_com__rvolosat
 }
 
 //go:linkname wasmimport_IncomingRequestPathWithQuery github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_IncomingRequestPathWithQuery
-func wasmimport_IncomingRequestPathWithQuery(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[string]) {
+func wasmimport_IncomingRequestPathWithQuery(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]incoming-request.path-with-query", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]incoming-request.path-with-query", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -558,11 +558,11 @@ func wasmimport_IncomingRequestPathWithQuery(self0 uint32, result *github_com__y
 }
 
 //go:linkname wasmimport_IncomingRequestScheme github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_IncomingRequestScheme
-func wasmimport_IncomingRequestScheme(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__http__types.Scheme]) {
+func wasmimport_IncomingRequestScheme(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__http__types.Scheme]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]incoming-request.scheme", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]incoming-request.scheme", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -578,11 +578,11 @@ func wasmimport_IncomingRequestScheme(self0 uint32, result *github_com__ydnar__w
 }
 
 //go:linkname wasmimport_IncomingResponseConsume github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_IncomingResponseConsume
-func wasmimport_IncomingResponseConsume(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingBody, github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingBody, struct{}]) {
+func wasmimport_IncomingResponseConsume(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingBody, github_com__rvolosatovs__west__bindings__wasi__http__types.IncomingBody, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]incoming-response.consume", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]incoming-response.consume", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -602,7 +602,7 @@ func wasmimport_IncomingResponseHeaders(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]incoming-response.headers", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]incoming-response.headers", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -622,7 +622,7 @@ func wasmimport_IncomingResponseStatus(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]incoming-response.status", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]incoming-response.status", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -638,11 +638,11 @@ func wasmimport_IncomingResponseStatus(self0 uint32) (result0 uint32) {
 }
 
 //go:linkname wasmimport_OutgoingBodyWrite github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_OutgoingBodyWrite
-func wasmimport_OutgoingBodyWrite(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.OutputStream, github_com__rvolosatovs__west__bindings__wasi__io__streams.OutputStream, struct{}]) {
+func wasmimport_OutgoingBodyWrite(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.OutputStream, github_com__rvolosatovs__west__bindings__wasi__io__streams.OutputStream, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-body.write", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-body.write", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -658,11 +658,11 @@ func wasmimport_OutgoingBodyWrite(self0 uint32, result *github_com__ydnar__wasm_
 }
 
 //go:linkname wasmimport_OutgoingRequestAuthority github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_OutgoingRequestAuthority
-func wasmimport_OutgoingRequestAuthority(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[string]) {
+func wasmimport_OutgoingRequestAuthority(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-request.authority", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-request.authority", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -678,11 +678,11 @@ func wasmimport_OutgoingRequestAuthority(self0 uint32, result *github_com__ydnar
 }
 
 //go:linkname wasmimport_OutgoingRequestBody github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_OutgoingRequestBody
-func wasmimport_OutgoingRequestBody(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.OutgoingBody, github_com__rvolosatovs__west__bindings__wasi__http__types.OutgoingBody, struct{}]) {
+func wasmimport_OutgoingRequestBody(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.OutgoingBody, github_com__rvolosatovs__west__bindings__wasi__http__types.OutgoingBody, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-request.body", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-request.body", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -702,7 +702,7 @@ func wasmimport_OutgoingRequestHeaders(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-request.headers", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-request.headers", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -722,7 +722,7 @@ func wasmimport_OutgoingRequestMethod(self0 uint32, result *github_com__rvolosat
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-request.method", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-request.method", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -738,11 +738,11 @@ func wasmimport_OutgoingRequestMethod(self0 uint32, result *github_com__rvolosat
 }
 
 //go:linkname wasmimport_OutgoingRequestPathWithQuery github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_OutgoingRequestPathWithQuery
-func wasmimport_OutgoingRequestPathWithQuery(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[string]) {
+func wasmimport_OutgoingRequestPathWithQuery(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-request.path-with-query", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-request.path-with-query", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -758,11 +758,11 @@ func wasmimport_OutgoingRequestPathWithQuery(self0 uint32, result *github_com__y
 }
 
 //go:linkname wasmimport_OutgoingRequestScheme github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_OutgoingRequestScheme
-func wasmimport_OutgoingRequestScheme(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__http__types.Scheme]) {
+func wasmimport_OutgoingRequestScheme(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__http__types.Scheme]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-request.scheme", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-request.scheme", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -782,7 +782,7 @@ func wasmimport_OutgoingRequestSetAuthority(self0 uint32, authority0 uint32, aut
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-request.set-authority", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-request.set-authority", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -814,7 +814,7 @@ func wasmimport_OutgoingRequestSetMethod(self0 uint32, method0 uint32, method1 *
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-request.set-method", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-request.set-method", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -846,7 +846,7 @@ func wasmimport_OutgoingRequestSetPathWithQuery(self0 uint32, pathWithQuery0 uin
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-request.set-path-with-query", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-request.set-path-with-query", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -878,7 +878,7 @@ func wasmimport_OutgoingRequestSetScheme(self0 uint32, scheme0 uint32, scheme1 u
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-request.set-scheme", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-request.set-scheme", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -910,11 +910,11 @@ func wasmimport_OutgoingRequestSetScheme(self0 uint32, scheme0 uint32, scheme1 u
 }
 
 //go:linkname wasmimport_OutgoingResponseBody github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_OutgoingResponseBody
-func wasmimport_OutgoingResponseBody(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.OutgoingBody, github_com__rvolosatovs__west__bindings__wasi__http__types.OutgoingBody, struct{}]) {
+func wasmimport_OutgoingResponseBody(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.OutgoingBody, github_com__rvolosatovs__west__bindings__wasi__http__types.OutgoingBody, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-response.body", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-response.body", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -934,7 +934,7 @@ func wasmimport_OutgoingResponseHeaders(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-response.headers", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-response.headers", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -954,7 +954,7 @@ func wasmimport_OutgoingResponseSetStatusCode(self0 uint32, statusCode0 uint32) 
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-response.set-status-code", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-response.set-status-code", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -978,7 +978,7 @@ func wasmimport_OutgoingResponseStatusCode(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]outgoing-response.status-code", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]outgoing-response.status-code", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -994,11 +994,11 @@ func wasmimport_OutgoingResponseStatusCode(self0 uint32) (result0 uint32) {
 }
 
 //go:linkname wasmimport_RequestOptionsBetweenBytesTimeout github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_RequestOptionsBetweenBytesTimeout
-func wasmimport_RequestOptionsBetweenBytesTimeout(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__clocks__monotonic___clock.Duration]) {
+func wasmimport_RequestOptionsBetweenBytesTimeout(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__clocks__monotonic___clock.Duration]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]request-options.between-bytes-timeout", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]request-options.between-bytes-timeout", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1014,11 +1014,11 @@ func wasmimport_RequestOptionsBetweenBytesTimeout(self0 uint32, result *github_c
 }
 
 //go:linkname wasmimport_RequestOptionsConnectTimeout github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_RequestOptionsConnectTimeout
-func wasmimport_RequestOptionsConnectTimeout(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__clocks__monotonic___clock.Duration]) {
+func wasmimport_RequestOptionsConnectTimeout(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__clocks__monotonic___clock.Duration]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]request-options.connect-timeout", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]request-options.connect-timeout", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1034,11 +1034,11 @@ func wasmimport_RequestOptionsConnectTimeout(self0 uint32, result *github_com__y
 }
 
 //go:linkname wasmimport_RequestOptionsFirstByteTimeout github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_RequestOptionsFirstByteTimeout
-func wasmimport_RequestOptionsFirstByteTimeout(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__clocks__monotonic___clock.Duration]) {
+func wasmimport_RequestOptionsFirstByteTimeout(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__clocks__monotonic___clock.Duration]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]request-options.first-byte-timeout", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]request-options.first-byte-timeout", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1058,7 +1058,7 @@ func wasmimport_RequestOptionsSetBetweenBytesTimeout(self0 uint32, duration0 uin
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]request-options.set-between-bytes-timeout", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]request-options.set-between-bytes-timeout", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1086,7 +1086,7 @@ func wasmimport_RequestOptionsSetConnectTimeout(self0 uint32, duration0 uint32, 
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]request-options.set-connect-timeout", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]request-options.set-connect-timeout", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1114,7 +1114,7 @@ func wasmimport_RequestOptionsSetFirstByteTimeout(self0 uint32, duration0 uint32
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[method]request-options.set-first-byte-timeout", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[method]request-options.set-first-byte-timeout", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1142,7 +1142,7 @@ func wasmimport_FieldsResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]fields", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]fields", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1158,7 +1158,7 @@ func wasmimport_FutureIncomingResponseResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]future-incoming-response", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]future-incoming-response", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1174,7 +1174,7 @@ func wasmimport_FutureTrailersResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]future-trailers", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]future-trailers", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1190,7 +1190,7 @@ func wasmimport_IncomingBodyResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]incoming-body", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]incoming-body", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1206,7 +1206,7 @@ func wasmimport_IncomingRequestResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]incoming-request", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]incoming-request", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1222,7 +1222,7 @@ func wasmimport_IncomingResponseResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]incoming-response", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]incoming-response", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1238,7 +1238,7 @@ func wasmimport_OutgoingBodyResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]outgoing-body", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]outgoing-body", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1254,7 +1254,7 @@ func wasmimport_OutgoingRequestResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]outgoing-request", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]outgoing-request", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1270,7 +1270,7 @@ func wasmimport_OutgoingResponseResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]outgoing-response", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]outgoing-response", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1286,7 +1286,7 @@ func wasmimport_RequestOptionsResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]request-options", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]request-options", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1302,7 +1302,7 @@ func wasmimport_ResponseOutparamResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[resource-drop]response-outparam", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[resource-drop]response-outparam", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1314,11 +1314,11 @@ func wasmimport_ResponseOutparamResourceDrop(self0 uint32) {
 }
 
 //go:linkname wasmimport_FieldsFromList github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_FieldsFromList
-func wasmimport_FieldsFromList(entries0 *github_com__ydnar__wasm___tools___go__cm.Tuple[github_com__rvolosatovs__west__bindings__wasi__http__types.FieldKey, github_com__rvolosatovs__west__bindings__wasi__http__types.FieldValue], entries1 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.Fields, github_com__rvolosatovs__west__bindings__wasi__http__types.Fields, github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError]) {
+func wasmimport_FieldsFromList(entries0 *github_com__bytecodealliance__wasm___tools___go__cm.Tuple[github_com__rvolosatovs__west__bindings__wasi__http__types.FieldKey, github_com__rvolosatovs__west__bindings__wasi__http__types.FieldValue], entries1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.Fields, github_com__rvolosatovs__west__bindings__wasi__http__types.Fields, github_com__rvolosatovs__west__bindings__wasi__http__types.HeaderError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[static]fields.from-list", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[static]fields.from-list", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(entries0)
 			__p.Pin(ptr)
 			return ptr
@@ -1342,7 +1342,7 @@ func wasmimport_IncomingBodyFinish(this0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[static]incoming-body.finish", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[static]incoming-body.finish", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&this0)
 			__p.Pin(ptr)
 			return ptr
@@ -1358,11 +1358,11 @@ func wasmimport_IncomingBodyFinish(this0 uint32) (result0 uint32) {
 }
 
 //go:linkname wasmimport_OutgoingBodyFinish github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_OutgoingBodyFinish
-func wasmimport_OutgoingBodyFinish(this0 uint32, trailers0 uint32, trailers1 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode, struct{}, github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode]) {
+func wasmimport_OutgoingBodyFinish(this0 uint32, trailers0 uint32, trailers1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode, struct{}, github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[static]outgoing-body.finish", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[static]outgoing-body.finish", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&this0)
 			__p.Pin(ptr)
 			return ptr
@@ -1390,7 +1390,7 @@ func wasmimport_ResponseOutparamSet(param0 uint32, response0 uint32, response1 u
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "[static]response-outparam.set", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "[static]response-outparam.set", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&param0)
 			__p.Pin(ptr)
 			return ptr
@@ -1434,11 +1434,11 @@ func wasmimport_ResponseOutparamSet(param0 uint32, response0 uint32, response1 u
 }
 
 //go:linkname wasmimport_HTTPErrorCode github.com/rvolosatovs/west/bindings/wasi/http/types.wasmimport_HTTPErrorCode
-func wasmimport_HTTPErrorCode(err0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode]) {
+func wasmimport_HTTPErrorCode(err0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__rvolosatovs__west__bindings__wasi__http__types.ErrorCode]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:http/types@0.2.0", "http-error-code", func() unsafe.Pointer {
+		return __instance.Call("wasi:http/types@0.2.1", "http-error-code", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&err0)
 			__p.Pin(ptr)
 			return ptr
@@ -1458,7 +1458,7 @@ func wasmimport_ErrorToDebugString(self0 uint32, result *string) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/error@0.2.0", "[method]error.to-debug-string", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/error@0.2.1", "[method]error.to-debug-string", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1478,7 +1478,7 @@ func wasmimport_ErrorResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/error@0.2.0", "[resource-drop]error", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/error@0.2.1", "[resource-drop]error", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1494,7 +1494,7 @@ func wasmimport_PollableBlock(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/poll@0.2.0", "[method]pollable.block", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/poll@0.2.1", "[method]pollable.block", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1510,7 +1510,7 @@ func wasmimport_PollableReady(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/poll@0.2.0", "[method]pollable.ready", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/poll@0.2.1", "[method]pollable.ready", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1530,7 +1530,7 @@ func wasmimport_PollableResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/poll@0.2.0", "[resource-drop]pollable", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/poll@0.2.1", "[resource-drop]pollable", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1542,11 +1542,11 @@ func wasmimport_PollableResourceDrop(self0 uint32) {
 }
 
 //go:linkname wasmimport_Poll github.com/rvolosatovs/west/bindings/wasi/io/poll.wasmimport_Poll
-func wasmimport_Poll(in0 *github_com__rvolosatovs__west__bindings__wasi__io__poll.Pollable, in1 uint32, result *github_com__ydnar__wasm___tools___go__cm.List[uint32]) {
+func wasmimport_Poll(in0 *github_com__rvolosatovs__west__bindings__wasi__io__poll.Pollable, in1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[uint32]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/poll@0.2.0", "poll", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/poll@0.2.1", "poll", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(in0)
 			__p.Pin(ptr)
 			return ptr
@@ -1566,11 +1566,11 @@ func wasmimport_Poll(in0 *github_com__rvolosatovs__west__bindings__wasi__io__pol
 }
 
 //go:linkname wasmimport_InputStreamBlockingRead github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_InputStreamBlockingRead
-func wasmimport_InputStreamBlockingRead(self0 uint32, len0 uint64, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__ydnar__wasm___tools___go__cm.List[uint8], github_com__ydnar__wasm___tools___go__cm.List[uint8], github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_InputStreamBlockingRead(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]input-stream.blocking-read", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]input-stream.blocking-read", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1590,11 +1590,11 @@ func wasmimport_InputStreamBlockingRead(self0 uint32, len0 uint64, result *githu
 }
 
 //go:linkname wasmimport_InputStreamBlockingSkip github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_InputStreamBlockingSkip
-func wasmimport_InputStreamBlockingSkip(self0 uint32, len0 uint64, result *github_com__ydnar__wasm___tools___go__cm.Result[uint64, uint64, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_InputStreamBlockingSkip(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]input-stream.blocking-skip", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]input-stream.blocking-skip", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1614,11 +1614,11 @@ func wasmimport_InputStreamBlockingSkip(self0 uint32, len0 uint64, result *githu
 }
 
 //go:linkname wasmimport_InputStreamRead github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_InputStreamRead
-func wasmimport_InputStreamRead(self0 uint32, len0 uint64, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__ydnar__wasm___tools___go__cm.List[uint8], github_com__ydnar__wasm___tools___go__cm.List[uint8], github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_InputStreamRead(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]input-stream.read", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]input-stream.read", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1638,11 +1638,11 @@ func wasmimport_InputStreamRead(self0 uint32, len0 uint64, result *github_com__y
 }
 
 //go:linkname wasmimport_InputStreamSkip github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_InputStreamSkip
-func wasmimport_InputStreamSkip(self0 uint32, len0 uint64, result *github_com__ydnar__wasm___tools___go__cm.Result[uint64, uint64, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_InputStreamSkip(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]input-stream.skip", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]input-stream.skip", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1666,7 +1666,7 @@ func wasmimport_InputStreamSubscribe(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]input-stream.subscribe", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]input-stream.subscribe", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1682,11 +1682,11 @@ func wasmimport_InputStreamSubscribe(self0 uint32) (result0 uint32) {
 }
 
 //go:linkname wasmimport_OutputStreamBlockingFlush github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingFlush
-func wasmimport_OutputStreamBlockingFlush(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_OutputStreamBlockingFlush(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]output-stream.blocking-flush", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]output-stream.blocking-flush", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1702,11 +1702,11 @@ func wasmimport_OutputStreamBlockingFlush(self0 uint32, result *github_com__ydna
 }
 
 //go:linkname wasmimport_OutputStreamBlockingSplice github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingSplice
-func wasmimport_OutputStreamBlockingSplice(self0 uint32, src0 uint32, len0 uint64, result *github_com__ydnar__wasm___tools___go__cm.Result[uint64, uint64, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_OutputStreamBlockingSplice(self0 uint32, src0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]output-stream.blocking-splice", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]output-stream.blocking-splice", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1730,11 +1730,11 @@ func wasmimport_OutputStreamBlockingSplice(self0 uint32, src0 uint32, len0 uint6
 }
 
 //go:linkname wasmimport_OutputStreamBlockingWriteAndFlush github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingWriteAndFlush
-func wasmimport_OutputStreamBlockingWriteAndFlush(self0 uint32, contents0 *uint8, contents1 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_OutputStreamBlockingWriteAndFlush(self0 uint32, contents0 *uint8, contents1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]output-stream.blocking-write-and-flush", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]output-stream.blocking-write-and-flush", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1758,11 +1758,11 @@ func wasmimport_OutputStreamBlockingWriteAndFlush(self0 uint32, contents0 *uint8
 }
 
 //go:linkname wasmimport_OutputStreamBlockingWriteZeroesAndFlush github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingWriteZeroesAndFlush
-func wasmimport_OutputStreamBlockingWriteZeroesAndFlush(self0 uint32, len0 uint64, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_OutputStreamBlockingWriteZeroesAndFlush(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]output-stream.blocking-write-zeroes-and-flush", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]output-stream.blocking-write-zeroes-and-flush", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1782,11 +1782,11 @@ func wasmimport_OutputStreamBlockingWriteZeroesAndFlush(self0 uint32, len0 uint6
 }
 
 //go:linkname wasmimport_OutputStreamCheckWrite github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_OutputStreamCheckWrite
-func wasmimport_OutputStreamCheckWrite(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[uint64, uint64, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_OutputStreamCheckWrite(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]output-stream.check-write", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]output-stream.check-write", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1802,11 +1802,11 @@ func wasmimport_OutputStreamCheckWrite(self0 uint32, result *github_com__ydnar__
 }
 
 //go:linkname wasmimport_OutputStreamFlush github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_OutputStreamFlush
-func wasmimport_OutputStreamFlush(self0 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_OutputStreamFlush(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]output-stream.flush", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]output-stream.flush", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1822,11 +1822,11 @@ func wasmimport_OutputStreamFlush(self0 uint32, result *github_com__ydnar__wasm_
 }
 
 //go:linkname wasmimport_OutputStreamSplice github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_OutputStreamSplice
-func wasmimport_OutputStreamSplice(self0 uint32, src0 uint32, len0 uint64, result *github_com__ydnar__wasm___tools___go__cm.Result[uint64, uint64, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_OutputStreamSplice(self0 uint32, src0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]output-stream.splice", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]output-stream.splice", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1854,7 +1854,7 @@ func wasmimport_OutputStreamSubscribe(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]output-stream.subscribe", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]output-stream.subscribe", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1870,11 +1870,11 @@ func wasmimport_OutputStreamSubscribe(self0 uint32) (result0 uint32) {
 }
 
 //go:linkname wasmimport_OutputStreamWrite github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_OutputStreamWrite
-func wasmimport_OutputStreamWrite(self0 uint32, contents0 *uint8, contents1 uint32, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_OutputStreamWrite(self0 uint32, contents0 *uint8, contents1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]output-stream.write", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]output-stream.write", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1898,11 +1898,11 @@ func wasmimport_OutputStreamWrite(self0 uint32, contents0 *uint8, contents1 uint
 }
 
 //go:linkname wasmimport_OutputStreamWriteZeroes github.com/rvolosatovs/west/bindings/wasi/io/streams.wasmimport_OutputStreamWriteZeroes
-func wasmimport_OutputStreamWriteZeroes(self0 uint32, len0 uint64, result *github_com__ydnar__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
+func wasmimport_OutputStreamWriteZeroes(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError, struct{}, github_com__rvolosatovs__west__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[method]output-stream.write-zeroes", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[method]output-stream.write-zeroes", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1926,7 +1926,7 @@ func wasmimport_InputStreamResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[resource-drop]input-stream", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[resource-drop]input-stream", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1942,7 +1942,7 @@ func wasmimport_OutputStreamResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("wasi:io/streams@0.2.0", "[resource-drop]output-stream", func() unsafe.Pointer {
+		return __instance.Call("wasi:io/streams@0.2.1", "[resource-drop]output-stream", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -1953,12 +1953,12 @@ func wasmimport_OutputStreamResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_NewIncomingRequest github.com/rvolosatovs/west/bindings/west/test/http-test.wasmimport_NewIncomingRequest
+//go:linkname wasmimport_NewIncomingRequest github.com/rvolosatovs/west/bindings/wasiext/http/ext.wasmimport_NewIncomingRequest
 func wasmimport_NewIncomingRequest(req0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("west:test/http-test@0.1.0", "new-incoming-request", func() unsafe.Pointer {
+		return __instance.Call("wasiext:http/ext@0.1.0", "new-incoming-request", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&req0)
 			__p.Pin(ptr)
 			return ptr
@@ -1973,12 +1973,12 @@ func wasmimport_NewIncomingRequest(req0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_NewResponseOutparam github.com/rvolosatovs/west/bindings/west/test/http-test.wasmimport_NewResponseOutparam
-func wasmimport_NewResponseOutparam(result *github_com__ydnar__wasm___tools___go__cm.Tuple[github_com__rvolosatovs__west__bindings__wasi__http__types.ResponseOutparam, github_com__rvolosatovs__west__bindings__wasi__http__types.FutureIncomingResponse]) {
+//go:linkname wasmimport_NewResponseOutparam github.com/rvolosatovs/west/bindings/wasiext/http/ext.wasmimport_NewResponseOutparam
+func wasmimport_NewResponseOutparam(result *github_com__bytecodealliance__wasm___tools___go__cm.Tuple[github_com__rvolosatovs__west__bindings__wasi__http__types.ResponseOutparam, github_com__rvolosatovs__west__bindings__wasi__http__types.FutureIncomingResponse]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := west.WithCurrentInstance(func(__instance *west.Instance) error {
-		return __instance.Call("west:test/http-test@0.1.0", "new-response-outparam", func() unsafe.Pointer {
+		return __instance.Call("wasiext:http/ext@0.1.0", "new-response-outparam", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(result)
 			__p.Pin(ptr)
 			return ptr
