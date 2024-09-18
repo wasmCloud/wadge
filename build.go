@@ -6,10 +6,12 @@
 
 package west
 
-// #cgo darwin,amd64  LDFLAGS: -L${SRCDIR}/lib/x86_64-darwin   -lwest
-// #cgo darwin,arm64  LDFLAGS: -L${SRCDIR}/lib/aarch64-darwin  -lwest
-// #cgo linux,amd64   LDFLAGS: -L${SRCDIR}/lib/x86_64-linux    -lwest
-// #cgo linux,arm64   LDFLAGS: -L${SRCDIR}/lib/aarch64-linux   -lwest
-// #cgo windows,amd64 LDFLAGS: -L${SRCDIR}/lib/x86_64-windows  -lwest
-// #cgo windows,arm64 LDFLAGS: -L${SRCDIR}/lib/aarch64-windows -lwest
+// #cgo               LDFLAGS: -lwest
+// #cgo linux         LDFLAGS: -lm
+// #cgo darwin,amd64  LDFLAGS: -L${SRCDIR}/lib/x86_64-darwin
+// #cgo darwin,arm64  LDFLAGS: -L${SRCDIR}/lib/aarch64-darwin
+// #cgo linux,amd64   LDFLAGS: -L${SRCDIR}/lib/x86_64-linux
+// #cgo linux,arm64   LDFLAGS: -L${SRCDIR}/lib/aarch64-linux
+// #cgo windows,amd64 LDFLAGS: -L${SRCDIR}/lib/x86_64-windows
+// #cgo windows,arm64 LDFLAGS: -L${SRCDIR}/lib/aarch64-windows
 import "C"

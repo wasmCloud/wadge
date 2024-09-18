@@ -6,5 +6,6 @@
 
 package west
 
-// #cgo LDFLAGS: -L${SRCDIR}/target/debug -lwest_sys
+// #cgo       LDFLAGS: -L${SRCDIR}/target/debug -lwest_sys
+// #cgo linux LDFLAGS: -lm
 import "C"
