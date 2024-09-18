@@ -15,7 +15,7 @@ mod bindings {
 
 use core::iter::{self, zip};
 
-use wasi_passthrough::bindings::wasi::io::streams::{InputStream, OutputStream, StreamError};
+use wasi_passthrough::bindings::wasi::io::streams::{InputStream, OutputStream};
 
 pub struct Handler;
 
@@ -56,10 +56,9 @@ impl bindings::exports::west_test::leftpad::leftpad::Guest for Handler {
             tx.write(s.as_bytes())?;
         }
         loop {
-            match rx.blocking_read(4096) {
-                Ok(buf) => tx.write(&buf)?,
-                Err(StreamError::Closed) => return Ok(()),
-                Err(StreamError::LastOperationFailed(err)) => return Err(wasi_passthrough::bindings::exports::wasi::io::streams::StreamError::LastOperationFailed(err.into()))
+            let n = tx.splice(&rx, 4096)?;
+            if n == 0 {
+                return Ok(());
             }
         }
     }
