@@ -25,12 +25,13 @@ jobs:
       matrix:
         target:
           - aarch64-unknown-linux-musl
-          - aarch64-apple-darwin
           - aarch64-linux-android
           - riscv64gc-unknown-linux-gnu
-          - x86_64-apple-darwin
           - x86_64-pc-windows-gnu
           - x86_64-unknown-linux-musl
+          # TODO: figure out what's different in Mac libraries built this way
+          #- aarch64-apple-darwin
+          #- x86_64-apple-darwin
 
     name: west-${{ matrix.target }}
     runs-on: ubuntu-latest
@@ -42,6 +43,33 @@ jobs:
       - uses: ./.github/actions/build-nix
         with:
           package: west-${{ matrix.target }}
+
+  build-ffi-darwin:
+    strategy:
+      matrix:
+        config:
+          - os: macos-13
+            lib: x86_64-darwin
+            target: x86_64-apple-darwin
+
+          - os: macos-14
+            lib: aarch64-darwin
+            target: aarch64-apple-darwin
+
+    runs-on: ${{ matrix.config.os }}
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: ./.github/actions/install-nix
+        with:
+          cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix profile install --inputs-from . '.#rust'
+      - run: cargo build -p west-sys --release
+      - run: mkdir -p artifact/lib
+      - run: mv target/release/libwest_sys.a artifact/lib/libwest_sys.a
+      - uses: actions/upload-artifact@v4
+        with:
+          name: west-${{ matrix.config.target }}
+          path: artifact
 
   build-wasm:
     runs-on: ubuntu-latest
@@ -80,6 +108,7 @@ jobs:
 
     needs:
       - build-ffi
+      - build-ffi-darwin
       - build-wasm
     runs-on: ${{ matrix.config.os }}
     steps:
@@ -254,8 +283,6 @@ jobs:
   release:
     if: startsWith(github.ref, 'refs/tags/v')
     needs:
-      - build-ffi
-      - build-wasm
       - test-release
       - cargo
       - crates
