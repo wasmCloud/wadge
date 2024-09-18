@@ -60,11 +60,11 @@ jobs:
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - uses: ./.github/actions/install-nix
-        with:
-          cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix build -L
-      - run: nix run -L --inputs-from . 'nixpkgs#coreutils' -- --coreutils-prog=cp -RLv ./result artifact
+      - run: rustup show
+      - uses: Swatinem/rust-cache@v2.7.3
+      - run: cargo build -p west-sys --release
+      - run: mkdir -p artifact/lib
+      - run: mv target/release/libwest_sys.a artifact/lib/libwest_sys.a
       - uses: actions/upload-artifact@v4
         with:
           name: west-${{ matrix.config.target }}
