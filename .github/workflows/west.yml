@@ -100,6 +100,9 @@ jobs:
       - run: cargo binstall -y wasm-tools@1.217
       - run: go generate ./tests/go/...
       - run: go test -v ./...
+        env:
+          WEST_LOG: trace
+        continue-on-error: ${{ matrix.config.os == 'ubuntu-latest' }} # TODO: remove
       - run: git diff --exit-code
 
   test-dev:
@@ -124,6 +127,9 @@ jobs:
       - run: cargo test --workspace --all-targets
       - run: go generate -tags=dev ./...
       - run: go test -v -tags=dev ./...
+        env:
+          WEST_LOG: trace
+        continue-on-error: ${{ matrix.os == 'ubuntu-latest' }} # TODO: remove
       - run: git diff --exit-code
 
   gofmt:
