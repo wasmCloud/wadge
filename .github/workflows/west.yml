@@ -99,8 +99,7 @@ jobs:
       - uses: cargo-bins/cargo-binstall@v1.10.5
       - run: cargo binstall -y wasm-tools@1.217
       - run: go generate ./tests/go/...
-      - run: go test ./...
-        continue-on-error: true # TODO: remove
+      - run: go test -v ./...
       - run: git diff --exit-code
 
   test-dev:
@@ -124,8 +123,7 @@ jobs:
       - run: cargo binstall -y wasm-tools@1.217
       - run: cargo test --workspace --all-targets
       - run: go generate -tags=dev ./...
-      - run: go test -tags=dev ./...
-        continue-on-error: true # TODO: remove
+      - run: go test -v -tags=dev ./...
       - run: git diff --exit-code
 
   gofmt:
