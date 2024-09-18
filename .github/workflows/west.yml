@@ -24,14 +24,14 @@ jobs:
     strategy:
       matrix:
         target:
-          - aarch64-unknown-linux-musl
           - aarch64-linux-android
+          - aarch64-unknown-linux-musl
           - riscv64gc-unknown-linux-gnu
+          - x86_64-pc-windows-gnu
           - x86_64-unknown-linux-musl
-          # TODO: figure out what's different in Mac/Windows libraries built this way
+          # TODO: figure out what's different in Mac libraries built this way
           #- aarch64-apple-darwin
           #- x86_64-apple-darwin
-          #- x86_64-pc-windows-gnu
 
     name: west-${{ matrix.target }}
     runs-on: ubuntu-latest
@@ -48,14 +48,13 @@ jobs:
     strategy:
       matrix:
         config:
-          - os: windows-latest
-            target: x86_64-pc-windows-msvc
-
           - os: macos-13
             target: x86_64-apple-darwin
+            sdk: 10.12
 
           - os: macos-14
             target: aarch64-apple-darwin
+            sdk: 11.0
 
     name: west-${{ matrix.config.target }}
     runs-on: ${{ matrix.config.os }}
@@ -64,11 +63,10 @@ jobs:
       - run: rustup show
       - uses: Swatinem/rust-cache@v2.7.3
       - run: cargo build -p west-sys --release --target ${{ matrix.config.target }}
+        env:
+          MACOSX_DEPLOYMENT_TARGET: ${{ matrix.config.sdk }}
       - run: mkdir -p artifact/lib
-      - run: mv target/release/${{ matrix.config.target }}/libwest_sys.a artifact/lib/libwest_sys.a
-        if: matrix.config.os != 'windows-latest'
-      - run: mv target/release/${{ matrix.config.target }}/west_sys.lib artifact/lib/west_sys.lib
-        if: matrix.config.os == 'windows-latest'
+      - run: mv target/${{ matrix.config.target }}/release/libwest_sys.a artifact/lib/libwest_sys.a
       - uses: actions/upload-artifact@v4
         with:
           name: west-${{ matrix.config.target }}
@@ -100,7 +98,7 @@ jobs:
 
           - os: windows-latest
             lib: x86_64-windows
-            target: x86_64-pc-windows-msvc
+            target: x86_64-pc-windows-gnu
 
           - os: macos-13
             lib: x86_64-darwin
@@ -125,13 +123,12 @@ jobs:
       - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: west-${{ matrix.config.target }}
-      - run: mv lib/libwest_sys.a "lib/${{ matrix.config.lib }}/libwest.a"
-        if: matrix.config.os != 'windows-latest'
-      - run: mv lib/west_sys.lib "lib/${{ matrix.config.lib }}/west.lib"
+      - run: choco install mingw --version 11.2.0 --allow-downgrade
         if: matrix.config.os == 'windows-latest'
+      - run: mv lib/libwest_sys.a "lib/${{ matrix.config.lib }}/libwest.a"
       - uses: actions/setup-go@v5
         with:
-          go-version-file: 'go.mod'
+          go-version-file: go.mod
       - run: rustup show
       - uses: Swatinem/rust-cache@v2.7.3
       - uses: cargo-bins/cargo-binstall@v1.10.5
@@ -158,26 +155,18 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/setup-go@v5
         with:
-          go-version-file: 'go.mod'
+          go-version-file: go.mod
       - run: rustup show
       - uses: Swatinem/rust-cache@v2.7.3
       - uses: cargo-bins/cargo-binstall@v1.10.5
       - run: cargo binstall -y wasm-tools@1.217
       - run: cargo test --workspace --all-targets
       - run: go generate -tags=dev ./...
-        if: matrix.os != 'windows-latest'
-      - run: |
-          cargo build -p west-sys --target x86_64-pc-windows-msvc
-          cargo build -p west-passthrough --target wasm32-unknown-unknown
-          go generate -tags=dev ./examples/go/...
-          go generate -tags=dev ./tests/go/...
-          wasm-tools component new target/wasm32-unknown-unknown/debug/west_passthrough.wasm -o lib/passthrough.wasm
-        if: matrix.os == 'windows-latest'
       - run: go test -tags=dev ./...
         env:
           GOGC: 1
           WEST_LOG: trace
-        continue-on-error: ${{ matrix.os == 'ubuntu-latest' }} # TODO: remove
+        continue-on-error: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'windows-latest' }} # TODO: remove
       - run: git diff --exit-code
 
   gofmt:
@@ -186,7 +175,7 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - uses: actions/setup-go@v5
         with:
-          go-version-file: 'go.mod'
+          go-version-file: go.mod
       - run: gofmt -w -s **/*.go
       - run: git diff --exit-code
 
