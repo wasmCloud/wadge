@@ -56,6 +56,7 @@ jobs:
             lib: aarch64-darwin
             target: aarch64-apple-darwin
 
+    name: west-${{ matrix.config.target }}
     runs-on: ${{ matrix.config.os }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -70,6 +71,7 @@ jobs:
           path: artifact
 
   build-wasm:
+    name: passthrough.wasm
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
@@ -104,6 +106,7 @@ jobs:
             lib: aarch64-darwin
             target: aarch64-apple-darwin
 
+    name: test-release-${{ matrix.config.target }}
     needs:
       - build-ffi
       - build-ffi-darwin
@@ -143,6 +146,7 @@ jobs:
           - macos-13
           - macos-14
 
+    name: test-dev-${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
