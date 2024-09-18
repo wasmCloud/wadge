@@ -8,6 +8,7 @@ package west
 
 // #cgo               LDFLAGS: -lwest
 // #cgo linux         LDFLAGS: -lm
+// #cgo android,arm64 LDFLAGS: -L${SRCDIR}/lib/aarch64-android
 // #cgo darwin,amd64  LDFLAGS: -L${SRCDIR}/lib/x86_64-darwin
 // #cgo darwin,arm64  LDFLAGS: -L${SRCDIR}/lib/aarch64-darwin
 // #cgo linux,amd64   LDFLAGS: -L${SRCDIR}/lib/x86_64-linux
