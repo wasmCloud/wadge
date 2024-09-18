@@ -46,6 +46,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
+      - uses: Swatinem/rust-cache@v2.7.3
       - uses: cargo-bins/cargo-binstall@v1.10.5
       - run: rustup show
       - run: cargo test --workspace --all-targets
