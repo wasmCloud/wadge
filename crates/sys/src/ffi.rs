@@ -4,7 +4,7 @@ use core::ptr::{self, null_mut};
 use std::ffi::CString;
 use std::sync::{LazyLock, Mutex};
 
-use crate::{call, instantiate, Config};
+use crate::{call, instantiate, Config, Instance};
 
 static ERROR: LazyLock<Mutex<Option<CString>>> = LazyLock::new(Mutex::default);
 
@@ -48,7 +48,7 @@ pub extern "C" fn instance_new(config: Config) -> *mut c_void {
 
 #[no_mangle]
 pub extern "C" fn instance_free(instance: *mut c_void) {
-    unsafe { drop(Box::from_raw(instance)) }
+    unsafe { drop(Box::from_raw(instance.cast::<Instance>())) }
 }
 
 #[no_mangle]
