@@ -39,21 +39,20 @@ impl bindings::exports::west_test::leftpad::leftpad::Guest for Handler {
         let rx: InputStream = in_.into_inner();
         let tx: &OutputStream = out.get();
 
-        let mut cs = zip(0..len, iter::repeat(c)).map(|(_, c)| c);
+        let mut cs = zip(0..len, iter::repeat(c)).flat_map(|(_, c)| String::from(c).into_bytes());
+        let mut buf = Vec::default();
         loop {
             let mut n = tx.check_write()?;
             if n == 0 {
                 tx.subscribe().block();
                 n = tx.check_write()?;
             }
-            let s: Box<str> = cs
-                .by_ref()
-                .take(n.try_into().unwrap_or(usize::MAX) / c.len_utf8())
-                .collect();
-            if s.is_empty() {
+            buf.extend(cs.by_ref().take(n.try_into().unwrap_or(usize::MAX)));
+            if buf.is_empty() {
                 break;
             }
-            tx.write(s.as_bytes())?;
+            tx.write(&buf)?;
+            buf.clear();
         }
         loop {
             let n = tx.splice(&rx, 4096)?;
