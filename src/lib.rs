@@ -6,7 +6,7 @@ use wasi_preview1_component_adapter_provider::{
     WASI_SNAPSHOT_PREVIEW1_ADAPTER_NAME, WASI_SNAPSHOT_PREVIEW1_REACTOR_ADAPTER,
 };
 use wasmtime::component::{Component, Linker, Resource, ResourceTable, Type, TypedFunc, Val};
-use wasmtime::{Engine, Store};
+use wasmtime::{AsContext as _, AsContextMut as _, Engine, Store};
 use wasmtime_wasi::{WasiCtx, WasiCtxBuilder, WasiView};
 use wasmtime_wasi_http::types::HostIncomingRequest;
 use wasmtime_wasi_http::{WasiHttpCtx, WasiHttpView};
@@ -182,25 +182,27 @@ pub struct Func<'a> {
 }
 
 impl Func<'_> {
+    #[must_use]
     pub fn params(&self) -> Box<[Type]> {
-        self.func.params(&self.store)
+        self.func.params(self.store.as_context())
     }
 
+    #[must_use]
     pub fn results(&self) -> Box<[Type]> {
-        self.func.results(&self.store)
+        self.func.results(self.store.as_context())
     }
 
     pub fn call(&mut self, params: &[Val], results: &mut [Val]) -> anyhow::Result<()> {
         self.func
-            .call(&mut self.store, params, results)
+            .call(self.store.as_context_mut(), params, results)
             .context("failed to call function")?;
         self.func
-            .post_return(&mut self.store)
+            .post_return(self.store.as_context_mut())
             .context("failed to invoke `post-return`")
     }
 
     pub fn store(&mut self) -> &mut Store<impl WasiView + WasiHttpView> {
-        &mut self.store
+        self.store
     }
 }
 
@@ -265,9 +267,9 @@ impl Instance {
 }
 
 pub fn instantiate(Config { engine, wasm }: Config) -> anyhow::Result<Instance> {
-    let wasm = if wasmparser::Parser::is_core_wasm(&wasm) {
+    let wasm = if wasmparser::Parser::is_core_wasm(wasm) {
         let wasm = wit_component::ComponentEncoder::default()
-            .module(&wasm)
+            .module(wasm)
             .context("failed to set core component module")?
             .adapter(
                 WASI_SNAPSHOT_PREVIEW1_ADAPTER_NAME,
