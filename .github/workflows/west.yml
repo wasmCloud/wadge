@@ -27,11 +27,11 @@ jobs:
           - aarch64-unknown-linux-musl
           - aarch64-linux-android
           - riscv64gc-unknown-linux-gnu
-          - x86_64-pc-windows-gnu
           - x86_64-unknown-linux-musl
-          # TODO: figure out what's different in Mac libraries built this way
+          # TODO: figure out what's different in Mac/Windows libraries built this way
           #- aarch64-apple-darwin
           #- x86_64-apple-darwin
+          #- x86_64-pc-windows-gnu
 
     name: west-${{ matrix.target }}
     runs-on: ubuntu-latest
@@ -44,16 +44,17 @@ jobs:
         with:
           package: west-${{ matrix.target }}
 
-  build-ffi-darwin:
+  build-ffi-rustup:
     strategy:
       matrix:
         config:
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+
           - os: macos-13
-            lib: x86_64-darwin
             target: x86_64-apple-darwin
 
           - os: macos-14
-            lib: aarch64-darwin
             target: aarch64-apple-darwin
 
     name: west-${{ matrix.config.target }}
@@ -62,9 +63,12 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - run: rustup show
       - uses: Swatinem/rust-cache@v2.7.3
-      - run: cargo build -p west-sys --release
+      - run: cargo build -p west-sys --release --target ${{ matrix.config.target }}
       - run: mkdir -p artifact/lib
-      - run: mv target/release/libwest_sys.a artifact/lib/libwest_sys.a
+      - run: mv target/release/${{ matrix.config.target }}/libwest_sys.a artifact/lib/libwest_sys.a
+        if: matrix.config.os != 'windows-latest'
+      - run: mv target/release/${{ matrix.config.target }}/west_sys.lib artifact/lib/west_sys.lib
+        if: matrix.config.os == 'windows-latest'
       - uses: actions/upload-artifact@v4
         with:
           name: west-${{ matrix.config.target }}
@@ -96,7 +100,7 @@ jobs:
 
           - os: windows-latest
             lib: x86_64-windows
-            target: x86_64-pc-windows-gnu
+            target: x86_64-pc-windows-msvc
 
           - os: macos-13
             lib: x86_64-darwin
@@ -109,7 +113,7 @@ jobs:
     name: test-release (${{ matrix.config.os }})
     needs:
       - build-ffi
-      - build-ffi-darwin
+      - build-ffi-rustup
       - build-wasm
     runs-on: ${{ matrix.config.os }}
     steps:
@@ -122,6 +126,9 @@ jobs:
         with:
           name: west-${{ matrix.config.target }}
       - run: mv lib/libwest_sys.a "lib/${{ matrix.config.lib }}/libwest.a"
+        if: matrix.config.os != 'windows-latest'
+      - run: mv lib/west_sys.lib "lib/${{ matrix.config.lib }}/west.lib"
+        if: matrix.config.os == 'windows-latest'
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
@@ -158,6 +165,14 @@ jobs:
       - run: cargo binstall -y wasm-tools@1.217
       - run: cargo test --workspace --all-targets
       - run: go generate -tags=dev ./...
+        if: matrix.os != 'windows-latest'
+      - run: |
+          cargo build -p west-sys --target x86_64-pc-windows-msvc
+          cargo build -p west-passthrough --target wasm32-unknown-unknown
+          go generate -tags=dev ./examples/go/...
+          go generate -tags=dev ./tests/go/...
+          wasm-tools component new target/wasm32-unknown-unknown/debug/west_passthrough.wasm -o lib/passthrough.wasm
+        if: matrix.os == 'windows-latest'
       - run: go test -tags=dev ./...
         env:
           GOGC: 1
