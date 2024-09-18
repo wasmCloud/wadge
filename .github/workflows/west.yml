@@ -87,11 +87,11 @@ jobs:
       - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: passthrough
-          path: lib/passthrough.wasm
+          path: lib
       - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:
           name: west-${{ matrix.config.target }}
-          path: lib/${{ matrix.config.lib }}/libwest.a
+      - run: mv lib/libwest_sys.a "lib/${{ matrix.config.lib }}/libwest.a"
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
@@ -101,6 +101,7 @@ jobs:
       - run: go generate ./tests/go/...
       - run: go test ./...
         env:
+          GOGC: 1
           WEST_LOG: trace
         continue-on-error: ${{ matrix.config.os == 'ubuntu-latest' || matrix.config.os == 'windows-latest' }} # TODO: remove
       - run: git diff --exit-code
@@ -128,6 +129,7 @@ jobs:
       - run: go generate -tags=dev ./...
       - run: go test -tags=dev ./...
         env:
+          GOGC: 1
           WEST_LOG: trace
         continue-on-error: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'windows-latest' }} # TODO: remove
       - run: git diff --exit-code
