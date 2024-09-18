@@ -157,7 +157,7 @@ func NewInstance(conf *Config) (*Instance, error) {
 	ptr := C.instance_new(C.Config{
 		wasm: C.List_u8{
 			ptr: (*C.uchar)(wasmPtr),
-			len: C.ulong(len(wasm)),
+			len: C.uintptr_t(len(wasm)),
 		},
 	})
 	if ptr == nil {
