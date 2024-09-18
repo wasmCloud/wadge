@@ -24,13 +24,13 @@ jobs:
     strategy:
       matrix:
         config:
-          #- os: ubuntu-latest
-          #  lib: x86_64-linux
-          #  target: x86_64-unknown-linux-musl
+        - os: ubuntu-latest
+          lib: x86_64-linux
+          target: x86_64-unknown-linux-musl
 
-          #- os: windows-latest
-          #  lib: x86_64-windows
-          #  target: x86_64-pc-windows-msvc
+        - os: windows-latest
+          lib: x86_64-windows
+          target: x86_64-pc-windows-msvc
 
         - os: macos-13
           lib: x86_64-darwin
@@ -48,7 +48,7 @@ jobs:
           go-version-file: 'go.mod'
       - uses: cargo-bins/cargo-binstall@v1.10.5
       - run: rustup show
-      #- run: cargo test --workspace --all-targets
+      - run: cargo test --workspace --all-targets
       - run: cargo binstall -y wasm-tools@1.217
       - run: go generate ./...
       - run: go test ./...
@@ -64,8 +64,8 @@ jobs:
         check:
           - audit
           - fmt
-          #- nextest
-          #- clippy
+          - nextest
+          - clippy
 
     name: cargo ${{ matrix.check }}
     runs-on: ubuntu-latest
@@ -84,7 +84,8 @@ jobs:
     strategy:
       matrix:
         include:
-          #- crate: passthrough
+          - crate: passthrough
+            workspace-dependencies: false
 
           - crate: sys
             workspace-dependencies: true
