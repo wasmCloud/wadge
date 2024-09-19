@@ -2,9 +2,7 @@
 
 package west
 
-// #cgo  windows CFLAGS:  -DWASM_API_EXTERN= -DWASI_API_EXTERN=
 // #cgo !windows LDFLAGS: -lm -ldl -pthread
-// #cgo  windows LDFLAGS: -luserenv -lole32 -lntdll -lws2_32 -lkernel32 -lbcrypt
 // #include "./include/west.h"
 // #include <stdlib.h>
 import "C"
