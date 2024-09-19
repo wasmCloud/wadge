@@ -38,7 +38,7 @@ tokio = { workspace = true }
 tracing = { workspace = true }
 wasi-preview1-component-adapter-provider = { workspace = true }
 wasmparser = { workspace = true }
-wasmtime = { workspace = true, features = ["cranelift"] }
+wasmtime = { workspace = true, features = ["cranelift", "gc"] }
 wasmtime-wasi = { workspace = true }
 wasmtime-wasi-http = { workspace = true }
 wit-component = { workspace = true }
