@@ -1,7 +1,16 @@
-//go:generate go run github.com/bytecodealliance/wasm-tools-go/cmd/wit-bindgen-go generate -w imports -o bindings ./wit
-
 package west
 
+// #cgo               LDFLAGS: -lwest
+// #cgo android,arm64 LDFLAGS: -L${SRCDIR}/lib/aarch64-android
+// #cgo darwin,amd64  LDFLAGS: -L${SRCDIR}/lib/x86_64-darwin
+// #cgo darwin,arm64  LDFLAGS: -L${SRCDIR}/lib/aarch64-darwin
+// #cgo linux,amd64   LDFLAGS: -L${SRCDIR}/lib/x86_64-linux
+// #cgo linux,arm64   LDFLAGS: -L${SRCDIR}/lib/aarch64-linux
+// #cgo linux,riscv64 LDFLAGS: -L${SRCDIR}/lib/riscv64-linux
+// #cgo windows,amd64 LDFLAGS: -L${SRCDIR}/lib/x86_64-windows
+// #cgo windows,arm64 LDFLAGS: -L${SRCDIR}/lib/aarch64-windows
+// #cgo !windows      LDFLAGS: -lm -ldl -pthread
+// #cgo windows       LDFLAGS: -lws2_32 -lole32 -loleaut32 -lntdll -lbcrypt -luserenv
 // #include "./include/west.h"
 // #include <stdlib.h>
 import "C"
