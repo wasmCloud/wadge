@@ -98,7 +98,6 @@ func WithInstance(i *Instance, f func()) {
 
 func withCurrentInstance[T any](f func(*Instance) T, handleErr func(error)) T {
 	instanceMu.RLock()
-	defer instanceMu.RUnlock()
 	if instance == nil {
 		instanceMu.RUnlock()
 		func() {
@@ -115,6 +114,7 @@ func withCurrentInstance[T any](f func(*Instance) T, handleErr func(error)) T {
 		}()
 		instanceMu.RLock()
 	}
+	defer instanceMu.RUnlock()
 	return f(instance)
 }
 
