@@ -1,5 +1,6 @@
 /target
 *.wasm
 *.a
+*.lib
 west_bindings_test.go
 /go/internal/tests/*/bindings/*
