@@ -11,7 +11,7 @@ use std::collections::HashSet;
 use std::sync::{Arc, LazyLock};
 
 use anyhow::{bail, ensure, Context as _};
-use tracing::{instrument, trace_span};
+use tracing::{instrument, trace, trace_span};
 use tracing_subscriber::EnvFilter;
 use wasmtime::component::{types, Resource, ResourceAny, ResourceType, Type, Val};
 use wasmtime::Store;
@@ -73,17 +73,17 @@ fn instantiate(config: Config) -> anyhow::Result<Instance> {
     })
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn align_of_record(ty: &types::Record) -> usize {
     ty.fields().map(|ty| align_of(&ty.ty)).max().unwrap_or(1)
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn align_of_tuple(ty: &types::Tuple) -> usize {
     ty.types().map(|ty| align_of(&ty)).max().unwrap_or(1)
 }
 
-#[instrument(level = "trace", skip_all, ret(level = "trace"))]
+#[instrument(level = "trace", skip_all)]
 fn max_case_alignment<'a>(cases: impl IntoIterator<Item = types::Case<'a>>) -> usize {
     cases
         .into_iter()
@@ -92,7 +92,7 @@ fn max_case_alignment<'a>(cases: impl IntoIterator<Item = types::Case<'a>>) -> u
         .unwrap_or(1)
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn align_of_variant(ty: &types::Variant) -> usize {
     let cases = ty.cases();
     let disc = match cases.len() {
@@ -103,19 +103,19 @@ fn align_of_variant(ty: &types::Variant) -> usize {
     max_case_alignment(cases).max(disc)
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn align_of_option(ty: &types::OptionType) -> usize {
     align_of(&ty.ty())
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn align_of_result(ty: &types::ResultType) -> usize {
     let ok = ty.ok().as_ref().map_or(1, align_of);
     let err = ty.err().as_ref().map_or(1, align_of);
     ok.max(err)
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn align_of(ty: &Type) -> usize {
     match ty {
         Type::Bool | Type::S8 | Type::U8 => 1,
@@ -141,12 +141,12 @@ fn align_of(ty: &Type) -> usize {
     }
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn align_to(addr: usize, align: usize) -> usize {
     addr.div_ceil(align).saturating_mul(align)
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn size_of_record(ty: &types::Record) -> usize {
     let mut size = 0usize;
     for types::Field { ty, .. } in ty.fields() {
@@ -155,7 +155,7 @@ fn size_of_record(ty: &types::Record) -> usize {
     align_to(size, align_of_record(ty))
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn size_of_tuple(ty: &types::Tuple) -> usize {
     let mut size = 0usize;
     for ty in ty.types() {
@@ -164,7 +164,7 @@ fn size_of_tuple(ty: &types::Tuple) -> usize {
     align_to(size, align_of_tuple(ty))
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn size_of_variant(ty: &types::Variant) -> usize {
     let cases = ty.cases();
     let size: usize = match cases.len() {
@@ -182,13 +182,13 @@ fn size_of_variant(ty: &types::Variant) -> usize {
     align_to(size, align_of_variant(ty))
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn size_of_option(ty: &types::OptionType) -> usize {
     let size = size_of(&ty.ty()).saturating_add(1);
     align_to(size, align_of_option(ty))
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn size_of_result(ty: &types::ResultType) -> usize {
     let ok = ty.ok().as_ref().map(size_of).unwrap_or_default();
     let err = ty.err().as_ref().map(size_of).unwrap_or_default();
@@ -196,7 +196,7 @@ fn size_of_result(ty: &types::ResultType) -> usize {
     align_to(size, align_of_result(ty))
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn size_of(ty: &Type) -> usize {
     match ty {
         Type::Bool | Type::S8 | Type::U8 => 1,
@@ -222,7 +222,7 @@ fn size_of(ty: &Type) -> usize {
     }
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn args_of_variant(ty: &types::Variant) -> usize {
     ty.cases()
         .map(|ty| ty.ty.map(|ty| args_of(&ty)).unwrap_or_default())
@@ -231,14 +231,14 @@ fn args_of_variant(ty: &types::Variant) -> usize {
         .saturating_add(1)
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn args_of_result(ty: &types::ResultType) -> usize {
     let ok = ty.ok().as_ref().map(args_of).unwrap_or_default();
     let err = ty.err().as_ref().map(args_of).unwrap_or_default();
     ok.max(err).saturating_add(1)
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "trace")]
 fn args_of(ty: &Type) -> usize {
     match ty {
         Type::Bool
@@ -309,7 +309,7 @@ fn deref_arg<T>(args: *const *mut c_void) -> anyhow::Result<(NonNull<T>, *const 
     Ok((data, args.as_ptr().wrapping_add(1)))
 }
 
-#[instrument(level = "trace", skip(store, ty, src), ret(level = "trace"))]
+#[instrument(level = "debug", skip(store, ty, src), ret(level = "debug"))]
 fn lower(
     store: &mut Store<impl WasiView>,
     ty: &Type,
@@ -382,12 +382,15 @@ fn lower(
             if val.is_empty() {
                 unsafe { dst.write((null(), 0)) }
             } else {
-                let size = val.len();
-                let layout = Layout::from_size_align(size, 1)
+                let len = val.len();
+                let layout = Layout::from_size_align(len, 1)
                     .context("failed to construct string memory layout")?;
+                trace!(?layout, "allocating string");
                 let data = unsafe { alloc(layout) };
-                unsafe { copy_nonoverlapping(val.as_ptr(), data, size) }
-                unsafe { dst.write((data, size)) }
+                ensure!(!data.is_null(), "failed to allocate list");
+                unsafe { copy_nonoverlapping(val.as_ptr(), data, len) }
+                trace!(?data, len, "writing string");
+                unsafe { dst.write((data, len)) }
             }
             Ok(dst.as_ptr().wrapping_add(1).cast())
         }
@@ -412,6 +415,7 @@ fn lower(
                     data = lower(store, &ty, dst, val)
                         .with_context(|| format!("failed to lower list element `{i}`"))?;
                 }
+                trace!(?start, len, "writing list");
                 unsafe { dst.write((start, len)) }
             }
             Ok(dst.as_ptr().wrapping_add(1).cast())
@@ -597,7 +601,7 @@ fn lower(
     }
 }
 
-#[instrument(level = "trace", skip_all, ret(level = "trace"))]
+#[instrument(level = "debug", skip_all, ret(level = "debug"))]
 fn lower_results(
     store: &mut Store<impl WasiView>,
     vals: Vec<Val>,
@@ -1036,7 +1040,7 @@ fn lift_borrow(
     Ok(src.as_ptr().wrapping_add(1).cast())
 }
 
-#[instrument(level = "trace", skip_all, ret(level = "trace"))]
+#[instrument(level = "debug", skip_all, ret(level = "debug"))]
 fn lift(
     store: &mut Store<impl WasiView>,
     ty: &Type,
@@ -1070,7 +1074,7 @@ fn lift(
     }
 }
 
-#[instrument(level = "trace", skip_all, ret(level = "trace"))]
+#[instrument(level = "debug", skip_all, ret(level = "debug"))]
 fn lift_param(
     store: &mut Store<impl WasiView>,
     ty: &Type,
@@ -1318,7 +1322,7 @@ fn lift_param(
     }
 }
 
-#[instrument(level = "trace", skip_all, ret(level = "trace"))]
+#[instrument(level = "debug", skip_all, ret(level = "debug"))]
 fn lift_params(
     store: &mut Store<impl WasiView>,
     tys: &[Type],
@@ -1338,7 +1342,7 @@ fn lift_params(
     Ok((vals, results))
 }
 
-#[instrument(level = "trace", ret(level = "trace"))]
+#[instrument(level = "debug", ret(level = "debug"))]
 fn call(
     instance_ptr: *mut c_void,
     instance: *const c_char,
