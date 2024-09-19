@@ -61,13 +61,13 @@ jobs:
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - run: rustup show
-      - uses: Swatinem/rust-cache@v2.7.3
+      - uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
       - run: cargo build -p west-sys --release --target ${{ matrix.config.target }}
         env:
           MACOSX_DEPLOYMENT_TARGET: ${{ matrix.config.sdk }}
       - run: mkdir -p artifact/lib
       - run: mv target/${{ matrix.config.target }}/release/libwest_sys.a artifact/lib/libwest_sys.a
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: west-${{ matrix.config.target }}
           path: artifact
@@ -83,7 +83,7 @@ jobs:
       - run: nix profile install --inputs-from . '.#rust' 'nixpkgs#wasm-tools'
       - run: cargo build -p west-passthrough --target wasm32-unknown-unknown --release
       - run: wasm-tools component new target/wasm32-unknown-unknown/release/west_passthrough.wasm -o lib/passthrough.wasm
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         with:
           name: passthrough
           path: lib/passthrough.wasm
@@ -122,7 +122,7 @@ jobs:
       run:
         shell: ${{ matrix.config.shell }} {0}
     steps:
-      - uses: msys2/setup-msys2@v2
+      - uses: msys2/setup-msys2@ddf331adaebd714795f1042345e6ca57bd66cea8 # v2.24.1
         if: matrix.config.os == 'windows-latest'
         with:
           update: true
@@ -141,12 +141,12 @@ jobs:
         with:
           name: west-${{ matrix.config.target }}
       - run: mv lib/libwest_sys.a "lib/${{ matrix.config.lib }}/libwest.a"
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
         with:
           go-version-file: go.mod
       - run: rustup show
-      - uses: Swatinem/rust-cache@v2.7.3
-      - uses: cargo-bins/cargo-binstall@v1.10.5
+      - uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
+      - uses: cargo-bins/cargo-binstall@f9144d57df0014c2e0975517e582dbaaa2b597af # v1.10.5
       - run: cargo binstall -y wasm-tools@1.217
       - run: go generate ./tests/go/...
       - run: go test -failfast ./...
@@ -177,7 +177,7 @@ jobs:
       run:
         shell: ${{ matrix.config.shell }} {0}
     steps:
-      - uses: msys2/setup-msys2@v2
+      - uses: msys2/setup-msys2@ddf331adaebd714795f1042345e6ca57bd66cea8 # v2.24.1
         if: matrix.config.os == 'windows-latest'
         with:
           update: true
@@ -188,7 +188,7 @@ jobs:
         if: matrix.config.os == 'windows-latest'
 
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
         with:
           go-version-file: go.mod
 
@@ -196,8 +196,8 @@ jobs:
         if: matrix.config.os == 'windows-latest'
       - run: rustup show
 
-      - uses: Swatinem/rust-cache@v2.7.3
-      - uses: cargo-bins/cargo-binstall@v1.10.5
+      - uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
+      - uses: cargo-bins/cargo-binstall@f9144d57df0014c2e0975517e582dbaaa2b597af # v1.10.5
       - run: cargo binstall -y wasm-tools@1.217
       - run: cargo test --workspace --all-targets
       - run: go generate -tags=dev ./...
@@ -212,7 +212,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
         with:
           go-version-file: go.mod
       - run: gofmt -w -s **/*.go
