@@ -144,11 +144,8 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
-        if: matrix.config.os != 'windows-latest'
       - run: rustup show
-        if: matrix.config.os != 'windows-latest'
       - uses: Swatinem/rust-cache@v2.7.3
-        if: matrix.config.os != 'windows-latest'
       - uses: cargo-bins/cargo-binstall@v1.10.5
       - run: cargo binstall -y wasm-tools@1.217
       - run: go generate ./tests/go/...
@@ -203,7 +200,6 @@ jobs:
       - uses: cargo-bins/cargo-binstall@v1.10.5
       - run: cargo binstall -y wasm-tools@1.217
       - run: cargo test --workspace --all-targets
-        if: matrix.config.os != 'windows-latest'
       - run: go generate -tags=dev ./...
       - run: go test -failfast -tags=dev ./...
         env:
