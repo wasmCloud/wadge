@@ -170,6 +170,7 @@ jobs:
           - os: macos-14
             shell: bash
 
+    name: test-dev (${{ matrix.config.os }})
     runs-on: ${{ matrix.config.os }}
     defaults:
       run:
