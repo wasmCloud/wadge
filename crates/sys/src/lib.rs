@@ -6,7 +6,7 @@ use core::ops::{BitOrAssign, Deref, DerefMut, Shl};
 use core::ptr::{copy_nonoverlapping, null, NonNull};
 use core::slice;
 
-use std::alloc::alloc;
+use std::alloc::{alloc, alloc_zeroed};
 use std::collections::HashSet;
 use std::sync::{Arc, LazyLock};
 
@@ -402,7 +402,9 @@ fn lower(
                 let align = align_of(&ty);
                 let layout = Layout::from_size_align(size, align)
                     .context("failed to construct list memory layout")?;
-                let start = unsafe { alloc(layout) }.cast::<c_void>();
+                trace!(?layout, "allocating list");
+                let start = unsafe { alloc_zeroed(layout) }.cast::<c_void>();
+                ensure!(!start.is_null(), "failed to allocate list");
                 let mut data = start;
                 for (i, val) in vals.into_iter().enumerate() {
                     let dst = NonNull::new(data)
