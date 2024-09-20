@@ -2015,7 +2015,7 @@ dependencies = [
 
 [[package]]
 name = "west"
-version = "0.1.0-alpha.2"
+version = "0.1.0-rc.1"
 dependencies = [
  "anyhow",
  "http",
@@ -2031,14 +2031,14 @@ dependencies = [
 
 [[package]]
 name = "west-passthrough"
-version = "0.1.0-alpha.1"
+version = "0.1.0-rc.1"
 dependencies = [
  "wasi-passthrough",
 ]
 
 [[package]]
 name = "west-sys"
-version = "0.1.0-alpha.1"
+version = "0.1.0-rc.1"
 dependencies = [
  "anyhow",
  "cbindgen",
