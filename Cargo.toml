@@ -9,6 +9,21 @@ edition.workspace = true
 license.workspace = true
 repository.workspace = true
 
+exclude = [
+    "*.a",
+    "*.go",
+    "*.h",
+    "*.s",
+    "*.wasm",
+    ".github",
+    ".gitignore",
+    "examples",
+    "flake.*",
+    "go.*",
+    "rust-toolchain.toml",
+    "tests",
+]
+
 [workspace]
 members = ["crates/*", "tests/components/*"]
 
