@@ -1,6 +1,6 @@
 [package]
 name = "west"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 description = "WebAssembly component test runtime"
 
 authors.workspace = true
@@ -54,6 +54,7 @@ wasi-passthrough = { version = "0.1.1", default-features = false }
 wasi-preview1-component-adapter-provider = { version = "24", default-features = false }
 wasmparser = { version = "0.217", default-features = false }
 wasmtime = { version = "24", default-features = false }
+wasmtime-cabish = { version = "0.1.2", default-features = false }
 wasmtime-wasi = { version = "24", default-features = false }
 wasmtime-wasi-http = { version = "24", default-features = false }
 west = { version = "0.1.0-rc.1", path = "." }
