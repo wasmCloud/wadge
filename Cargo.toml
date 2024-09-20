@@ -72,6 +72,6 @@ wasmtime = { version = "24", default-features = false }
 wasmtime-cabish = { version = "0.1.2", default-features = false }
 wasmtime-wasi = { version = "24", default-features = false }
 wasmtime-wasi-http = { version = "24", default-features = false }
-west = { version = "0.1.0", path = "." }
+west = { version = "0.1.2", path = "." }
 wit-bindgen = { version = "0.32", default-features = false }
 wit-component = { version = "0.217", default-features = false }
