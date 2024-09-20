@@ -2,4 +2,6 @@ package west:west@0.1.0;
 
 world imports {
     include wasiext:http/imports@0.1.0;
+
+    import wasi:logging/logging;
 }
