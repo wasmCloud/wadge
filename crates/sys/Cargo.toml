@@ -1,6 +1,6 @@
 [package]
 name = "west-sys"
-version = "0.1.0"
+version = "0.1.1"
 description = "WebAssembly component test runtime C bindings"
 
 authors.workspace = true
@@ -20,7 +20,3 @@ wasmtime = { workspace = true }
 wasmtime-cabish = { workspace = true }
 wasmtime-wasi = { workspace = true }
 west = { workspace = true }
-
-[build-dependencies]
-anyhow = { workspace = true }
-cbindgen = { workspace = true }
