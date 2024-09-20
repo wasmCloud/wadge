@@ -1,6 +1,6 @@
 [package]
 name = "west-passthrough"
-version = "0.1.0"
+version = "0.1.1"
 description = "WebAssembly component, which reexports WASI from the host"
 
 authors.workspace = true
