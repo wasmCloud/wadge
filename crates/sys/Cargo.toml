@@ -1,6 +1,6 @@
 [package]
 name = "west-sys"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 description = "WebAssembly component test runtime C bindings"
 
 authors.workspace = true
@@ -17,8 +17,8 @@ anyhow = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true, features = ["ansi", "env-filter", "fmt"] }
 wasmtime = { workspace = true }
+wasmtime-cabish = { workspace = true }
 wasmtime-wasi = { workspace = true }
-wasmtime-wasi-http = { workspace = true }
 west = { workspace = true }
 
 [build-dependencies]

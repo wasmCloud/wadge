@@ -128,6 +128,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8318a53db07bb3f8dca91a600466bdb3f2eaadeedfdbcf02e1accbad9271ba50"
 
 [[package]]
+name = "cabish"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c14b653b20cfc99e4fe75e620f4a6057ae0efa147801cca86eb152b1dd40adbe"
+dependencies = [
+ "anyhow",
+]
+
+[[package]]
 name = "cap-fs-ext"
 version = "3.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1795,6 +1804,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "wasmtime-cabish"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a12fd816e8e0b96121d0ee2879131dc07f9d2f34ee5de6045b14b9f5f2027903"
+dependencies = [
+ "anyhow",
+ "cabish",
+ "tracing",
+ "wasmtime",
+ "wasmtime-wasi",
+]
+
+[[package]]
 name = "wasmtime-component-macro"
 version = "24.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2015,7 +2037,7 @@ dependencies = [
 
 [[package]]
 name = "west"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "http",
@@ -2031,22 +2053,22 @@ dependencies = [
 
 [[package]]
 name = "west-passthrough"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "wasi-passthrough",
 ]
 
 [[package]]
 name = "west-sys"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "anyhow",
  "cbindgen",
  "tracing",
  "tracing-subscriber",
  "wasmtime",
+ "wasmtime-cabish",
  "wasmtime-wasi",
- "wasmtime-wasi-http",
  "west",
 ]
 
