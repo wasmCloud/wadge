@@ -543,6 +543,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "generate-header"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "cbindgen",
+]
+
+[[package]]
 name = "getrandom"
 version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2060,10 +2068,9 @@ dependencies = [
 
 [[package]]
 name = "west-sys"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
- "cbindgen",
  "tracing",
  "tracing-subscriber",
  "wasmtime",

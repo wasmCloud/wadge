@@ -1,3 +1,5 @@
+//go:generate cargo run -p generate-header
+
 package west
 
 // #cgo               LDFLAGS: -lwest
