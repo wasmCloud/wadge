@@ -1,7 +1,7 @@
 use core::time::Duration;
 
 use anyhow::Context as _;
-use tracing::instrument;
+use tracing::{info, instrument};
 use wasi_preview1_component_adapter_provider::{
     WASI_SNAPSHOT_PREVIEW1_ADAPTER_NAME, WASI_SNAPSHOT_PREVIEW1_REACTOR_ADAPTER,
 };
@@ -46,6 +46,19 @@ impl WasiHttpView for Ctx {
     }
     fn table(&mut self) -> &mut ResourceTable {
         &mut self.table
+    }
+}
+
+impl bindings::wasi::logging::logging::Host for Ctx {
+    #[instrument(level = "trace", skip_all, ret(level = "trace"))]
+    fn log(
+        &mut self,
+        level: bindings::wasi::logging::logging::Level,
+        context: String,
+        message: String,
+    ) -> wasmtime::Result<()> {
+        info!(?level, context, message);
+        Ok(())
     }
 }
 
