@@ -146,8 +146,7 @@ jobs:
           go-version-file: go.mod
       - run: rustup show
       - uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
-      - uses: cargo-bins/cargo-binstall@f9144d57df0014c2e0975517e582dbaaa2b597af # v1.10.5
-      - run: cargo binstall -y wasm-tools@1.217
+      - run: cargo install wasm-tools@1.217.0
       - run: go generate ./tests/go/... ./examples/go/...
       - run: go test -failfast ./...
         env:
@@ -196,8 +195,7 @@ jobs:
       - run: rustup show
 
       - uses: Swatinem/rust-cache@23bce251a8cd2ffc3c1075eaa2367cf899916d84 # v2.7.3
-      - uses: cargo-bins/cargo-binstall@f9144d57df0014c2e0975517e582dbaaa2b597af # v1.10.5
-      - run: cargo binstall -y wasm-tools@1.217
+      - run: cargo install wasm-tools@1.217.0
       - run: cargo test --workspace --all-targets
       - run: go generate -tags=dev ./...
       - run: go test -failfast -tags=dev ./...
