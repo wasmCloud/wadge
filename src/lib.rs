@@ -302,7 +302,10 @@ pub fn instantiate(Config { engine, wasm }: Config) -> anyhow::Result<Instance> 
     wasmtime_wasi::add_to_linker_sync(&mut linker).context("failed to link WASI")?;
     wasmtime_wasi_http::add_only_http_to_linker_sync(&mut linker)
         .context("failed to link `wasi:http`")?;
-    bindings::wasiext::http::ext::add_to_linker(&mut linker, |cx| cx)?;
+    bindings::wasiext::http::ext::add_to_linker(&mut linker, |cx| cx)
+        .context("failed to link `wasiext:http/ext`")?;
+    bindings::wasi::logging::logging::add_to_linker(&mut linker, |cx| cx)
+        .context("failed to link `wasi:logging/logging`")?;
 
     let wasi = WasiCtxBuilder::new()
         .inherit_env()
