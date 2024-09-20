@@ -1607,9 +1607,9 @@ checksum = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
 
 [[package]]
 name = "wasi-passthrough"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "75af629a58d64296102af2854e9b37a9341efd21984c8277326f8e921ef354e0"
+checksum = "2f9720d94dc2220d47198299ec7c0d3ab15c8e883c97c8cefc220700e1e2bb83"
 dependencies = [
  "wit-bindgen",
 ]
@@ -2061,7 +2061,7 @@ dependencies = [
 
 [[package]]
 name = "west-passthrough"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "wasi-passthrough",
 ]
