@@ -16,6 +16,7 @@ mod bindings {
 use core::iter::{self, zip};
 
 use wasi_passthrough::bindings::wasi::io::streams::{InputStream, OutputStream};
+use wasi_passthrough_ext as _;
 
 pub struct Handler;
 
