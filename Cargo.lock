@@ -1607,9 +1607,28 @@ checksum = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
 
 [[package]]
 name = "wasi-passthrough"
-version = "0.1.2"
+version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f9720d94dc2220d47198299ec7c0d3ab15c8e883c97c8cefc220700e1e2bb83"
+checksum = "330d3c13cddb628bb3fbf698d7ca5768b712fd9c3e4e06177279b04c05417a79"
+dependencies = [
+ "wit-bindgen",
+]
+
+[[package]]
+name = "wasi-passthrough-ext"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "977613992b50ed021a32390994b0a3c4cecc7bb04951e08d67898e987ea34134"
+dependencies = [
+ "wasi-passthrough",
+ "wit-bindgen",
+]
+
+[[package]]
+name = "wasi-passthrough-logging"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e0716d0e57714fbf9a4dfef9cb54fa037905cc82fe528fff126c54f591d9ec92"
 dependencies = [
  "wit-bindgen",
 ]
@@ -1625,6 +1644,7 @@ name = "wasi-test-component"
 version = "0.1.0"
 dependencies = [
  "wasi-passthrough",
+ "wasi-passthrough-ext",
  "wit-bindgen",
 ]
 
@@ -2061,9 +2081,12 @@ dependencies = [
 
 [[package]]
 name = "west-passthrough"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "wasi-passthrough",
+ "wasi-passthrough-ext",
+ "wasi-passthrough-logging",
+ "wit-bindgen",
 ]
 
 [[package]]

@@ -1,6 +1,6 @@
 [package]
 name = "west-passthrough"
-version = "0.1.1"
+version = "0.1.2"
 description = "WebAssembly component, which reexports WASI from the host"
 
 authors.workspace = true
@@ -13,4 +13,7 @@ repository.workspace = true
 crate-type = ["cdylib"]
 
 [dependencies]
+wit-bindgen = { workspace = true }
 wasi-passthrough = { workspace = true }
+wasi-passthrough-ext = { workspace = true }
+wasi-passthrough-logging = { workspace = true }
