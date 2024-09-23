@@ -5,8 +5,8 @@ package udpcreatesocket
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/rvolosatovs/west/bindings/wasi/sockets/network"
-	"github.com/rvolosatovs/west/bindings/wasi/sockets/udp"
+	"github.com/wasmCloud/west/bindings/wasi/sockets/network"
+	"github.com/wasmCloud/west/bindings/wasi/sockets/udp"
 )
 
 // CreateUDPSocket represents the imported function "create-udp-socket".

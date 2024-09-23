@@ -1,11 +1,12 @@
 [package]
 name = "west"
-version = "0.1.4"
+version = "0.1.5"
 description = "WebAssembly component test runtime"
 
 authors.workspace = true
 categories.workspace = true
 edition.workspace = true
+homepage.workspace = true
 license.workspace = true
 repository.workspace = true
 
@@ -31,9 +32,9 @@ members = ["crates/*", "tests/components/*"]
 authors = ["Roman Volosatovs <rvolosatovs@riseup.net>"]
 categories = ["wasm"]
 edition = "2021"
-homepage = "https://github.com/rvolosatovs/west"
+homepage = "https://github.com/wasmCloud/west"
 license = "Apache-2.0 WITH LLVM-exception"
-repository = "https://github.com/rvolosatovs/west"
+repository = "https://github.com/wasmCloud/west"
 
 [profile.release.package.west-passthrough]
 opt-level = 's'

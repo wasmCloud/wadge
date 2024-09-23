@@ -8,7 +8,7 @@ package incominghandler
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/http/types"
+	"github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/http/types"
 )
 
 //go:wasmexport wasi:http/incoming-handler@0.2.1#handle

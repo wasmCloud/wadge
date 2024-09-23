@@ -1,4 +1,4 @@
-module github.com/rvolosatovs/west
+module github.com/wasmCloud/west
 
 go 1.23.0
 
@@ -16,4 +16,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/rvolosatovs/west => ./.
+replace github.com/wasmCloud/west => ./.

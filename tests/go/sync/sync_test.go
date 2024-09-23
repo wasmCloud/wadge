@@ -1,4 +1,4 @@
-//go:generate go run github.com/rvolosatovs/west/cmd/west-bindgen-go
+//go:generate go run github.com/wasmCloud/west/cmd/west-bindgen-go
 //go:generate cargo build -p sync-test-component --target wasm32-unknown-unknown
 //go:generate cp ../../../target/wasm32-unknown-unknown/debug/sync_test_component.wasm component.wasm
 
@@ -13,9 +13,9 @@ import (
 	"unsafe"
 
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/rvolosatovs/west"
-	"github.com/rvolosatovs/west/tests/go/sync/bindings/west-test/sync/sync"
 	"github.com/stretchr/testify/assert"
+	"github.com/wasmCloud/west"
+	"github.com/wasmCloud/west/tests/go/sync/bindings/west-test/sync/sync"
 )
 
 //go:embed component.wasm

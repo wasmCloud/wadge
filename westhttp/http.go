@@ -10,9 +10,9 @@ import (
 	"unsafe"
 
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/rvolosatovs/west/bindings/wasi/http/types"
-	"github.com/rvolosatovs/west/bindings/wasi/io/poll"
-	"github.com/rvolosatovs/west/bindings/wasiext/http/ext"
+	"github.com/wasmCloud/west/bindings/wasi/http/types"
+	"github.com/wasmCloud/west/bindings/wasi/io/poll"
+	"github.com/wasmCloud/west/bindings/wasiext/http/ext"
 )
 
 func NewFields(h http.Header) types.Fields {

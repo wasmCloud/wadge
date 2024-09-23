@@ -8,7 +8,7 @@ package terminalstdin
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	terminalinput "github.com/rvolosatovs/west/examples/go/http/bindings/wasi/cli/terminal-input"
+	terminalinput "github.com/wasmCloud/west/examples/go/http/bindings/wasi/cli/terminal-input"
 )
 
 // GetTerminalStdin represents the imported function "get-terminal-stdin".

@@ -27,9 +27,9 @@ sha256 = "9676b482485bb0fd2751a390374c1108865a096b7037f4b5dbe524f066bfb06e"
 sha512 = "30a621a6d48a0175e8047c062e618523a85f69c45a7c31918da2b888f7527fce1aca67fa132552222725d0f6cdcaed95be7f16c28488d9468c0fad00cb7450b9"
 
 [passthrough]
-url = "https://github.com/wasiext/passthrough/archive/main.tar.gz"
-sha256 = "e0e68af9daec38b16b3c7697e94e806837640c8f8eb165cc309257a17e78a393"
-sha512 = "da9a4566a004ab549bc02b96a57591ff2dde19c6561a5079f492e585cd60b0263d01276d26605c953dce93723bf58ee3b02c3d3a1911ba457b625cec39938716"
+url = "https://github.com/wasmCloud/wasi-passthrough/archive/main.tar.gz"
+sha256 = "6186ba52f5e4cfb2e47f636e546f3ac27104c38c3567d89a15c3d80a98d376d7"
+sha512 = "4d32215f1c54101092d8cf78987e5185b8c8584ea0908f6a71115bb1d6faabccbab57108252f34c0ca8779362e5793f3d3dd72ce52ec8923a2ed9b9cb3a26c46"
 deps = ["cli", "clocks", "filesystem", "http", "httpext", "io", "logging", "random", "sockets"]
 
 [random]

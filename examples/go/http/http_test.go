@@ -1,4 +1,4 @@
-//go:generate go run github.com/rvolosatovs/west/cmd/west-bindgen-go
+//go:generate go run github.com/wasmCloud/west/cmd/west-bindgen-go
 
 package wasi_test
 
@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"testing"
 
-	west "github.com/rvolosatovs/west"
-	_ "github.com/rvolosatovs/west/bindings"
-	incominghandler "github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/http/incoming-handler"
-	"github.com/rvolosatovs/west/westhttp"
 	"github.com/stretchr/testify/assert"
+	west "github.com/wasmCloud/west"
+	_ "github.com/wasmCloud/west/bindings"
+	incominghandler "github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/http/incoming-handler"
+	"github.com/wasmCloud/west/westhttp"
 )
 
 func TestIncomingHandler(t *testing.T) {

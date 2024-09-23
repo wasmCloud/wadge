@@ -7,10 +7,10 @@ import (
 	"strconv"
 
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	incominghandler "github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/http/incoming-handler"
-	"github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/http/types"
-	"github.com/rvolosatovs/west/tests/go/wasi/bindings/west-test/fib/fib"
-	"github.com/rvolosatovs/west/tests/go/wasi/bindings/west-test/leftpad/leftpad"
+	incominghandler "github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/http/incoming-handler"
+	"github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/http/types"
+	"github.com/wasmCloud/west/tests/go/wasi/bindings/west-test/fib/fib"
+	"github.com/wasmCloud/west/tests/go/wasi/bindings/west-test/leftpad/leftpad"
 )
 
 func init() {
