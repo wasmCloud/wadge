@@ -45,7 +45,7 @@ func handle(req types.IncomingRequest, out types.ResponseOutparam) *types.ErrorC
 	slog.Debug("setting response outparam")
 	types.ResponseOutparamSet(out, cm.OK[cm.Result[types.ErrorCodeShape, types.OutgoingResponse, types.ErrorCode]](resp))
 	stream := bodyWrite.OK()
-	s := "foo bar baz"
+	s := "hello world"
 	writeRes := stream.BlockingWriteAndFlush(cm.NewList(unsafe.StringData(s), uint(len(s))))
 	if writeRes.IsErr() {
 		slog.Error("failed to write to stream", "err", writeRes.Err())

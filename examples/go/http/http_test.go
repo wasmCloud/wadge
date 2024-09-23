@@ -3,100 +3,44 @@
 package wasi_test
 
 import (
+	"io"
+	"net/http"
 	"testing"
-	"unsafe"
 
-	"github.com/bytecodealliance/wasm-tools-go/cm"
 	west "github.com/rvolosatovs/west"
 	_ "github.com/rvolosatovs/west/bindings"
-	testtypes "github.com/rvolosatovs/west/bindings/wasi/http/types"
-	httpext "github.com/rvolosatovs/west/bindings/wasiext/http/ext"
 	incominghandler "github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/http/incoming-handler"
-	"github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/http/types"
+	"github.com/rvolosatovs/west/westhttp"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestIncomingHandler(t *testing.T) {
 	west.RunTest(t, func() {
-		headers := testtypes.NewFields()
-		headers.Append(
-			testtypes.FieldKey("foo"),
-			testtypes.FieldValue(cm.NewList(
-				unsafe.SliceData([]byte("bar")),
-				3,
-			)),
-		)
-		headers.Append(
-			testtypes.FieldKey("foo"),
-			testtypes.FieldValue(cm.NewList(
-				unsafe.SliceData([]byte("baz")),
-				3,
-			)),
-		)
-		headers.Set(
-			testtypes.FieldKey("key"),
-			cm.NewList(
-				unsafe.SliceData(
-					[]testtypes.FieldValue{
-						testtypes.FieldValue(cm.NewList(
-							unsafe.SliceData([]byte("value")),
-							5,
-						)),
-					},
-				),
-				1,
-			),
-		)
-		req := testtypes.NewOutgoingRequest(headers)
-		req.SetPathWithQuery(cm.Some("test"))
-		req.SetMethod(testtypes.MethodGet())
-		out := httpext.NewResponseOutparam()
-		incominghandler.Exports.Handle(
-			types.IncomingRequest(httpext.NewIncomingRequest(req)),
-			types.ResponseOutparam(out.F0),
-		)
-		out.F1.Subscribe().Block()
-		respOptResRes := out.F1.Get()
-		respResRes := respOptResRes.Some()
-		if !assert.NotNil(t, respResRes) {
-			t.FailNow()
+		req, err := http.NewRequest("", "test", nil)
+		if err != nil {
+			t.Fatalf("failed to create new HTTP request: %s", err)
 		}
-		respRes := respResRes.OK()
-		if !assert.NotNil(t, respRes) || !assert.Nil(t, respRes.Err()) {
-			t.FailNow()
+		req.Header.Add("foo", "bar")
+		req.Header.Add("foo", "baz")
+		req.Header.Add("key", "value")
+		resp, err := westhttp.HandleIncomingRequest(incominghandler.Exports.Handle, req)
+		if err != nil {
+			t.Fatalf("failed to handle incoming HTTP request: %s", err)
 		}
-		resp := respRes.OK()
-		assert.Equal(t, testtypes.StatusCode(200), resp.Status())
-		hs := map[string][][]byte{}
-		for _, h := range resp.Headers().Entries().Slice() {
-			k := string(h.F0)
-			hs[k] = append(hs[k], h.F1.Slice())
-		}
-		assert.Equal(t, map[string][][]byte{
+		assert.Equal(t, 200, resp.StatusCode)
+		assert.Equal(t, http.Header{
 			"foo": {
-				[]byte("bar"),
-				[]byte("baz"),
+				"bar",
+				"baz",
 			},
 			"key": {
-				[]byte("value"),
+				"value",
 			},
-		}, hs)
-		bodyRes := resp.Consume()
-		body := bodyRes.OK()
-		if !assert.NotNil(t, body) {
-			t.FailNow()
+		}, resp.Header)
+		buf, err := io.ReadAll(resp.Body)
+		if err != nil {
+			t.Fatalf("failed to read HTTP response body: %s", err)
 		}
-		bodyStreamRes := body.Stream()
-		bodyStream := bodyStreamRes.OK()
-		if !assert.NotNil(t, bodyStream) {
-			t.FailNow()
-		}
-		bufRes := bodyStream.BlockingRead(4096)
-		buf := bufRes.OK()
-		if !assert.NotNil(t, buf) {
-			t.FailNow()
-		}
-		assert.Equal(t, []byte("foo bar baz"), buf.Slice())
-		bodyStream.ResourceDrop()
+		assert.Equal(t, []byte("hello world"), buf)
 	})
 }
