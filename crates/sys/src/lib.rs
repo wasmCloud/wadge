@@ -1,11 +1,10 @@
 use core::ffi::{c_char, c_void, CStr};
-use core::ops::{Deref, DerefMut};
 use core::ptr::NonNull;
 use core::slice;
 
-use std::sync::{Arc, LazyLock};
+use std::sync::{Arc, LazyLock, Mutex};
 
-use anyhow::{ensure, Context as _};
+use anyhow::{bail, ensure, Context as _};
 use tracing::{instrument, trace_span};
 use tracing_subscriber::EnvFilter;
 use wasmtime::component::{Resource, ResourceAny, Val};
@@ -30,22 +29,8 @@ pub struct Config {
 }
 
 pub struct Instance {
-    instance: west::Instance,
+    instance: Mutex<west::Instance>,
     subscriber: Arc<dyn tracing::Subscriber + Send + Sync + 'static>,
-}
-
-impl Deref for Instance {
-    type Target = west::Instance;
-
-    fn deref(&self) -> &Self::Target {
-        &self.instance
-    }
-}
-
-impl DerefMut for Instance {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.instance
-    }
 }
 
 #[instrument(level = "trace")]
@@ -63,7 +48,7 @@ fn instantiate(config: Config) -> anyhow::Result<Instance> {
         .with_env_filter(EnvFilter::from_env("WEST_LOG"))
         .finish();
     Ok(Instance {
-        instance,
+        instance: instance.into(),
         subscriber: Arc::new(subscriber),
     })
 }
@@ -75,7 +60,7 @@ fn call(
     name: *const c_char,
     args: *const *mut c_void,
 ) -> anyhow::Result<()> {
-    let mut inst =
+    let inst =
         NonNull::new(instance_ptr.cast::<Instance>()).context("`instance_ptr` must not be null")?;
     ensure!(!instance.is_null(), "`instance` must not be null");
     ensure!(!name.is_null(), "`name` must not be null");
@@ -85,8 +70,11 @@ fn call(
     let name = unsafe { CStr::from_ptr(name) }
         .to_str()
         .context("`name` is not valid UTF-8")?;
-    let inst = unsafe { inst.as_mut() };
+    let inst = unsafe { inst.as_ref() };
     let _log = tracing::subscriber::set_default(Arc::clone(&inst.subscriber));
+    let Ok(mut inst) = inst.instance.lock() else {
+        bail!("failed to lock instance mutex")
+    };
     let _span = trace_span!("call", "instance" = instance, "name" = name).entered();
     if let Some(ty) = name.strip_prefix("[resource-drop]") {
         let (rep, _) = deref_arg::<u32>(args)?;
