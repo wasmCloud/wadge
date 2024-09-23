@@ -7,7 +7,7 @@ package instancenetwork
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/sockets/network"
+	"github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/sockets/network"
 )
 
 // InstanceNetwork represents the imported function "instance-network".

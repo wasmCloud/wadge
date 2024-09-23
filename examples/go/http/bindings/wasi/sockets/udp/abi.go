@@ -4,7 +4,7 @@ package udp
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/rvolosatovs/west/examples/go/http/bindings/wasi/sockets/network"
+	"github.com/wasmCloud/west/examples/go/http/bindings/wasi/sockets/network"
 	"unsafe"
 )
 

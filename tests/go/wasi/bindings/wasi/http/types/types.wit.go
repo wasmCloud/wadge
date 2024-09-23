@@ -9,10 +9,10 @@ package types
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	monotonicclock "github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/clocks/monotonic-clock"
-	ioerror "github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/io/error"
-	"github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/io/poll"
-	"github.com/rvolosatovs/west/tests/go/wasi/bindings/wasi/io/streams"
+	monotonicclock "github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/clocks/monotonic-clock"
+	ioerror "github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/io/error"
+	"github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/io/poll"
+	"github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/io/streams"
 )
 
 // Method represents the variant "wasi:http/types@0.2.1#method".

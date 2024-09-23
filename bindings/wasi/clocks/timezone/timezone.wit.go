@@ -4,7 +4,7 @@
 package timezone
 
 import (
-	wallclock "github.com/rvolosatovs/west/bindings/wasi/clocks/wall-clock"
+	wallclock "github.com/wasmCloud/west/bindings/wasi/clocks/wall-clock"
 )
 
 // TimezoneDisplay represents the record "wasi:clocks/timezone@0.2.1#timezone-display".

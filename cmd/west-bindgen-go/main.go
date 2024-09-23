@@ -469,7 +469,7 @@ func generate(path string) error {
 		},
 		{
 			Name: &ast.Ident{Name: "west"},
-			Path: &ast.BasicLit{Kind: token.STRING, Value: `"github.com/rvolosatovs/west"`},
+			Path: &ast.BasicLit{Kind: token.STRING, Value: `"github.com/wasmCloud/west"`},
 		},
 	}
 	for path, name := range goImports {

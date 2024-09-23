@@ -8,4 +8,4 @@
 
 # Design
 
-`west` uses [`cabish`](https://github.com/rvolosatovs/cabish) to read and write values over FFI to pass to embedded Wasmtime instance.
+`west` uses [`cabish`](https://github.com/wasmCloud/cabish) to read and write values over FFI to pass to embedded Wasmtime instance.

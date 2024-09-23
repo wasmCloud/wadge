@@ -1,4 +1,4 @@
-package wasiext:passthrough@0.1.0;
+package wasiext:passthrough@0.2.0;
 
 world passthrough {
     export wasi:cli/environment@0.2.1;
@@ -19,7 +19,6 @@ world passthrough {
     export wasi:io/error@0.2.1;
     export wasi:io/poll@0.2.1;
     export wasi:io/streams@0.2.1;
-    export wasi:logging/logging;
     export wasi:random/insecure-seed@0.2.1;
     export wasi:random/insecure@0.2.1;
     export wasi:random/random@0.2.1;
@@ -48,7 +47,6 @@ world passthrough {
     import wasi:io/error@0.2.1;
     import wasi:io/poll@0.2.1;
     import wasi:io/streams@0.2.1;
-    import wasi:logging/logging;
     import wasi:random/insecure-seed@0.2.1;
     import wasi:random/insecure@0.2.1;
     import wasi:random/random@0.2.1;
@@ -58,6 +56,4 @@ world passthrough {
     import wasi:sockets/tcp@0.2.1;
     import wasi:sockets/udp-create-socket@0.2.1;
     import wasi:sockets/udp@0.2.1;
-
-    include wasiext:http/proxy@0.1.0;
 }

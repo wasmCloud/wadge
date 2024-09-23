@@ -272,7 +272,7 @@ jobs:
 
       - name: publish ${{ matrix.crate }} to crates.io
         if: startsWith(github.ref, format('refs/tags/crates/{0}/v', matrix.crate)) && !steps.ctx.outputs.prerelease
-        continue-on-error: ${{ github.repository_owner != 'rvolosatovs' }}
+        continue-on-error: ${{ github.repository_owner != 'wasmCloud' }}
         run: |
           pkgver=$(cargo pkgid | cut -d '@' -f 2)
           tagver="${{ steps.ctx.outputs.version }}"
