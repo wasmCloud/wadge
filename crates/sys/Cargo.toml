@@ -1,6 +1,6 @@
 [package]
 name = "west-sys"
-version = "0.1.4"
+version = "0.2.0"
 description = "WebAssembly component test runtime C bindings"
 
 authors.workspace = true

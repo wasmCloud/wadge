@@ -2035,7 +2035,7 @@ dependencies = [
 
 [[package]]
 name = "west"
-version = "0.1.5"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "http",
@@ -2051,7 +2051,7 @@ dependencies = [
 
 [[package]]
 name = "west-passthrough"
-version = "0.1.2"
+version = "0.2.0"
 dependencies = [
  "wasi-passthrough",
  "wasi-passthrough-ext",
@@ -2061,7 +2061,7 @@ dependencies = [
 
 [[package]]
 name = "west-sys"
-version = "0.1.4"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "tracing",

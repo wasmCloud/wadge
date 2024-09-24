@@ -1,6 +1,6 @@
 [package]
 name = "west"
-version = "0.1.5"
+version = "0.2.0"
 description = "WebAssembly component test runtime"
 
 authors.workspace = true
@@ -76,6 +76,6 @@ wasmtime = { version = "25", default-features = false }
 wasmtime-cabish = { version = "0.2", default-features = false }
 wasmtime-wasi = { version = "25", default-features = false }
 wasmtime-wasi-http = { version = "25", default-features = false }
-west = { version = "0.1.3", path = "." }
+west = { version = "0.2", path = "." }
 wit-bindgen = { version = "0.32", default-features = false }
 wit-component = { version = "0.217", default-features = false }
