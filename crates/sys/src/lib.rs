@@ -29,7 +29,7 @@ pub struct Config {
 }
 
 pub struct Instance {
-    instance: Mutex<west::Instance>,
+    instance: Mutex<wadge::Instance>,
     subscriber: Arc<dyn tracing::Subscriber + Send + Sync + 'static>,
 }
 
@@ -38,14 +38,14 @@ fn instantiate(config: Config) -> anyhow::Result<Instance> {
     let Config { wasm } = config;
     ensure!(!wasm.ptr.is_null(), "`wasm_ptr` must not be null");
     let wasm = unsafe { slice::from_raw_parts(wasm.ptr, wasm.len) };
-    let instance = west::instantiate(west::Config {
+    let instance = wadge::instantiate(wadge::Config {
         engine: ENGINE.clone(),
         wasm,
     })
     .context("failed to instantiate component")?;
     let subscriber = tracing_subscriber::fmt()
         .without_time()
-        .with_env_filter(EnvFilter::from_env("WEST_LOG"))
+        .with_env_filter(EnvFilter::from_env("WADGE_LOG"))
         .finish();
     Ok(Instance {
         instance: instance.into(),

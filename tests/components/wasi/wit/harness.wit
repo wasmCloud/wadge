@@ -1,8 +1,8 @@
-package west-test:wasi;
+package wadge-test:wasi;
 
 world harness {
-    include west-test:fib/host;
-    include west-test:leftpad/host;
+    include wadge-test:fib/host;
+    include wadge-test:leftpad/host;
 
     export wasi:io/error@0.2.1;
     export wasi:io/poll@0.2.1;

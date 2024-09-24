@@ -5,18 +5,18 @@ mod bindings {
         world: "host",
         path: "../../wit/sync",
         with: {
-            "west-test:sync/sync": generate,
+            "wadge-test:sync/sync": generate,
         }
     });
     export!(Handler);
 }
-use bindings::exports::west_test::sync::sync::{Abc, Foobar, Primitives, Rec, Var};
+use bindings::exports::wadge_test::sync::sync::{Abc, Foobar, Primitives, Rec, Var};
 
 struct Handler;
 
 struct Res;
 
-impl bindings::exports::west_test::sync::sync::GuestRes for Res {
+impl bindings::exports::wadge_test::sync::sync::GuestRes for Res {
     fn new() -> Res {
         Res
     }
@@ -25,18 +25,18 @@ impl bindings::exports::west_test::sync::sync::GuestRes for Res {
         "foo".into()
     }
 
-    fn make_list() -> Vec<bindings::exports::west_test::sync::sync::Res> {
+    fn make_list() -> Vec<bindings::exports::wadge_test::sync::sync::Res> {
         vec![
-            bindings::exports::west_test::sync::sync::Res::new(Res),
-            bindings::exports::west_test::sync::sync::Res::new(Res),
-            bindings::exports::west_test::sync::sync::Res::new(Res),
-            bindings::exports::west_test::sync::sync::Res::new(Res),
-            bindings::exports::west_test::sync::sync::Res::new(Res),
+            bindings::exports::wadge_test::sync::sync::Res::new(Res),
+            bindings::exports::wadge_test::sync::sync::Res::new(Res),
+            bindings::exports::wadge_test::sync::sync::Res::new(Res),
+            bindings::exports::wadge_test::sync::sync::Res::new(Res),
+            bindings::exports::wadge_test::sync::sync::Res::new(Res),
         ]
     }
 }
 
-impl bindings::exports::west_test::sync::sync::Guest for Handler {
+impl bindings::exports::wadge_test::sync::sync::Guest for Handler {
     type Res = Res;
 
     fn identity_bool(arg: bool) -> bool {

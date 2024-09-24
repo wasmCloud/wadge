@@ -3,11 +3,11 @@ mod bindings {
 
     wit_bindgen::generate!({
         with: {
+            "wadge-test:fib/fib": generate,
+            "wadge-test:leftpad/leftpad": generate,
             "wasi:io/error@0.2.1": wasi_passthrough::bindings::exports::wasi::io::error,
             "wasi:io/poll@0.2.1": wasi_passthrough::bindings::exports::wasi::io::poll,
             "wasi:io/streams@0.2.1": wasi_passthrough::bindings::exports::wasi::io::streams,
-            "west-test:fib/fib": generate,
-            "west-test:leftpad/leftpad": generate,
         }
     });
     export!(Handler);
@@ -20,7 +20,7 @@ use wasi_passthrough_ext as _;
 
 pub struct Handler;
 
-impl bindings::exports::west_test::fib::fib::Guest for Handler {
+impl bindings::exports::wadge_test::fib::fib::Guest for Handler {
     fn fib(n: u32) -> u64 {
         match n {
             0 => 0,
@@ -30,7 +30,7 @@ impl bindings::exports::west_test::fib::fib::Guest for Handler {
     }
 }
 
-impl bindings::exports::west_test::leftpad::leftpad::Guest for Handler {
+impl bindings::exports::wadge_test::leftpad::leftpad::Guest for Handler {
     fn leftpad(
         in_: wasi_passthrough::bindings::exports::wasi::io::streams::InputStream,
         out: wasi_passthrough::bindings::exports::wasi::io::streams::OutputStreamBorrow<'_>,

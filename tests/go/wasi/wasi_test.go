@@ -1,4 +1,4 @@
-//go:generate go run github.com/wasmCloud/west/cmd/west-bindgen-go
+//go:generate go run github.com/wasmCloud/wadge/cmd/wadge-bindgen-go
 //go:generate cargo build -p wasi-test-component --target wasm32-wasip1
 //go:generate cp ../../../target/wasm32-wasip1/debug/wasi_test_component.wasm component.wasm
 
@@ -15,10 +15,10 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/wasmCloud/west"
-	_ "github.com/wasmCloud/west/bindings"
-	incominghandler "github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/http/incoming-handler"
-	"github.com/wasmCloud/west/westhttp"
+	"github.com/wasmCloud/wadge"
+	_ "github.com/wasmCloud/wadge/bindings"
+	incominghandler "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/incoming-handler"
+	"github.com/wasmCloud/wadge/wadgehttp"
 )
 
 //go:embed component.wasm
@@ -35,17 +35,17 @@ func init() {
 		},
 	})))
 
-	instance, err := west.NewInstance(&west.Config{
+	instance, err := wadge.NewInstance(&wadge.Config{
 		Wasm: component,
 	})
 	if err != nil {
 		log.Fatalf("failed to construct new instance: %s", err)
 	}
-	west.SetInstance(instance)
+	wadge.SetInstance(instance)
 }
 
 func TestIncomingHandler(t *testing.T) {
-	west.RunTest(t, func() {
+	wadge.RunTest(t, func() {
 		req, err := http.NewRequest(http.MethodPost, "5", bytes.NewReader([]byte("foo bar baz")))
 		if err != nil {
 			t.Fatalf("failed to create new HTTP request: %s", err)
@@ -53,7 +53,7 @@ func TestIncomingHandler(t *testing.T) {
 		req.Header.Add("foo", "bar")
 		req.Header.Add("foo", "baz")
 		req.Header.Add("key", "value")
-		resp, err := westhttp.HandleIncomingRequest(incominghandler.Exports.Handle, req)
+		resp, err := wadgehttp.HandleIncomingRequest(incominghandler.Exports.Handle, req)
 		if err != nil {
 			t.Fatalf("failed to handle incoming HTTP request: %s", err)
 		}

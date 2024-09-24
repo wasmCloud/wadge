@@ -1,5 +1,5 @@
 [package]
-name = "west-passthrough"
+name = "wadge-passthrough"
 version = "0.2.0"
 description = "WebAssembly component, which reexports WASI from the host"
 

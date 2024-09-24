@@ -1,7 +1,7 @@
 [package]
-name = "west"
-version = "0.2.1"
-description = "WebAssembly component test runtime"
+name = "wadge"
+version = "0.3.0"
+description = "WAdge runtime"
 
 authors.workspace = true
 categories.workspace = true
@@ -32,15 +32,15 @@ members = ["crates/*", "tests/components/*"]
 authors = ["Roman Volosatovs <rvolosatovs@riseup.net>"]
 categories = ["wasm"]
 edition = "2021"
-homepage = "https://github.com/wasmCloud/west"
+homepage = "https://github.com/wasmCloud/wadge"
 license = "Apache-2.0 WITH LLVM-exception"
-repository = "https://github.com/wasmCloud/west"
+repository = "https://github.com/wasmCloud/wadge"
 
-[profile.release.package.west-passthrough]
+[profile.release.package.wadge-passthrough]
 opt-level = 's'
 strip = true
 
-[profile.release.package.west-sys]
+[profile.release.package.wadge-sys]
 opt-level = 's'
 strip = true
 
@@ -78,6 +78,7 @@ http = { version = "1", default-features = false }
 tokio = { version = "1", default-features = false }
 tracing = { version = "0.1", default-features = false }
 tracing-subscriber = { version = "0.3", default-features = false }
+wadge = { version = "0.3", path = "." }
 wasi-passthrough = { version = "0.3.2", default-features = false }
 wasi-passthrough-ext = { version = "0.1.4", default-features = false }
 wasi-passthrough-keyvalue = { version = "0.1.1", default-features = false }
@@ -90,6 +91,5 @@ wasmtime-wasi = { version = "25", default-features = false }
 wasmtime-wasi-http = { version = "25", default-features = false }
 wasmtime-wasi-keyvalue = { version = "25", default-features = false }
 wasmtime-wasi-runtime-config = { version = "25", default-features = false }
-west = { version = "0.2", path = "." }
 wit-bindgen = { version = "0.32", default-features = false }
 wit-component = { version = "0.217", default-features = false }

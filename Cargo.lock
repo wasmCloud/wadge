@@ -1651,6 +1651,47 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
+name = "wadge"
+version = "0.3.0"
+dependencies = [
+ "anyhow",
+ "http",
+ "tokio",
+ "tracing",
+ "wasi-preview1-component-adapter-provider",
+ "wasmparser",
+ "wasmtime",
+ "wasmtime-wasi",
+ "wasmtime-wasi-http",
+ "wasmtime-wasi-keyvalue",
+ "wasmtime-wasi-runtime-config",
+ "wit-component",
+]
+
+[[package]]
+name = "wadge-passthrough"
+version = "0.2.0"
+dependencies = [
+ "wasi-passthrough",
+ "wasi-passthrough-ext",
+ "wasi-passthrough-logging",
+ "wit-bindgen",
+]
+
+[[package]]
+name = "wadge-sys"
+version = "0.3.0"
+dependencies = [
+ "anyhow",
+ "tracing",
+ "tracing-subscriber",
+ "wadge",
+ "wasmtime",
+ "wasmtime-cabish",
+ "wasmtime-wasi",
+]
+
+[[package]]
 name = "want"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2149,47 +2190,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "841c67bff177718f1d4dfefde8d8f0e78f9b6589319ba88312f567fc5841a958"
 dependencies = [
  "rustls-pki-types",
-]
-
-[[package]]
-name = "west"
-version = "0.2.1"
-dependencies = [
- "anyhow",
- "http",
- "tokio",
- "tracing",
- "wasi-preview1-component-adapter-provider",
- "wasmparser",
- "wasmtime",
- "wasmtime-wasi",
- "wasmtime-wasi-http",
- "wasmtime-wasi-keyvalue",
- "wasmtime-wasi-runtime-config",
- "wit-component",
-]
-
-[[package]]
-name = "west-passthrough"
-version = "0.2.0"
-dependencies = [
- "wasi-passthrough",
- "wasi-passthrough-ext",
- "wasi-passthrough-logging",
- "wit-bindgen",
-]
-
-[[package]]
-name = "west-sys"
-version = "0.2.0"
-dependencies = [
- "anyhow",
- "tracing",
- "tracing-subscriber",
- "wasmtime",
- "wasmtime-cabish",
- "wasmtime-wasi",
- "west",
 ]
 
 [[package]]

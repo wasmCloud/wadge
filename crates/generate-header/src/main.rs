@@ -21,6 +21,6 @@ fn main() -> anyhow::Result<()> {
         },
     )
     .context("failed to generate bindings")?;
-    bindings.write_to_file(root.join("include").join("west.h"));
+    bindings.write_to_file(root.join("include").join("wadge.h"));
     Ok(())
 }

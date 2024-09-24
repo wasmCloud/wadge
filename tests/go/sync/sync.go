@@ -3,5 +3,5 @@
 package sync
 
 import (
-	_ "github.com/wasmCloud/west/tests/go/sync/bindings/west-test/sync/sync"
+	_ "github.com/wasmCloud/wadge/tests/go/sync/bindings/wadge-test/sync/sync"
 )

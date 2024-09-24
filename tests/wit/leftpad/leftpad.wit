@@ -1,4 +1,4 @@
-package west-test:leftpad;
+package wadge-test:leftpad;
 
 interface leftpad {
     use wasi:io/streams@0.2.1.{input-stream, output-stream, stream-error};
