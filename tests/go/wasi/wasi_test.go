@@ -71,6 +71,9 @@ func TestIncomingHandler(t *testing.T) {
 		if err != nil {
 			t.Fatalf("failed to read HTTP response body: %s", err)
 		}
+		if err := resp.Body.Close(); err != nil {
+			t.Fatalf("failed to close response body: %s", err)
+		}
 		assert.Equal(t, []byte("🧭🧭🧭🧭🧭foo bar baz"), buf)
 	})
 }

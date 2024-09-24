@@ -16,4 +16,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/wasmCloud/west => ./.
+replace github.com/wasmCloud/west v0.2.0 => ./.
