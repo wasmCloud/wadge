@@ -10,6 +10,8 @@ use wasmtime::{AsContext as _, AsContextMut as _, Engine, Store};
 use wasmtime_wasi::{WasiCtx, WasiCtxBuilder, WasiView};
 use wasmtime_wasi_http::types::HostIncomingRequest;
 use wasmtime_wasi_http::{WasiHttpCtx, WasiHttpView};
+use wasmtime_wasi_keyvalue::{WasiKeyValue, WasiKeyValueCtx};
+use wasmtime_wasi_runtime_config::{WasiRuntimeConfig, WasiRuntimeConfigVariables};
 
 mod bindings {
     wasmtime::component::bindgen!({
@@ -28,6 +30,8 @@ mod bindings {
 struct Ctx {
     wasi: WasiCtx,
     http: WasiHttpCtx,
+    kv: WasiKeyValueCtx,
+    conf: WasiRuntimeConfigVariables,
     table: ResourceTable,
 }
 
@@ -302,6 +306,12 @@ pub fn instantiate(Config { engine, wasm }: Config) -> anyhow::Result<Instance> 
     wasmtime_wasi::add_to_linker_sync(&mut linker).context("failed to link WASI")?;
     wasmtime_wasi_http::add_only_http_to_linker_sync(&mut linker)
         .context("failed to link `wasi:http`")?;
+    wasmtime_wasi_keyvalue::add_to_linker(&mut linker, |cx| {
+        WasiKeyValue::new(&cx.kv, &mut cx.table)
+    })
+    .context("failed to link `wasi:keyvalue`")?;
+    wasmtime_wasi_runtime_config::add_to_linker(&mut linker, |cx| WasiRuntimeConfig::new(&cx.conf))
+        .context("failed to link `wasi:keyvalue`")?;
     bindings::wasiext::http::ext::add_to_linker(&mut linker, |cx| cx)
         .context("failed to link `wasiext:http/ext`")?;
     bindings::wasi::logging::logging::add_to_linker(&mut linker, |cx| cx)
@@ -314,8 +324,19 @@ pub fn instantiate(Config { engine, wasm }: Config) -> anyhow::Result<Instance> 
         .inherit_network()
         .build();
     let http = WasiHttpCtx::new();
+    let kv = WasiKeyValueCtx::builder().build();
+    let conf = WasiRuntimeConfigVariables::default();
     let table = ResourceTable::new();
-    let mut store = Store::new(&engine, Ctx { wasi, http, table });
+    let mut store = Store::new(
+        &engine,
+        Ctx {
+            wasi,
+            http,
+            kv,
+            conf,
+            table,
+        },
+    );
     let instance = linker
         .instantiate(&mut store, &wasm)
         .context("failed to instantiate component")?;
