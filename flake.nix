@@ -36,7 +36,7 @@
     with nixify.lib;
       rust.mkFlake {
         src = ./.;
-        name = "west";
+        name = "wadge";
 
         overlays = [
           wit-deps.overlays.fenix
@@ -74,7 +74,7 @@
         doCheck = false; # testing is performed in checks via `nextest`
 
         build.packages = [
-          "west-sys"
+          "wadge-sys"
         ];
 
         targets.arm-unknown-linux-gnueabihf = false;

@@ -7,8 +7,8 @@ import (
 	"unsafe"
 
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	incominghandler "github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/http/incoming-handler"
-	"github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/http/types"
+	incominghandler "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/incoming-handler"
+	"github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types"
 )
 
 func init() {

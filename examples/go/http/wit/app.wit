@@ -1,4 +1,4 @@
-package west-examples:http;
+package wadge-examples:http;
 
 world app {
     include wasi:http/proxy@0.2.1;

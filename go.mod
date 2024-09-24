@@ -1,4 +1,4 @@
-module github.com/wasmCloud/west
+module github.com/wasmCloud/wadge
 
 go 1.23.0
 
@@ -16,4 +16,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/wasmCloud/west v0.2.0 => ./.
+replace github.com/wasmCloud/wadge v0.2.0 => ./.

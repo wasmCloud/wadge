@@ -132,7 +132,7 @@ impl bindings::wasiext::http::ext::Host for Ctx {
         let uri = if let Some(authority) = authority {
             uri.authority(authority)
         } else {
-            uri.authority("west")
+            uri.authority("wadge")
         };
         let uri = uri.build().context("failed to build URI")?;
         let mut req = http::Request::builder();

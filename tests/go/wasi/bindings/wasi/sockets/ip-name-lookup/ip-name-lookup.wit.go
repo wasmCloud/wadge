@@ -5,8 +5,8 @@ package ipnamelookup
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/io/poll"
-	"github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/sockets/network"
+	"github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/poll"
+	"github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/sockets/network"
 )
 
 // ResolveAddressStream represents the imported resource "wasi:sockets/ip-name-lookup@0.2.1#resolve-address-stream".

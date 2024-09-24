@@ -1,4 +1,4 @@
-package west-test:fib;
+package wadge-test:fib;
 
 interface fib {
     fib: func(n: u32) -> u64;

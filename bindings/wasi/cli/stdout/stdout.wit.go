@@ -5,7 +5,7 @@ package stdout
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/wasmCloud/west/bindings/wasi/io/streams"
+	"github.com/wasmCloud/wadge/bindings/wasi/io/streams"
 )
 
 // GetStdout represents the imported function "get-stdout".

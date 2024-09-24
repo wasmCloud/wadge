@@ -2,4 +2,4 @@
 
 //go:generate go run ./internal/generate
 
-package west
+package wadge

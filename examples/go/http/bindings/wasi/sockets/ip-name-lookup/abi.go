@@ -4,7 +4,7 @@ package ipnamelookup
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/wasmCloud/west/examples/go/http/bindings/wasi/sockets/network"
+	"github.com/wasmCloud/wadge/examples/go/http/bindings/wasi/sockets/network"
 	"unsafe"
 )
 

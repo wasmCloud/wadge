@@ -1,4 +1,4 @@
-//go:generate go run github.com/wasmCloud/west/cmd/west-bindgen-go
+//go:generate go run github.com/wasmCloud/wadge/cmd/wadge-bindgen-go
 
 package wasi_test
 
@@ -8,14 +8,14 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/wasmCloud/west"
-	_ "github.com/wasmCloud/west/bindings"
-	incominghandler "github.com/wasmCloud/west/tests/go/wasi/bindings/wasi/http/incoming-handler"
-	"github.com/wasmCloud/west/westhttp"
+	"github.com/wasmCloud/wadge"
+	_ "github.com/wasmCloud/wadge/bindings"
+	incominghandler "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/incoming-handler"
+	"github.com/wasmCloud/wadge/wadgehttp"
 )
 
 func TestIncomingHandler(t *testing.T) {
-	west.RunTest(t, func() {
+	wadge.RunTest(t, func() {
 		req, err := http.NewRequest("", "test", nil)
 		if err != nil {
 			t.Fatalf("failed to create new HTTP request: %s", err)
@@ -23,7 +23,7 @@ func TestIncomingHandler(t *testing.T) {
 		req.Header.Add("foo", "bar")
 		req.Header.Add("foo", "baz")
 		req.Header.Add("key", "value")
-		resp, err := westhttp.HandleIncomingRequest(incominghandler.Exports.Handle, req)
+		resp, err := wadgehttp.HandleIncomingRequest(incominghandler.Exports.Handle, req)
 		if err != nil {
 			t.Fatalf("failed to handle incoming HTTP request: %s", err)
 		}

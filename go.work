@@ -2,4 +2,4 @@ go 1.23.0
 
 use ./.
 
-replace github.com/wasmCloud/west v0.2.0 => ./.
+replace github.com/wasmCloud/wadge v0.2.0 => ./.
