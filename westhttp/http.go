@@ -127,7 +127,6 @@ func NewOutgoingRequest(req *http.Request) (types.OutgoingRequest, func(func(pol
 					slog.Debug("write stream closed")
 					return io.EOF
 				}
-				slog.Debug("failed to check write buffer capacity")
 				return fmt.Errorf("failed to check write buffer capacity: %s", err.LastOperationFailed().ToDebugString())
 			}
 			wn := *checkWriteRes.OK()
@@ -151,7 +150,6 @@ func NewOutgoingRequest(req *http.Request) (types.OutgoingRequest, func(func(pol
 						slog.Debug("write stream closed")
 						return io.EOF
 					}
-					slog.Debug("failed to write to buffer to stream")
 					return fmt.Errorf("failed to write buffer: %s", err.LastOperationFailed().ToDebugString())
 				}
 			}
@@ -159,8 +157,10 @@ func NewOutgoingRequest(req *http.Request) (types.OutgoingRequest, func(func(pol
 				continue
 			}
 			if err != io.EOF {
-				slog.Debug("failed to read buffer from body stream")
-				return err
+				return fmt.Errorf("failed read buffer from body stream: %w", err)
+			}
+			if err := req.Body.Close(); err != nil {
+				return fmt.Errorf("failed to close request body: %w", err)
 			}
 			flushRes := resStream.Flush()
 			if err := flushRes.Err(); err != nil {
@@ -168,7 +168,6 @@ func NewOutgoingRequest(req *http.Request) (types.OutgoingRequest, func(func(pol
 					slog.Debug("write stream closed")
 					return io.EOF
 				}
-				slog.Debug("failed to flush body stream")
 				return fmt.Errorf("failed to flush body stream: %s", err.LastOperationFailed().ToDebugString())
 			}
 			resStream.ResourceDrop()
