@@ -209,19 +209,41 @@ func NewIncomingResponse(resp types.IncomingResponse) (*http.Response, error) {
 	bodyStream := bodyStreamRes.OK()
 	var buf []byte
 	for {
+		slog.Debug("reading response body buffer")
 		bufRes := bodyStream.BlockingRead(4096)
 		if err := bufRes.Err(); err != nil {
 			if err.Closed() {
+				slog.Debug("response body closed")
 				break
 			}
 			return nil, fmt.Errorf("failed to read response body stream: %s", err.LastOperationFailed().ToDebugString())
 		}
+		slog.Debug("read body stream chunk", "buf", bufRes.OK().Slice())
 		buf = append(buf, bufRes.OK().Slice()...)
 	}
 	bodyStream.ResourceDrop()
-	body.ResourceDrop()
-
+	futTrailers := types.IncomingBodyFinish(*body)
+	// TODO: Block for trailers, once panic in wasmtime is fixed
+	//futTrailers.Subscribe().Block()
+	trailersOptResResOpt := futTrailers.Get()
 	var trailer http.Header
+	if trailersOptResRes := trailersOptResResOpt.Some(); trailersOptResRes != nil {
+		if err := trailersOptResRes.Err(); err != nil {
+			return nil, errors.New("failed to get trailers")
+		}
+		trailersOptRes := trailersOptResRes.OK()
+		if err := trailersOptRes.Err(); err != nil {
+			return nil, fmt.Errorf("failed to getting trailers: %v", *err)
+		}
+		trailersOpt := trailersOptRes.OK()
+		if trailers := trailersOpt.Some(); trailers != nil {
+			for _, h := range trailers.Entries().Slice() {
+				k := string(h.F0)
+				trailer[k] = append(trailer[k], string(h.F1.Slice()))
+			}
+		}
+	}
+	futTrailers.ResourceDrop()
 	return &http.Response{
 		Status:     http.StatusText(int(resp.Status())),
 		StatusCode: int(resp.Status()),
@@ -259,11 +281,11 @@ func HandleIncomingRequest[I, O ~uint32](f func(I, O), req *http.Request) (*http
 
 	respRes := respResRes.OK()
 	if err := respRes.Err(); err != nil {
-		return nil, fmt.Errorf("failed to receive response: %v", err)
+		return nil, fmt.Errorf("failed to receive response: %v", *err)
 	}
 	resp, err := NewIncomingResponse(*respRes.OK())
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse response: %v", err)
+		return nil, fmt.Errorf("failed to parse response: %w", err)
 	}
 	resp.Request = req
 	return resp, nil
