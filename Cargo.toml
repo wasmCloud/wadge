@@ -70,12 +70,12 @@ wasi-passthrough = { version = "0.3.2", default-features = false }
 wasi-passthrough-ext = { version = "0.1.4", default-features = false }
 wasi-passthrough-keyvalue = { version = "0.1.1", default-features = false }
 wasi-passthrough-logging = { version = "0.1.1", default-features = false }
-wasi-preview1-component-adapter-provider = { version = "24", default-features = false }
+wasi-preview1-component-adapter-provider = { version = "25", default-features = false }
 wasmparser = { version = "0.217", default-features = false }
-wasmtime = { version = "24", default-features = false }
-wasmtime-cabish = { version = "0.1.2", default-features = false }
-wasmtime-wasi = { version = "24", default-features = false }
-wasmtime-wasi-http = { version = "24", default-features = false }
+wasmtime = { version = "25", default-features = false }
+wasmtime-cabish = { version = "0.2", default-features = false }
+wasmtime-wasi = { version = "25", default-features = false }
+wasmtime-wasi-http = { version = "25", default-features = false }
 west = { version = "0.1.3", path = "." }
 wit-bindgen = { version = "0.32", default-features = false }
 wit-component = { version = "0.217", default-features = false }
