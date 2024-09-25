@@ -1,6 +1,6 @@
 //go:generate go run github.com/wasmCloud/wadge/cmd/wadge-bindgen-go
 
-package wasi_test
+package app_test
 
 import (
 	"io"
@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/wasmCloud/wadge"
 	_ "github.com/wasmCloud/wadge/bindings"
-	incominghandler "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/incoming-handler"
+	incominghandler "github.com/wasmCloud/wadge/examples/go/http/bindings/wasi/http/incoming-handler"
 	"github.com/wasmCloud/wadge/wadgehttp"
 )
 
