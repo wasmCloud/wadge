@@ -1,4 +1,4 @@
-//go:generate go run github.com/wasmCloud/wadge/cmd/wadge-bindgen-go
+//go:generate go run go.wasmcloud.dev/wadge/cmd/wadge-bindgen-go
 //go:generate cargo build -p sync-test-component --target wasm32-unknown-unknown
 //go:generate cp ../../../target/wasm32-unknown-unknown/debug/sync_test_component.wasm component.wasm
 
@@ -14,8 +14,8 @@ import (
 
 	"github.com/bytecodealliance/wasm-tools-go/cm"
 	"github.com/stretchr/testify/assert"
-	"github.com/wasmCloud/wadge"
-	"github.com/wasmCloud/wadge/tests/go/sync/bindings/wadge-test/sync/sync"
+	"go.wasmcloud.dev/wadge"
+	"go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync"
 )
 
 //go:embed component.wasm

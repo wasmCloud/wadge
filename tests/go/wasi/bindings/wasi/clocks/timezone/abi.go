@@ -3,7 +3,7 @@
 package timezone
 
 import (
-	wallclock "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/clocks/wall-clock"
+	wallclock "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/clocks/wall-clock"
 )
 
 func lower_DateTime(v wallclock.DateTime) (f0 uint64, f1 uint32) {

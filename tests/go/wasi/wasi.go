@@ -7,10 +7,10 @@ import (
 	"strconv"
 
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/wasmCloud/wadge/tests/go/wasi/bindings/wadge-test/fib/fib"
-	"github.com/wasmCloud/wadge/tests/go/wasi/bindings/wadge-test/leftpad/leftpad"
-	incominghandler "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/incoming-handler"
-	"github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types"
+	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wadge-test/fib/fib"
+	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wadge-test/leftpad/leftpad"
+	incominghandler "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/incoming-handler"
+	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types"
 )
 
 func init() {

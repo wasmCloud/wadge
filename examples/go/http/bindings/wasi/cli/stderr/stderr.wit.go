@@ -5,7 +5,7 @@ package stderr
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/wasmCloud/wadge/examples/go/http/bindings/wasi/io/streams"
+	"go.wasmcloud.dev/wadge/examples/go/http/bindings/wasi/io/streams"
 )
 
 // GetStderr represents the imported function "get-stderr".
