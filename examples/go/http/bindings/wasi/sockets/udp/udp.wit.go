@@ -5,8 +5,8 @@ package udp
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/wasmCloud/wadge/examples/go/http/bindings/wasi/io/poll"
-	"github.com/wasmCloud/wadge/examples/go/http/bindings/wasi/sockets/network"
+	"go.wasmcloud.dev/wadge/examples/go/http/bindings/wasi/io/poll"
+	"go.wasmcloud.dev/wadge/examples/go/http/bindings/wasi/sockets/network"
 )
 
 // IncomingDatagram represents the record "wasi:sockets/udp@0.2.0#incoming-datagram".

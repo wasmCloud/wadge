@@ -4,11 +4,11 @@ package wasi_test
 
 import (
 	github_com__bytecodealliance__wasm___tools___go__cm "github.com/bytecodealliance/wasm-tools-go/cm"
-	wadge "github.com/wasmCloud/wadge"
-	github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__clocks__monotonic___clock "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/clocks/monotonic-clock"
-	github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types"
-	github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__poll "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/poll"
-	github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams"
+	wadge "go.wasmcloud.dev/wadge"
+	go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__clocks__monotonic___clock "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/clocks/monotonic-clock"
+	go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types"
+	go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__poll "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/poll"
+	go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams"
 	"runtime"
 	"unsafe"
 )
@@ -17,7 +17,7 @@ const _ string = runtime.Compiler
 
 var _ unsafe.Pointer
 
-//go:linkname wasmimport_Fib github.com/wasmCloud/wadge/tests/go/wasi/bindings/wadge-test/fib/fib.wasmimport_Fib
+//go:linkname wasmimport_Fib go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wadge-test/fib/fib.wasmimport_Fib
 func wasmimport_Fib(n0 uint32) (result0 uint64) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -37,8 +37,8 @@ func wasmimport_Fib(n0 uint32) (result0 uint64) {
 	return
 }
 
-//go:linkname wasmimport_Leftpad github.com/wasmCloud/wadge/tests/go/wasi/bindings/wadge-test/leftpad/leftpad.wasmimport_Leftpad
-func wasmimport_Leftpad(in0 uint32, out0 uint32, len0 uint64, c0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_Leftpad go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wadge-test/leftpad/leftpad.wasmimport_Leftpad
+func wasmimport_Leftpad(in0 uint32, out0 uint32, len0 uint64, c0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -69,7 +69,7 @@ func wasmimport_Leftpad(in0 uint32, out0 uint32, len0 uint64, c0 uint32, result 
 	return
 }
 
-//go:linkname wasmimport_Now github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/clocks/monotonic-clock.wasmimport_Now
+//go:linkname wasmimport_Now go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/clocks/monotonic-clock.wasmimport_Now
 func wasmimport_Now() (result0 uint64) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -85,7 +85,7 @@ func wasmimport_Now() (result0 uint64) {
 	return
 }
 
-//go:linkname wasmimport_Resolution github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/clocks/monotonic-clock.wasmimport_Resolution
+//go:linkname wasmimport_Resolution go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/clocks/monotonic-clock.wasmimport_Resolution
 func wasmimport_Resolution() (result0 uint64) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -101,7 +101,7 @@ func wasmimport_Resolution() (result0 uint64) {
 	return
 }
 
-//go:linkname wasmimport_SubscribeDuration github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/clocks/monotonic-clock.wasmimport_SubscribeDuration
+//go:linkname wasmimport_SubscribeDuration go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/clocks/monotonic-clock.wasmimport_SubscribeDuration
 func wasmimport_SubscribeDuration(when0 uint64) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -121,7 +121,7 @@ func wasmimport_SubscribeDuration(when0 uint64) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_SubscribeInstant github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/clocks/monotonic-clock.wasmimport_SubscribeInstant
+//go:linkname wasmimport_SubscribeInstant go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/clocks/monotonic-clock.wasmimport_SubscribeInstant
 func wasmimport_SubscribeInstant(when0 uint64) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -141,7 +141,7 @@ func wasmimport_SubscribeInstant(when0 uint64) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_NewFields github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_NewFields
+//go:linkname wasmimport_NewFields go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_NewFields
 func wasmimport_NewFields() (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -157,7 +157,7 @@ func wasmimport_NewFields() (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_NewOutgoingRequest github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_NewOutgoingRequest
+//go:linkname wasmimport_NewOutgoingRequest go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_NewOutgoingRequest
 func wasmimport_NewOutgoingRequest(headers0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -177,7 +177,7 @@ func wasmimport_NewOutgoingRequest(headers0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_NewOutgoingResponse github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_NewOutgoingResponse
+//go:linkname wasmimport_NewOutgoingResponse go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_NewOutgoingResponse
 func wasmimport_NewOutgoingResponse(headers0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -197,7 +197,7 @@ func wasmimport_NewOutgoingResponse(headers0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_NewRequestOptions github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_NewRequestOptions
+//go:linkname wasmimport_NewRequestOptions go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_NewRequestOptions
 func wasmimport_NewRequestOptions() (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -213,8 +213,8 @@ func wasmimport_NewRequestOptions() (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_FieldsAppend github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsAppend
-func wasmimport_FieldsAppend(self0 uint32, name0 *uint8, name1 uint32, value0 *uint8, value1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError]) {
+//go:linkname wasmimport_FieldsAppend go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsAppend
+func wasmimport_FieldsAppend(self0 uint32, name0 *uint8, name1 uint32, value0 *uint8, value1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -249,7 +249,7 @@ func wasmimport_FieldsAppend(self0 uint32, name0 *uint8, name1 uint32, value0 *u
 	return
 }
 
-//go:linkname wasmimport_FieldsClone github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsClone
+//go:linkname wasmimport_FieldsClone go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsClone
 func wasmimport_FieldsClone(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -269,8 +269,8 @@ func wasmimport_FieldsClone(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_FieldsDelete github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsDelete
-func wasmimport_FieldsDelete(self0 uint32, name0 *uint8, name1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError]) {
+//go:linkname wasmimport_FieldsDelete go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsDelete
+func wasmimport_FieldsDelete(self0 uint32, name0 *uint8, name1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -297,8 +297,8 @@ func wasmimport_FieldsDelete(self0 uint32, name0 *uint8, name1 uint32, result *g
 	return
 }
 
-//go:linkname wasmimport_FieldsEntries github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsEntries
-func wasmimport_FieldsEntries(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[github_com__bytecodealliance__wasm___tools___go__cm.Tuple[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.FieldKey, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.FieldValue]]) {
+//go:linkname wasmimport_FieldsEntries go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsEntries
+func wasmimport_FieldsEntries(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[github_com__bytecodealliance__wasm___tools___go__cm.Tuple[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.FieldKey, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.FieldValue]]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -317,8 +317,8 @@ func wasmimport_FieldsEntries(self0 uint32, result *github_com__bytecodealliance
 	return
 }
 
-//go:linkname wasmimport_FieldsGet github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsGet
-func wasmimport_FieldsGet(self0 uint32, name0 *uint8, name1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.FieldValue]) {
+//go:linkname wasmimport_FieldsGet go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsGet
+func wasmimport_FieldsGet(self0 uint32, name0 *uint8, name1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.FieldValue]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -345,7 +345,7 @@ func wasmimport_FieldsGet(self0 uint32, name0 *uint8, name1 uint32, result *gith
 	return
 }
 
-//go:linkname wasmimport_FieldsHas github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsHas
+//go:linkname wasmimport_FieldsHas go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsHas
 func wasmimport_FieldsHas(self0 uint32, name0 *uint8, name1 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -373,8 +373,8 @@ func wasmimport_FieldsHas(self0 uint32, name0 *uint8, name1 uint32) (result0 uin
 	return
 }
 
-//go:linkname wasmimport_FieldsSet github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsSet
-func wasmimport_FieldsSet(self0 uint32, name0 *uint8, name1 uint32, value0 *github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.FieldValue, value1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError]) {
+//go:linkname wasmimport_FieldsSet go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsSet
+func wasmimport_FieldsSet(self0 uint32, name0 *uint8, name1 uint32, value0 *go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.FieldValue, value1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -409,8 +409,8 @@ func wasmimport_FieldsSet(self0 uint32, name0 *uint8, name1 uint32, value0 *gith
 	return
 }
 
-//go:linkname wasmimport_FutureIncomingResponseGet github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureIncomingResponseGet
-func wasmimport_FutureIncomingResponseGet(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCodeShape, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingResponse, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode], github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCodeShape, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingResponse, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode], struct{}]]) {
+//go:linkname wasmimport_FutureIncomingResponseGet go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureIncomingResponseGet
+func wasmimport_FutureIncomingResponseGet(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCodeShape, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingResponse, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode], github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCodeShape, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingResponse, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode], struct{}]]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -429,7 +429,7 @@ func wasmimport_FutureIncomingResponseGet(self0 uint32, result *github_com__byte
 	return
 }
 
-//go:linkname wasmimport_FutureIncomingResponseSubscribe github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureIncomingResponseSubscribe
+//go:linkname wasmimport_FutureIncomingResponseSubscribe go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureIncomingResponseSubscribe
 func wasmimport_FutureIncomingResponseSubscribe(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -449,8 +449,8 @@ func wasmimport_FutureIncomingResponseSubscribe(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_FutureTrailersGet github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureTrailersGet
-func wasmimport_FutureTrailersGet(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCodeShape, github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.Fields], github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode], github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCodeShape, github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.Fields], github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode], struct{}]]) {
+//go:linkname wasmimport_FutureTrailersGet go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureTrailersGet
+func wasmimport_FutureTrailersGet(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCodeShape, github_com__bytecodealliance__wasm___tools___go__cm.Option[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.Fields], go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode], github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCodeShape, github_com__bytecodealliance__wasm___tools___go__cm.Option[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.Fields], go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode], struct{}]]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -469,7 +469,7 @@ func wasmimport_FutureTrailersGet(self0 uint32, result *github_com__bytecodealli
 	return
 }
 
-//go:linkname wasmimport_FutureTrailersSubscribe github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureTrailersSubscribe
+//go:linkname wasmimport_FutureTrailersSubscribe go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureTrailersSubscribe
 func wasmimport_FutureTrailersSubscribe(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -489,8 +489,8 @@ func wasmimport_FutureTrailersSubscribe(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_IncomingBodyStream github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingBodyStream
-func wasmimport_IncomingBodyStream(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.InputStream, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.InputStream, struct{}]) {
+//go:linkname wasmimport_IncomingBodyStream go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingBodyStream
+func wasmimport_IncomingBodyStream(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.InputStream, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.InputStream, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -509,7 +509,7 @@ func wasmimport_IncomingBodyStream(self0 uint32, result *github_com__bytecodeall
 	return
 }
 
-//go:linkname wasmimport_IncomingRequestAuthority github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestAuthority
+//go:linkname wasmimport_IncomingRequestAuthority go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestAuthority
 func wasmimport_IncomingRequestAuthority(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -529,8 +529,8 @@ func wasmimport_IncomingRequestAuthority(self0 uint32, result *github_com__bytec
 	return
 }
 
-//go:linkname wasmimport_IncomingRequestConsume github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestConsume
-func wasmimport_IncomingRequestConsume(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingBody, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingBody, struct{}]) {
+//go:linkname wasmimport_IncomingRequestConsume go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestConsume
+func wasmimport_IncomingRequestConsume(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingBody, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingBody, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -549,7 +549,7 @@ func wasmimport_IncomingRequestConsume(self0 uint32, result *github_com__bytecod
 	return
 }
 
-//go:linkname wasmimport_IncomingRequestHeaders github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestHeaders
+//go:linkname wasmimport_IncomingRequestHeaders go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestHeaders
 func wasmimport_IncomingRequestHeaders(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -569,8 +569,8 @@ func wasmimport_IncomingRequestHeaders(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_IncomingRequestMethod github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestMethod
-func wasmimport_IncomingRequestMethod(self0 uint32, result *github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.Method) {
+//go:linkname wasmimport_IncomingRequestMethod go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestMethod
+func wasmimport_IncomingRequestMethod(self0 uint32, result *go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.Method) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -589,7 +589,7 @@ func wasmimport_IncomingRequestMethod(self0 uint32, result *github_com__wasmClou
 	return
 }
 
-//go:linkname wasmimport_IncomingRequestPathWithQuery github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestPathWithQuery
+//go:linkname wasmimport_IncomingRequestPathWithQuery go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestPathWithQuery
 func wasmimport_IncomingRequestPathWithQuery(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -609,8 +609,8 @@ func wasmimport_IncomingRequestPathWithQuery(self0 uint32, result *github_com__b
 	return
 }
 
-//go:linkname wasmimport_IncomingRequestScheme github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestScheme
-func wasmimport_IncomingRequestScheme(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.Scheme]) {
+//go:linkname wasmimport_IncomingRequestScheme go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestScheme
+func wasmimport_IncomingRequestScheme(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.Scheme]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -629,8 +629,8 @@ func wasmimport_IncomingRequestScheme(self0 uint32, result *github_com__bytecode
 	return
 }
 
-//go:linkname wasmimport_IncomingResponseConsume github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingResponseConsume
-func wasmimport_IncomingResponseConsume(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingBody, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingBody, struct{}]) {
+//go:linkname wasmimport_IncomingResponseConsume go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingResponseConsume
+func wasmimport_IncomingResponseConsume(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingBody, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.IncomingBody, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -649,7 +649,7 @@ func wasmimport_IncomingResponseConsume(self0 uint32, result *github_com__byteco
 	return
 }
 
-//go:linkname wasmimport_IncomingResponseHeaders github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingResponseHeaders
+//go:linkname wasmimport_IncomingResponseHeaders go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingResponseHeaders
 func wasmimport_IncomingResponseHeaders(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -669,7 +669,7 @@ func wasmimport_IncomingResponseHeaders(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_IncomingResponseStatus github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingResponseStatus
+//go:linkname wasmimport_IncomingResponseStatus go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingResponseStatus
 func wasmimport_IncomingResponseStatus(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -689,8 +689,8 @@ func wasmimport_IncomingResponseStatus(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_OutgoingBodyWrite github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingBodyWrite
-func wasmimport_OutgoingBodyWrite(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.OutputStream, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.OutputStream, struct{}]) {
+//go:linkname wasmimport_OutgoingBodyWrite go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingBodyWrite
+func wasmimport_OutgoingBodyWrite(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.OutputStream, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.OutputStream, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -709,7 +709,7 @@ func wasmimport_OutgoingBodyWrite(self0 uint32, result *github_com__bytecodealli
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestAuthority github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestAuthority
+//go:linkname wasmimport_OutgoingRequestAuthority go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestAuthority
 func wasmimport_OutgoingRequestAuthority(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -729,8 +729,8 @@ func wasmimport_OutgoingRequestAuthority(self0 uint32, result *github_com__bytec
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestBody github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestBody
-func wasmimport_OutgoingRequestBody(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.OutgoingBody, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.OutgoingBody, struct{}]) {
+//go:linkname wasmimport_OutgoingRequestBody go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestBody
+func wasmimport_OutgoingRequestBody(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.OutgoingBody, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.OutgoingBody, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -749,7 +749,7 @@ func wasmimport_OutgoingRequestBody(self0 uint32, result *github_com__bytecodeal
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestHeaders github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestHeaders
+//go:linkname wasmimport_OutgoingRequestHeaders go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestHeaders
 func wasmimport_OutgoingRequestHeaders(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -769,8 +769,8 @@ func wasmimport_OutgoingRequestHeaders(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestMethod github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestMethod
-func wasmimport_OutgoingRequestMethod(self0 uint32, result *github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.Method) {
+//go:linkname wasmimport_OutgoingRequestMethod go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestMethod
+func wasmimport_OutgoingRequestMethod(self0 uint32, result *go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.Method) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -789,7 +789,7 @@ func wasmimport_OutgoingRequestMethod(self0 uint32, result *github_com__wasmClou
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestPathWithQuery github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestPathWithQuery
+//go:linkname wasmimport_OutgoingRequestPathWithQuery go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestPathWithQuery
 func wasmimport_OutgoingRequestPathWithQuery(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -809,8 +809,8 @@ func wasmimport_OutgoingRequestPathWithQuery(self0 uint32, result *github_com__b
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestScheme github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestScheme
-func wasmimport_OutgoingRequestScheme(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.Scheme]) {
+//go:linkname wasmimport_OutgoingRequestScheme go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestScheme
+func wasmimport_OutgoingRequestScheme(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.Scheme]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -829,7 +829,7 @@ func wasmimport_OutgoingRequestScheme(self0 uint32, result *github_com__bytecode
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestSetAuthority github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestSetAuthority
+//go:linkname wasmimport_OutgoingRequestSetAuthority go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestSetAuthority
 func wasmimport_OutgoingRequestSetAuthority(self0 uint32, authority0 uint32, authority1 *uint8, authority2 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -861,7 +861,7 @@ func wasmimport_OutgoingRequestSetAuthority(self0 uint32, authority0 uint32, aut
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestSetMethod github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestSetMethod
+//go:linkname wasmimport_OutgoingRequestSetMethod go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestSetMethod
 func wasmimport_OutgoingRequestSetMethod(self0 uint32, method0 uint32, method1 *uint8, method2 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -893,7 +893,7 @@ func wasmimport_OutgoingRequestSetMethod(self0 uint32, method0 uint32, method1 *
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestSetPathWithQuery github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestSetPathWithQuery
+//go:linkname wasmimport_OutgoingRequestSetPathWithQuery go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestSetPathWithQuery
 func wasmimport_OutgoingRequestSetPathWithQuery(self0 uint32, pathWithQuery0 uint32, pathWithQuery1 *uint8, pathWithQuery2 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -925,7 +925,7 @@ func wasmimport_OutgoingRequestSetPathWithQuery(self0 uint32, pathWithQuery0 uin
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestSetScheme github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestSetScheme
+//go:linkname wasmimport_OutgoingRequestSetScheme go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestSetScheme
 func wasmimport_OutgoingRequestSetScheme(self0 uint32, scheme0 uint32, scheme1 uint32, scheme2 *uint8, scheme3 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -961,8 +961,8 @@ func wasmimport_OutgoingRequestSetScheme(self0 uint32, scheme0 uint32, scheme1 u
 	return
 }
 
-//go:linkname wasmimport_OutgoingResponseBody github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingResponseBody
-func wasmimport_OutgoingResponseBody(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.OutgoingBody, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.OutgoingBody, struct{}]) {
+//go:linkname wasmimport_OutgoingResponseBody go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingResponseBody
+func wasmimport_OutgoingResponseBody(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.OutgoingBody, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.OutgoingBody, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -981,7 +981,7 @@ func wasmimport_OutgoingResponseBody(self0 uint32, result *github_com__bytecodea
 	return
 }
 
-//go:linkname wasmimport_OutgoingResponseHeaders github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingResponseHeaders
+//go:linkname wasmimport_OutgoingResponseHeaders go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingResponseHeaders
 func wasmimport_OutgoingResponseHeaders(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1001,7 +1001,7 @@ func wasmimport_OutgoingResponseHeaders(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_OutgoingResponseSetStatusCode github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingResponseSetStatusCode
+//go:linkname wasmimport_OutgoingResponseSetStatusCode go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingResponseSetStatusCode
 func wasmimport_OutgoingResponseSetStatusCode(self0 uint32, statusCode0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1025,7 +1025,7 @@ func wasmimport_OutgoingResponseSetStatusCode(self0 uint32, statusCode0 uint32) 
 	return
 }
 
-//go:linkname wasmimport_OutgoingResponseStatusCode github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingResponseStatusCode
+//go:linkname wasmimport_OutgoingResponseStatusCode go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingResponseStatusCode
 func wasmimport_OutgoingResponseStatusCode(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1045,8 +1045,8 @@ func wasmimport_OutgoingResponseStatusCode(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_RequestOptionsBetweenBytesTimeout github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsBetweenBytesTimeout
-func wasmimport_RequestOptionsBetweenBytesTimeout(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__clocks__monotonic___clock.Duration]) {
+//go:linkname wasmimport_RequestOptionsBetweenBytesTimeout go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsBetweenBytesTimeout
+func wasmimport_RequestOptionsBetweenBytesTimeout(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__clocks__monotonic___clock.Duration]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1065,8 +1065,8 @@ func wasmimport_RequestOptionsBetweenBytesTimeout(self0 uint32, result *github_c
 	return
 }
 
-//go:linkname wasmimport_RequestOptionsConnectTimeout github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsConnectTimeout
-func wasmimport_RequestOptionsConnectTimeout(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__clocks__monotonic___clock.Duration]) {
+//go:linkname wasmimport_RequestOptionsConnectTimeout go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsConnectTimeout
+func wasmimport_RequestOptionsConnectTimeout(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__clocks__monotonic___clock.Duration]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1085,8 +1085,8 @@ func wasmimport_RequestOptionsConnectTimeout(self0 uint32, result *github_com__b
 	return
 }
 
-//go:linkname wasmimport_RequestOptionsFirstByteTimeout github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsFirstByteTimeout
-func wasmimport_RequestOptionsFirstByteTimeout(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__clocks__monotonic___clock.Duration]) {
+//go:linkname wasmimport_RequestOptionsFirstByteTimeout go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsFirstByteTimeout
+func wasmimport_RequestOptionsFirstByteTimeout(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__clocks__monotonic___clock.Duration]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1105,7 +1105,7 @@ func wasmimport_RequestOptionsFirstByteTimeout(self0 uint32, result *github_com_
 	return
 }
 
-//go:linkname wasmimport_RequestOptionsSetBetweenBytesTimeout github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsSetBetweenBytesTimeout
+//go:linkname wasmimport_RequestOptionsSetBetweenBytesTimeout go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsSetBetweenBytesTimeout
 func wasmimport_RequestOptionsSetBetweenBytesTimeout(self0 uint32, duration0 uint32, duration1 uint64) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1133,7 +1133,7 @@ func wasmimport_RequestOptionsSetBetweenBytesTimeout(self0 uint32, duration0 uin
 	return
 }
 
-//go:linkname wasmimport_RequestOptionsSetConnectTimeout github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsSetConnectTimeout
+//go:linkname wasmimport_RequestOptionsSetConnectTimeout go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsSetConnectTimeout
 func wasmimport_RequestOptionsSetConnectTimeout(self0 uint32, duration0 uint32, duration1 uint64) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1161,7 +1161,7 @@ func wasmimport_RequestOptionsSetConnectTimeout(self0 uint32, duration0 uint32, 
 	return
 }
 
-//go:linkname wasmimport_RequestOptionsSetFirstByteTimeout github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsSetFirstByteTimeout
+//go:linkname wasmimport_RequestOptionsSetFirstByteTimeout go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsSetFirstByteTimeout
 func wasmimport_RequestOptionsSetFirstByteTimeout(self0 uint32, duration0 uint32, duration1 uint64) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1189,7 +1189,7 @@ func wasmimport_RequestOptionsSetFirstByteTimeout(self0 uint32, duration0 uint32
 	return
 }
 
-//go:linkname wasmimport_FieldsResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsResourceDrop
+//go:linkname wasmimport_FieldsResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsResourceDrop
 func wasmimport_FieldsResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1205,7 +1205,7 @@ func wasmimport_FieldsResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_FutureIncomingResponseResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureIncomingResponseResourceDrop
+//go:linkname wasmimport_FutureIncomingResponseResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureIncomingResponseResourceDrop
 func wasmimport_FutureIncomingResponseResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1221,7 +1221,7 @@ func wasmimport_FutureIncomingResponseResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_FutureTrailersResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureTrailersResourceDrop
+//go:linkname wasmimport_FutureTrailersResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FutureTrailersResourceDrop
 func wasmimport_FutureTrailersResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1237,7 +1237,7 @@ func wasmimport_FutureTrailersResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_IncomingBodyResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingBodyResourceDrop
+//go:linkname wasmimport_IncomingBodyResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingBodyResourceDrop
 func wasmimport_IncomingBodyResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1253,7 +1253,7 @@ func wasmimport_IncomingBodyResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_IncomingRequestResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestResourceDrop
+//go:linkname wasmimport_IncomingRequestResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingRequestResourceDrop
 func wasmimport_IncomingRequestResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1269,7 +1269,7 @@ func wasmimport_IncomingRequestResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_IncomingResponseResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingResponseResourceDrop
+//go:linkname wasmimport_IncomingResponseResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingResponseResourceDrop
 func wasmimport_IncomingResponseResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1285,7 +1285,7 @@ func wasmimport_IncomingResponseResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_OutgoingBodyResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingBodyResourceDrop
+//go:linkname wasmimport_OutgoingBodyResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingBodyResourceDrop
 func wasmimport_OutgoingBodyResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1301,7 +1301,7 @@ func wasmimport_OutgoingBodyResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_OutgoingRequestResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestResourceDrop
+//go:linkname wasmimport_OutgoingRequestResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingRequestResourceDrop
 func wasmimport_OutgoingRequestResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1317,7 +1317,7 @@ func wasmimport_OutgoingRequestResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_OutgoingResponseResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingResponseResourceDrop
+//go:linkname wasmimport_OutgoingResponseResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingResponseResourceDrop
 func wasmimport_OutgoingResponseResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1333,7 +1333,7 @@ func wasmimport_OutgoingResponseResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_RequestOptionsResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsResourceDrop
+//go:linkname wasmimport_RequestOptionsResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_RequestOptionsResourceDrop
 func wasmimport_RequestOptionsResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1349,7 +1349,7 @@ func wasmimport_RequestOptionsResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_ResponseOutparamResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_ResponseOutparamResourceDrop
+//go:linkname wasmimport_ResponseOutparamResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_ResponseOutparamResourceDrop
 func wasmimport_ResponseOutparamResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1365,8 +1365,8 @@ func wasmimport_ResponseOutparamResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_FieldsFromList github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsFromList
-func wasmimport_FieldsFromList(entries0 *github_com__bytecodealliance__wasm___tools___go__cm.Tuple[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.FieldKey, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.FieldValue], entries1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.Fields, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.Fields, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError]) {
+//go:linkname wasmimport_FieldsFromList go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_FieldsFromList
+func wasmimport_FieldsFromList(entries0 *github_com__bytecodealliance__wasm___tools___go__cm.Tuple[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.FieldKey, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.FieldValue], entries1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.Fields, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.Fields, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.HeaderError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1389,7 +1389,7 @@ func wasmimport_FieldsFromList(entries0 *github_com__bytecodealliance__wasm___to
 	return
 }
 
-//go:linkname wasmimport_IncomingBodyFinish github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingBodyFinish
+//go:linkname wasmimport_IncomingBodyFinish go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_IncomingBodyFinish
 func wasmimport_IncomingBodyFinish(this0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1409,8 +1409,8 @@ func wasmimport_IncomingBodyFinish(this0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_OutgoingBodyFinish github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingBodyFinish
-func wasmimport_OutgoingBodyFinish(this0 uint32, trailers0 uint32, trailers1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode]) {
+//go:linkname wasmimport_OutgoingBodyFinish go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_OutgoingBodyFinish
+func wasmimport_OutgoingBodyFinish(this0 uint32, trailers0 uint32, trailers1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1437,7 +1437,7 @@ func wasmimport_OutgoingBodyFinish(this0 uint32, trailers0 uint32, trailers1 uin
 	return
 }
 
-//go:linkname wasmimport_ResponseOutparamSet github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_ResponseOutparamSet
+//go:linkname wasmimport_ResponseOutparamSet go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_ResponseOutparamSet
 func wasmimport_ResponseOutparamSet(param0 uint32, response0 uint32, response1 uint32, response2 uint32, response3 uint64, response4 uint32, response5 uint32, response6 uint32, response7 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1485,8 +1485,8 @@ func wasmimport_ResponseOutparamSet(param0 uint32, response0 uint32, response1 u
 	return
 }
 
-//go:linkname wasmimport_HTTPErrorCode github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_HTTPErrorCode
-func wasmimport_HTTPErrorCode(err0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode]) {
+//go:linkname wasmimport_HTTPErrorCode go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/types.wasmimport_HTTPErrorCode
+func wasmimport_HTTPErrorCode(err0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__http__types.ErrorCode]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1505,7 +1505,7 @@ func wasmimport_HTTPErrorCode(err0 uint32, result *github_com__bytecodealliance_
 	return
 }
 
-//go:linkname wasmimport_ErrorToDebugString github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/error.wasmimport_ErrorToDebugString
+//go:linkname wasmimport_ErrorToDebugString go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/error.wasmimport_ErrorToDebugString
 func wasmimport_ErrorToDebugString(self0 uint32, result *string) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1525,7 +1525,7 @@ func wasmimport_ErrorToDebugString(self0 uint32, result *string) {
 	return
 }
 
-//go:linkname wasmimport_ErrorResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/error.wasmimport_ErrorResourceDrop
+//go:linkname wasmimport_ErrorResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/error.wasmimport_ErrorResourceDrop
 func wasmimport_ErrorResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1541,7 +1541,7 @@ func wasmimport_ErrorResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_PollableBlock github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/poll.wasmimport_PollableBlock
+//go:linkname wasmimport_PollableBlock go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/poll.wasmimport_PollableBlock
 func wasmimport_PollableBlock(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1557,7 +1557,7 @@ func wasmimport_PollableBlock(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_PollableReady github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/poll.wasmimport_PollableReady
+//go:linkname wasmimport_PollableReady go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/poll.wasmimport_PollableReady
 func wasmimport_PollableReady(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1577,7 +1577,7 @@ func wasmimport_PollableReady(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_PollableResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/poll.wasmimport_PollableResourceDrop
+//go:linkname wasmimport_PollableResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/poll.wasmimport_PollableResourceDrop
 func wasmimport_PollableResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1593,8 +1593,8 @@ func wasmimport_PollableResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_Poll github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/poll.wasmimport_Poll
-func wasmimport_Poll(in0 *github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__poll.Pollable, in1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[uint32]) {
+//go:linkname wasmimport_Poll go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/poll.wasmimport_Poll
+func wasmimport_Poll(in0 *go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__poll.Pollable, in1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[uint32]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1617,8 +1617,8 @@ func wasmimport_Poll(in0 *github_com__wasmCloud__wadge__tests__go__wasi__binding
 	return
 }
 
-//go:linkname wasmimport_InputStreamBlockingRead github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamBlockingRead
-func wasmimport_InputStreamBlockingRead(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_InputStreamBlockingRead go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamBlockingRead
+func wasmimport_InputStreamBlockingRead(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1641,8 +1641,8 @@ func wasmimport_InputStreamBlockingRead(self0 uint32, len0 uint64, result *githu
 	return
 }
 
-//go:linkname wasmimport_InputStreamBlockingSkip github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamBlockingSkip
-func wasmimport_InputStreamBlockingSkip(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_InputStreamBlockingSkip go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamBlockingSkip
+func wasmimport_InputStreamBlockingSkip(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1665,8 +1665,8 @@ func wasmimport_InputStreamBlockingSkip(self0 uint32, len0 uint64, result *githu
 	return
 }
 
-//go:linkname wasmimport_InputStreamRead github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamRead
-func wasmimport_InputStreamRead(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_InputStreamRead go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamRead
+func wasmimport_InputStreamRead(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], github_com__bytecodealliance__wasm___tools___go__cm.List[uint8], go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1689,8 +1689,8 @@ func wasmimport_InputStreamRead(self0 uint32, len0 uint64, result *github_com__b
 	return
 }
 
-//go:linkname wasmimport_InputStreamSkip github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamSkip
-func wasmimport_InputStreamSkip(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_InputStreamSkip go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamSkip
+func wasmimport_InputStreamSkip(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1713,7 +1713,7 @@ func wasmimport_InputStreamSkip(self0 uint32, len0 uint64, result *github_com__b
 	return
 }
 
-//go:linkname wasmimport_InputStreamSubscribe github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamSubscribe
+//go:linkname wasmimport_InputStreamSubscribe go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamSubscribe
 func wasmimport_InputStreamSubscribe(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1733,8 +1733,8 @@ func wasmimport_InputStreamSubscribe(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_OutputStreamBlockingFlush github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingFlush
-func wasmimport_OutputStreamBlockingFlush(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_OutputStreamBlockingFlush go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingFlush
+func wasmimport_OutputStreamBlockingFlush(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1753,8 +1753,8 @@ func wasmimport_OutputStreamBlockingFlush(self0 uint32, result *github_com__byte
 	return
 }
 
-//go:linkname wasmimport_OutputStreamBlockingSplice github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingSplice
-func wasmimport_OutputStreamBlockingSplice(self0 uint32, src0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_OutputStreamBlockingSplice go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingSplice
+func wasmimport_OutputStreamBlockingSplice(self0 uint32, src0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1781,8 +1781,8 @@ func wasmimport_OutputStreamBlockingSplice(self0 uint32, src0 uint32, len0 uint6
 	return
 }
 
-//go:linkname wasmimport_OutputStreamBlockingWriteAndFlush github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingWriteAndFlush
-func wasmimport_OutputStreamBlockingWriteAndFlush(self0 uint32, contents0 *uint8, contents1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_OutputStreamBlockingWriteAndFlush go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingWriteAndFlush
+func wasmimport_OutputStreamBlockingWriteAndFlush(self0 uint32, contents0 *uint8, contents1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1809,8 +1809,8 @@ func wasmimport_OutputStreamBlockingWriteAndFlush(self0 uint32, contents0 *uint8
 	return
 }
 
-//go:linkname wasmimport_OutputStreamBlockingWriteZeroesAndFlush github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingWriteZeroesAndFlush
-func wasmimport_OutputStreamBlockingWriteZeroesAndFlush(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_OutputStreamBlockingWriteZeroesAndFlush go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamBlockingWriteZeroesAndFlush
+func wasmimport_OutputStreamBlockingWriteZeroesAndFlush(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1833,8 +1833,8 @@ func wasmimport_OutputStreamBlockingWriteZeroesAndFlush(self0 uint32, len0 uint6
 	return
 }
 
-//go:linkname wasmimport_OutputStreamCheckWrite github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamCheckWrite
-func wasmimport_OutputStreamCheckWrite(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_OutputStreamCheckWrite go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamCheckWrite
+func wasmimport_OutputStreamCheckWrite(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1853,8 +1853,8 @@ func wasmimport_OutputStreamCheckWrite(self0 uint32, result *github_com__bytecod
 	return
 }
 
-//go:linkname wasmimport_OutputStreamFlush github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamFlush
-func wasmimport_OutputStreamFlush(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_OutputStreamFlush go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamFlush
+func wasmimport_OutputStreamFlush(self0 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1873,8 +1873,8 @@ func wasmimport_OutputStreamFlush(self0 uint32, result *github_com__bytecodealli
 	return
 }
 
-//go:linkname wasmimport_OutputStreamSplice github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamSplice
-func wasmimport_OutputStreamSplice(self0 uint32, src0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_OutputStreamSplice go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamSplice
+func wasmimport_OutputStreamSplice(self0 uint32, src0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[uint64, uint64, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1901,7 +1901,7 @@ func wasmimport_OutputStreamSplice(self0 uint32, src0 uint32, len0 uint64, resul
 	return
 }
 
-//go:linkname wasmimport_OutputStreamSubscribe github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamSubscribe
+//go:linkname wasmimport_OutputStreamSubscribe go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamSubscribe
 func wasmimport_OutputStreamSubscribe(self0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1921,8 +1921,8 @@ func wasmimport_OutputStreamSubscribe(self0 uint32) (result0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_OutputStreamWrite github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamWrite
-func wasmimport_OutputStreamWrite(self0 uint32, contents0 *uint8, contents1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_OutputStreamWrite go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamWrite
+func wasmimport_OutputStreamWrite(self0 uint32, contents0 *uint8, contents1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1949,8 +1949,8 @@ func wasmimport_OutputStreamWrite(self0 uint32, contents0 *uint8, contents1 uint
 	return
 }
 
-//go:linkname wasmimport_OutputStreamWriteZeroes github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamWriteZeroes
-func wasmimport_OutputStreamWriteZeroes(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, github_com__wasmCloud__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
+//go:linkname wasmimport_OutputStreamWriteZeroes go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamWriteZeroes
+func wasmimport_OutputStreamWriteZeroes(self0 uint32, len0 uint64, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError, struct{}, go_wasmcloud_dev__wadge__tests__go__wasi__bindings__wasi__io__streams.StreamError]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -1973,7 +1973,7 @@ func wasmimport_OutputStreamWriteZeroes(self0 uint32, len0 uint64, result *githu
 	return
 }
 
-//go:linkname wasmimport_InputStreamResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamResourceDrop
+//go:linkname wasmimport_InputStreamResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_InputStreamResourceDrop
 func wasmimport_InputStreamResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
@@ -1989,7 +1989,7 @@ func wasmimport_InputStreamResourceDrop(self0 uint32) {
 	return
 }
 
-//go:linkname wasmimport_OutputStreamResourceDrop github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamResourceDrop
+//go:linkname wasmimport_OutputStreamResourceDrop go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams.wasmimport_OutputStreamResourceDrop
 func wasmimport_OutputStreamResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()

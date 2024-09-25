@@ -3,7 +3,7 @@
 package leftpad
 
 import (
-	"github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams"
+	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams"
 	"unsafe"
 )
 

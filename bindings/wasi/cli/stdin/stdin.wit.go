@@ -5,7 +5,7 @@ package stdin
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/wasmCloud/wadge/bindings/wasi/io/streams"
+	"go.wasmcloud.dev/wadge/bindings/wasi/io/streams"
 )
 
 // GetStdin represents the imported function "get-stdin".

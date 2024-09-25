@@ -30,9 +30,9 @@ package types
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	wallclock "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/clocks/wall-clock"
-	ioerror "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/error"
-	"github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/io/streams"
+	wallclock "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/clocks/wall-clock"
+	ioerror "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/error"
+	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams"
 )
 
 // FileSize represents the u64 "wasi:filesystem/types@0.2.1#filesize".

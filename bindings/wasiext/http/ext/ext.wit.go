@@ -5,7 +5,7 @@ package ext
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/wasmCloud/wadge/bindings/wasi/http/types"
+	"go.wasmcloud.dev/wadge/bindings/wasi/http/types"
 )
 
 // NewResponseOutparam represents the imported function "new-response-outparam".

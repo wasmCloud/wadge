@@ -5,7 +5,7 @@ package preopens
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"github.com/wasmCloud/wadge/examples/go/http/bindings/wasi/filesystem/types"
+	"go.wasmcloud.dev/wadge/examples/go/http/bindings/wasi/filesystem/types"
 )
 
 // GetDirectories represents the imported function "get-directories".
