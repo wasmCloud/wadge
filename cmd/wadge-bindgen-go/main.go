@@ -455,10 +455,7 @@ func generate(path string) error {
 	}
 	name := *pkgName
 	if name == "" {
-		name = pkg.Name
-		if pkg.Name != "main" {
-			name = fmt.Sprintf("%s_test", pkg.Name)
-		}
+		name = fmt.Sprintf("%s_test", pkg.Name)
 	}
 	importSpecs := []*ast.ImportSpec{
 		{
