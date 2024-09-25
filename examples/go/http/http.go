@@ -1,14 +1,14 @@
 //go:generate go run github.com/bytecodealliance/wasm-tools-go/cmd/wit-bindgen-go generate -w app -o bindings ./wit
 
-package wasi
+package app
 
 import (
 	"log/slog"
 	"unsafe"
 
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	incominghandler "github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/incoming-handler"
-	"github.com/wasmCloud/wadge/tests/go/wasi/bindings/wasi/http/types"
+	incominghandler "github.com/wasmCloud/wadge/examples/go/http/bindings/wasi/http/incoming-handler"
+	"github.com/wasmCloud/wadge/examples/go/http/bindings/wasi/http/types"
 )
 
 func init() {
@@ -62,3 +62,5 @@ func handle(req types.IncomingRequest, out types.ResponseOutparam) *types.ErrorC
 	}
 	return nil
 }
+
+func main() {}
