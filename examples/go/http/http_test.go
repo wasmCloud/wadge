@@ -1,6 +1,6 @@
 //go:generate go run github.com/wasmCloud/wadge/cmd/wadge-bindgen-go
 
-package app_test
+package main_test
 
 import (
 	"io"
