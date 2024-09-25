@@ -1,6 +1,6 @@
 [package]
 name = "wadge"
-version = "0.3.0"
+version = "0.3.1"
 description = "WAdge runtime"
 
 authors.workspace = true
@@ -78,7 +78,7 @@ http = { version = "1", default-features = false }
 tokio = { version = "1", default-features = false }
 tracing = { version = "0.1", default-features = false }
 tracing-subscriber = { version = "0.3", default-features = false }
-wadge = { version = "0.3", path = "." }
+wadge = { version = "0.3.1", path = "." }
 wasi-passthrough = { version = "0.3.2", default-features = false }
 wasi-passthrough-ext = { version = "0.1.4", default-features = false }
 wasi-passthrough-keyvalue = { version = "0.1.1", default-features = false }
