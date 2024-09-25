@@ -162,6 +162,7 @@
             buildInputs = [
               pkgs.wit-deps
 
+              pkgs.pkgsUnstable.binaryen
               pkgs.pkgsUnstable.cargo-audit
               pkgs.pkgsUnstable.gh
               pkgs.pkgsUnstable.go_1_23
