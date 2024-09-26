@@ -14,7 +14,7 @@ fn main() -> anyhow::Result<()> {
         .parent()
         .context("failed to lookup workspace root directory")?;
     let bindings = cbindgen::generate_with_config(
-        crates.join("sys"),
+        crates.join("wadge-sys"),
         cbindgen::Config {
             language: cbindgen::Language::C,
             ..Default::default()
