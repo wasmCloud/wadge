@@ -29,6 +29,9 @@ import (
 	"unsafe"
 )
 
+// Passthrough is a default passthrough Wasm component, which
+// reexports all standard WASI interfaces
+//
 //go:embed lib/passthrough.wasm
 var Passthrough []byte
 
@@ -50,12 +53,18 @@ func setErrorHandler(f func(error)) func(error) {
 	return errorHandler.Swap(f).(func(error))
 }
 
+// SetErrorHandler atomically sets a global error handler and returns previous value.
+// SetErrorHandler is safe for concurrent use.
 func SetErrorHandler(f func(error)) func(error) {
 	errorHandlerMu.Lock()
 	defer errorHandlerMu.Unlock()
 	return setErrorHandler(f)
 }
 
+// WithErrorHandler executes `f` with `handler` as the global error handler
+// resetting it back to previous value once `f` returns
+// WithErrorHandler is safe for concurrent use, but calling it from within `handler`
+// or `f` will cause a deadlock
 func WithErrorHandler(handler func(error), f func()) {
 	errorHandlerMu.Lock()
 	defer errorHandlerMu.Unlock()
@@ -66,10 +75,15 @@ func WithErrorHandler(handler func(error), f func()) {
 	f()
 }
 
+// CurrentErrorHandler atomically loads the current global error handler.
+// CurrentErrorHandler is safe for concurrent use.
 func CurrentErrorHandler() func(error) {
 	return errorHandler.Load().(func(error))
 }
 
+// WithCurrentErrorHandler executes `f` with current global error handler.
+// WithCurrentErrorHandler is safe for concurrent use, but calling it from within
+// `f` will cause a deadlock.
 func WithCurrentErrorHandler(f func(func(error))) {
 	errorHandlerMu.RLock()
 	defer errorHandlerMu.RUnlock()
@@ -81,6 +95,8 @@ func setInstance(i *Instance) *Instance {
 	return i
 }
 
+// SetInstance atomically sets a global `wadge` Instance.
+// SetInstance is safe for concurrent use.
 func SetInstance(i *Instance) *Instance {
 	instanceMu.Lock()
 	defer instanceMu.Unlock()
@@ -88,6 +104,10 @@ func SetInstance(i *Instance) *Instance {
 	return setInstance(i)
 }
 
+// WithInstance executes `f` with `i` as the global `wadge` Instance
+// resetting it back to previous value once `f` returns
+// WithInstance is safe for concurrent use, but calling it from within
+// `f` will cause a deadlock
 func WithInstance(i *Instance, f func()) {
 	instanceMu.Lock()
 	defer instanceMu.Unlock()
@@ -120,12 +140,21 @@ func withCurrentInstance[T any](f func(*Instance) T, handleErr func(error)) T {
 	return f(instance)
 }
 
+// WithCurrentInstance executes `f` with current global `wadge` Instance.
+// WithCurrentInstance is safe for concurrent use, but calling it from within
+// `f` will cause a deadlock.
+// If no global `wadge` Instance has been configured, WithCurrentInstance will
+// attempt to use `Passthrough`. It will call `log.Fatal` if instantiating it fails.
 func WithCurrentInstance[T any](f func(*Instance) T) T {
 	return withCurrentInstance(f, func(err error) {
 		log.Fatal(err)
 	})
 }
 
+// RunTest executes `f` with current global `wadge` Instance and global error handler,
+// which calls `t.Fatal` on errors.
+// RunTest is safe for concurrent use, but calling it from within
+// `f` will cause a deadlock.
 func RunTest(t *testing.T, f func()) {
 	WithErrorHandler(
 		func(err error) {
@@ -145,14 +174,20 @@ func RunTest(t *testing.T, f func()) {
 	)
 }
 
+// Instance is an instantiated Wasm component in `wadge` runtime
 type Instance struct {
 	ptr unsafe.Pointer
 }
 
+// Config is `wadge` runtime configuration
 type Config struct {
+	// Wasm is the component bytes to instantiate, this can either be
+	// binary Wasm or WAT.
+	// In case a Wasm module is specified here, the runtime will componentize it.
 	Wasm []byte
 }
 
+// NewInstance instantiates a new Wasm component in `wadge` runtime given a `Config`.
 func NewInstance(conf *Config) (*Instance, error) {
 	var pinner runtime.Pinner
 	defer pinner.Unpin()
@@ -188,6 +223,8 @@ func NewInstance(conf *Config) (*Instance, error) {
 	return instance, nil
 }
 
+// Call calls function `name` within `instance` with arguments passed according to
+// `cabish` specification
 func (i Instance) Call(instance string, name string, args ...unsafe.Pointer) error {
 	instanceC := C.CString(instance)
 	defer C.free(unsafe.Pointer(instanceC))
