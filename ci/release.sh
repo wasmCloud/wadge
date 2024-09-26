@@ -2,7 +2,8 @@
 
 set -xe
 
-id=$(gh run list -b main -w wadge -L 1 --json databaseId -q '.[].databaseId')
+rev=$(git rev-parse HEAD)
+id=$(gh run list -c "$rev" -b main -w wadge -L 1 --json databaseId -q '.[].databaseId')
 git clean -xf lib target/artifacts
 gh run download -D lib -n 'passthrough' "$id"
 gh run download -D target/artifacts -p 'wadge-*' "$id"
