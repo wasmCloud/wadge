@@ -16,7 +16,6 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"go.wasmcloud.dev/wadge"
-	_ "go.wasmcloud.dev/wadge/bindings"
 	incominghandler "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/incoming-handler"
 	"go.wasmcloud.dev/wadge/wadgehttp"
 )
