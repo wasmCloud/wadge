@@ -16,6 +16,7 @@ import (
 	"go.wasmcloud.dev/wadge/bindings/wasiext/http/ext"
 )
 
+// NewFields constructs a new `Fields` resource given `http.Header`.
 func NewFields(h http.Header) types.Fields {
 	headers := types.NewFields()
 	for name, values := range h {
@@ -32,6 +33,8 @@ func NewFields(h http.Header) types.Fields {
 	return headers
 }
 
+// NewOutgoingRequest constructs a new `types.OutgoingRequest` resource given `http.Request`.
+// NewOutgoingRequest returns a poll callback, which associated body pollable will be passed to.
 func NewOutgoingRequest(req *http.Request) (types.OutgoingRequest, func(func(poll.Pollable)) error, error) {
 	if req.TLS != nil {
 		return 0, nil, errors.New("`http.Request.TLS` is not currently supported")
@@ -187,11 +190,14 @@ func NewOutgoingRequest(req *http.Request) (types.OutgoingRequest, func(func(pol
 	}, nil
 }
 
+// NewIncomingRequest constructs a new `types.IncomingRequest` resource given `http.Request`.
+// NewIncomingRequest returns a poll callback, which associated body pollable will be passed to.
 func NewIncomingRequest(req *http.Request) (types.IncomingRequest, func(func(poll.Pollable)) error, error) {
 	res, write, err := NewOutgoingRequest(req)
 	return ext.NewIncomingRequest(res), write, err
 }
 
+// NewIncomingResponse constructs a new `http.Response` given a `types.IncomingResponse` resource.
 func NewIncomingResponse(resp types.IncomingResponse) (*http.Response, error) {
 	header := make(http.Header, len(resp.Headers().Entries().Slice()))
 	for _, h := range resp.Headers().Entries().Slice() {
@@ -254,6 +260,9 @@ func NewIncomingResponse(resp types.IncomingResponse) (*http.Response, error) {
 	}, nil
 }
 
+// HandleIncomingRequest calls generated `wasi:http/incoming-handler.handle` function represented by `f`
+// using the specified `http.Request`.
+// It returns an `http.Response` corresponding to result of calling the export or an error.
 func HandleIncomingRequest[I, O ~uint32](f func(I, O), req *http.Request) (*http.Response, error) {
 	wr, write, err := NewIncomingRequest(req)
 	if err != nil {
