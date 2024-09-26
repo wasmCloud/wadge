@@ -10,6 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/bytecodealliance/wasm-tools-go/cm"
+	_ "go.wasmcloud.dev/wadge/bindings"
 	"go.wasmcloud.dev/wadge/bindings/wasi/http/types"
 	"go.wasmcloud.dev/wadge/bindings/wasi/io/poll"
 	"go.wasmcloud.dev/wadge/bindings/wasiext/http/ext"
@@ -224,7 +225,7 @@ func NewIncomingResponse(resp types.IncomingResponse) (*http.Response, error) {
 	bodyStream.ResourceDrop()
 	futTrailers := types.IncomingBodyFinish(*body)
 	// TODO: Block for trailers, once panic in wasmtime is fixed
-	//futTrailers.Subscribe().Block()
+	// futTrailers.Subscribe().Block()
 	trailersOptResResOpt := futTrailers.Get()
 	var trailer http.Header
 	if trailersOptResRes := trailersOptResResOpt.Some(); trailersOptResRes != nil {

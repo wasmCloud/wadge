@@ -16,4 +16,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace go.wasmcloud.dev/wadge v0.2.0 => ./.
+replace go.wasmcloud.dev/wadge v0.4.1 => ./.
