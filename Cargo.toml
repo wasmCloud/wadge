@@ -1,32 +1,6 @@
-[package]
-name = "wadge"
-version = "0.3.1"
-description = "WAdge runtime"
-
-authors.workspace = true
-categories.workspace = true
-edition.workspace = true
-homepage.workspace = true
-license.workspace = true
-repository.workspace = true
-
-exclude = [
-    "*.a",
-    "*.go",
-    "*.h",
-    "*.s",
-    "*.wasm",
-    ".github",
-    ".gitignore",
-    "examples",
-    "flake.*",
-    "go.*",
-    "rust-toolchain.toml",
-    "tests",
-]
-
 [workspace]
 members = ["crates/*", "tests/components/*"]
+resolver = "2"
 
 [workspace.package]
 authors = ["Roman Volosatovs <rvolosatovs@riseup.net>"]
@@ -47,30 +21,6 @@ strip = true
 [profile.release]
 lto = true
 
-[dependencies]
-anyhow = { workspace = true }
-http = { workspace = true }
-tokio = { workspace = true }
-tracing = { workspace = true }
-wasi-preview1-component-adapter-provider = { workspace = true }
-wasmparser = { workspace = true }
-wasmtime = { workspace = true, features = [
-    "addr2line",
-    "component-model",
-    "coredump",
-    "cranelift",
-    "demangle",
-    "gc",
-    "parallel-compilation",
-    "runtime",
-    "wat",
-] }
-wasmtime-wasi = { workspace = true }
-wasmtime-wasi-http = { workspace = true }
-wasmtime-wasi-keyvalue = { workspace = true }
-wasmtime-wasi-runtime-config = { workspace = true }
-wit-component = { workspace = true }
-
 [workspace.dependencies]
 anyhow = { version = "1", default-features = false }
 cbindgen = { version = "0.27", default-features = false }
@@ -78,7 +28,7 @@ http = { version = "1", default-features = false }
 tokio = { version = "1", default-features = false }
 tracing = { version = "0.1", default-features = false }
 tracing-subscriber = { version = "0.3", default-features = false }
-wadge = { version = "0.3.1", path = "." }
+wadge = { version = "0.3.1", path = "./crates/wadge" }
 wasi-passthrough = { version = "0.3.2", default-features = false }
 wasi-passthrough-ext = { version = "0.1.4", default-features = false }
 wasi-passthrough-keyvalue = { version = "0.1.1", default-features = false }

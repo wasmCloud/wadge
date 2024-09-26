@@ -7,10 +7,12 @@ on:
     branches:
       - main
     tags:
-      - 'crates/passthrough/v[0-9].[0-9]+.[0-9]+'
-      - 'crates/passthrough/v[0-9].[0-9]+.[0-9]+-*'
-      - 'crates/sys/v[0-9].[0-9]+.[0-9]+'
-      - 'crates/sys/v[0-9].[0-9]+.[0-9]+-*'
+      - 'crates/wadge-passthrough/v[0-9].[0-9]+.[0-9]+'
+      - 'crates/wadge-passthrough/v[0-9].[0-9]+.[0-9]+-*'
+      - 'crates/wadge-sys/v[0-9].[0-9]+.[0-9]+'
+      - 'crates/wadge-sys/v[0-9].[0-9]+.[0-9]+-*'
+      - 'crates/wadge/v[0-9].[0-9]+.[0-9]+'
+      - 'crates/wadge/v[0-9].[0-9]+.[0-9]+-*'
       - 'v[0-9].[0-9]+.[0-9]+'
       - 'v[0-9].[0-9]+.[0-9]+-*'
   workflow_dispatch:
@@ -241,10 +243,13 @@ jobs:
     strategy:
       matrix:
         include:
-          - crate: passthrough
+          - crate: wadge
             workspace-dependencies: false
 
-          - crate: sys
+          - crate: wadge-passthrough
+            workspace-dependencies: false
+
+          - crate: wadge-sys
             workspace-dependencies: true
 
     name: publish ${{ matrix.crate }} to crates.io
@@ -274,7 +279,7 @@ jobs:
         if: startsWith(github.ref, format('refs/tags/crates/{0}/v', matrix.crate)) && !steps.ctx.outputs.prerelease
         continue-on-error: ${{ github.repository_owner != 'wasmCloud' }}
         run: |
-          pkgver=$(cargo pkgid | cut -d '@' -f 2)
+          pkgver=$(cargo pkgid | cut -d '#' -f 2)
           tagver="${{ steps.ctx.outputs.version }}"
           if ! [ "$pkgver" = "$tagver" ]; then
             echo "version mismatch, $pkgver (package) != $tagver (tag)"
@@ -344,16 +349,6 @@ jobs:
             echo "version ${version} is a pre-release"
             echo "prerelease=true" >> "$GITHUB_OUTPUT"
           fi
-
-      - name: publish wadge to crates.io
-        run: |
-          pkgver=$(cargo pkgid | cut -d '#' -f 2)
-          tagver="${{ steps.ctx.outputs.version }}"
-          if ! [ "$pkgver" = "$tagver" ]; then
-            echo "version mismatch, $pkgver (package) != $tagver (tag)"
-            exit 1
-          fi
-          cargo publish --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
 
       - uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
         with:

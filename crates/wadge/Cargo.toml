@@ -1,0 +1,35 @@
+[package]
+name = "wadge"
+version = "0.3.1"
+description = "WAdge runtime"
+
+authors.workspace = true
+categories.workspace = true
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+http = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+wasi-preview1-component-adapter-provider = { workspace = true }
+wasmparser = { workspace = true }
+wasmtime = { workspace = true, features = [
+    "addr2line",
+    "component-model",
+    "coredump",
+    "cranelift",
+    "demangle",
+    "gc",
+    "parallel-compilation",
+    "runtime",
+    "wat",
+] }
+wasmtime-wasi = { workspace = true }
+wasmtime-wasi-http = { workspace = true }
+wasmtime-wasi-keyvalue = { workspace = true }
+wasmtime-wasi-runtime-config = { workspace = true }
+wit-component = { workspace = true }
