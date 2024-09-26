@@ -115,6 +115,7 @@ jobs:
             shell: bash
 
     name: test-release (${{ matrix.config.os }})
+    if: ${{ !startsWith(github.ref, 'refs/tags/crates/') }}
     needs:
       - build-ffi
       - build-ffi-darwin
@@ -173,6 +174,7 @@ jobs:
             shell: bash
 
     name: test-dev (${{ matrix.config.os }})
+    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
     runs-on: ${{ matrix.config.os }}
     defaults:
       run:
@@ -208,6 +210,7 @@ jobs:
       - run: git diff --exit-code
 
   gofmt:
+    if: ${{ !startsWith(github.ref, 'refs/tags/crates/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
@@ -253,7 +256,11 @@ jobs:
             workspace-dependencies: true
 
     name: publish ${{ matrix.crate }} to crates.io
-    needs: cargo
+    needs:
+      - build-ffi
+      - build-ffi-darwin
+      - build-wasm
+      - cargo
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
@@ -289,6 +296,7 @@ jobs:
         working-directory: ./crates/${{ matrix.crate }}
 
   build-doc:
+    if: ${{ !startsWith(github.ref, 'refs/tags/crates/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
