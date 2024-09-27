@@ -10,7 +10,6 @@ import (
 	"unsafe"
 
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	_ "go.wasmcloud.dev/wadge/bindings"
 	"go.wasmcloud.dev/wadge/bindings/wasi/http/types"
 	"go.wasmcloud.dev/wadge/bindings/wasi/io/poll"
 	"go.wasmcloud.dev/wadge/bindings/wasiext/http/ext"
