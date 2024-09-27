@@ -35,6 +35,9 @@ func RunCargo(args ...string) error {
 }
 
 func main() {
+	if err := RunCargo("run", "-p", "generate-header"); err != nil {
+		log.Fatalf("failed to generate `wadge-sys` C header: %s", err)
+	}
 	if err := Run(exec.Command(
 		"go",
 		"run",

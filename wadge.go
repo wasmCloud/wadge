@@ -1,4 +1,4 @@
-//go:generate cargo run -p generate-header
+//go:build !wasm && !wasi && !wasip1 && !wasip2 && !wasm_unknown && !tinygo.wasm
 
 package wadge
 
