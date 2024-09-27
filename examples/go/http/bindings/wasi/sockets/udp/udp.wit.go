@@ -18,6 +18,7 @@ import (
 //		remote-address: ip-socket-address,
 //	}
 type IncomingDatagram struct {
+	_ cm.HostLayout
 	// The payload.
 	//
 	// Theoretical max size: ~64 KiB. In practice, typically less than 1500 bytes.
@@ -41,6 +42,7 @@ type IncomingDatagram struct {
 //		remote-address: option<ip-socket-address>,
 //	}
 type OutgoingDatagram struct {
+	_ cm.HostLayout
 	// The payload.
 	Data cm.List[uint8]
 

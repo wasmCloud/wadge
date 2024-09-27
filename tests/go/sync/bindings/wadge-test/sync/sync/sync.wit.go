@@ -28,6 +28,7 @@ const (
 //		foo: string,
 //	}
 type RecNested struct {
+	_   cm.HostLayout
 	Foo string
 }
 
@@ -37,6 +38,7 @@ type RecNested struct {
 //		nested: rec-nested,
 //	}
 type Rec struct {
+	_      cm.HostLayout
 	Nested RecNested
 }
 
@@ -110,6 +112,7 @@ func (e Foobar) String() string {
 //		m: string,
 //	}
 type Primitives struct {
+	_ cm.HostLayout
 	A uint8
 	B uint16
 	C uint32

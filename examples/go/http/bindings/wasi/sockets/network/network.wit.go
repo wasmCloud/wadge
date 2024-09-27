@@ -257,6 +257,7 @@ func (self *IPAddress) IPv6() *IPv6Address {
 //		address: ipv4-address,
 //	}
 type IPv4SocketAddress struct {
+	_ cm.HostLayout
 	// sin_port
 	Port uint16
 
@@ -273,6 +274,7 @@ type IPv4SocketAddress struct {
 //		scope-id: u32,
 //	}
 type IPv6SocketAddress struct {
+	_ cm.HostLayout
 	// sin6_port
 	Port uint16
 

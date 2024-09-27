@@ -3,9 +3,9 @@ module go.wasmcloud.dev/wadge
 go 1.23.0
 
 require (
-	github.com/bytecodealliance/wasm-tools-go v0.2.0
+	github.com/bytecodealliance/wasm-tools-go v0.2.1
 	github.com/stretchr/testify v1.9.0
-	golang.org/x/tools v0.24.0
+	golang.org/x/tools v0.25.0
 )
 
 require (

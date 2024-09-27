@@ -4,6 +4,7 @@
 package timezone
 
 import (
+	"github.com/bytecodealliance/wasm-tools-go/cm"
 	wallclock "go.wasmcloud.dev/wadge/bindings/wasi/clocks/wall-clock"
 )
 
@@ -20,6 +21,7 @@ import (
 //		in-daylight-saving-time: bool,
 //	}
 type TimezoneDisplay struct {
+	_ cm.HostLayout
 	// The number of seconds difference between UTC time and the local
 	// time of the timezone.
 	//
