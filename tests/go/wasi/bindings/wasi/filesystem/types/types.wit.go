@@ -227,6 +227,7 @@ type LinkCount uint64
 //		status-change-timestamp: option<datetime>,
 //	}
 type DescriptorStat struct {
+	_ cm.HostLayout
 	// File type.
 	Type DescriptorType
 
@@ -315,6 +316,7 @@ func (self *NewTimestamp) Timestamp() *wallclock.DateTime {
 //		name: string,
 //	}
 type DirectoryEntry struct {
+	_ cm.HostLayout
 	// The type of the file referred to by this directory entry.
 	Type DescriptorType
 
@@ -593,6 +595,7 @@ func (e Advice) String() string {
 //		upper: u64,
 //	}
 type MetadataHashValue struct {
+	_ cm.HostLayout
 	// 64 bits of a 128-bit hash value.
 	Lower uint64
 

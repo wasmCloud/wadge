@@ -194,6 +194,7 @@ func (self *Scheme) Other() *string {
 //		info-code: option<u16>,
 //	}
 type DNSErrorPayload struct {
+	_        cm.HostLayout
 	Rcode    cm.Option[string]
 	InfoCode cm.Option[uint16]
 }
@@ -207,6 +208,7 @@ type DNSErrorPayload struct {
 //		alert-message: option<string>,
 //	}
 type TLSAlertReceivedPayload struct {
+	_            cm.HostLayout
 	AlertID      cm.Option[uint8]
 	AlertMessage cm.Option[string]
 }
@@ -220,6 +222,7 @@ type TLSAlertReceivedPayload struct {
 //		field-size: option<u32>,
 //	}
 type FieldSizePayload struct {
+	_         cm.HostLayout
 	FieldName cm.Option[string]
 	FieldSize cm.Option[uint32]
 }
