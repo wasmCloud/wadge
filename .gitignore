@@ -2,5 +2,5 @@
 *.wasm
 *.a
 *.lib
-wadge_bindings_test.go
+bindings.wadge.go
 /go/internal/tests/*/bindings/*
