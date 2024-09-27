@@ -2091,9 +2091,9 @@ dependencies = [
 
 [[package]]
 name = "wasmtime-wasi-http"
-version = "25.0.0"
+version = "25.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "859b1d684902af4c5f5a6da6f2e576b666ffcd94fd5350b1a4e216e4fbbe6f0b"
+checksum = "59e072fb24b4403f8fb614bee988ef2d8a93e5ba9410c0c53804f62d15a447b3"
 dependencies = [
  "anyhow",
  "async-trait",
