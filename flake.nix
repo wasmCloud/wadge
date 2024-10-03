@@ -22,7 +22,7 @@
   inputs.nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   inputs.wit-deps.inputs.nixify.follows = "nixify";
   inputs.wit-deps.inputs.nixlib.follows = "nixlib";
-  inputs.wit-deps.url = "github:bytecodealliance/wit-deps/v0.3.5";
+  inputs.wit-deps.url = "github:bytecodealliance/wit-deps/v0.4.0";
 
   outputs = {
     nixify,
@@ -164,8 +164,9 @@
 
               pkgs.pkgsUnstable.binaryen
               pkgs.pkgsUnstable.cargo-audit
+              pkgs.pkgsUnstable.cargo-nextest
               pkgs.pkgsUnstable.gh
-              pkgs.pkgsUnstable.go_1_23
+              pkgs.pkgsUnstable.go
               pkgs.pkgsUnstable.wasm-tools
               pkgs.pkgsUnstable.wasmtime
             ];
