@@ -17,4 +17,5 @@ crate-type = ["cdylib"]
 wit-bindgen = { workspace = true }
 wasi-passthrough = { workspace = true }
 wasi-passthrough-ext = { workspace = true }
+wasi-passthrough-keyvalue = { workspace = true }
 wasi-passthrough-logging = { workspace = true }
