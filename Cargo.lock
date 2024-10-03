@@ -1674,6 +1674,7 @@ version = "0.2.0"
 dependencies = [
  "wasi-passthrough",
  "wasi-passthrough-ext",
+ "wasi-passthrough-keyvalue",
  "wasi-passthrough-logging",
  "wit-bindgen",
 ]
@@ -1722,6 +1723,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "977613992b50ed021a32390994b0a3c4cecc7bb04951e08d67898e987ea34134"
 dependencies = [
  "wasi-passthrough",
+ "wit-bindgen",
+]
+
+[[package]]
+name = "wasi-passthrough-keyvalue"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9cbc5ec7bddfc9f71fa520834e5e10fd6ae81fae3ee6840e5771df9e64e39e5c"
+dependencies = [
  "wit-bindgen",
 ]
 
