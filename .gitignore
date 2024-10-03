@@ -1,6 +1,7 @@
-/target
-*.wasm
 *.a
 *.lib
-bindings.wadge.go
+*.wasm
 /go/internal/tests/*/bindings/*
+/target
+bindings.wadge.go
+bindings.wadge_test.go

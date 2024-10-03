@@ -1,4 +1,4 @@
-//go:generate go run go.wasmcloud.dev/wadge/cmd/wadge-bindgen-go
+//go:generate go run go.wasmcloud.dev/wadge/cmd/wadge-bindgen-go -test
 //go:generate cargo build -p sync-test-component --target wasm32-unknown-unknown
 //go:generate cp ../../../target/wasm32-unknown-unknown/debug/sync_test_component.wasm component.wasm
 

@@ -1,4 +1,4 @@
-//go:generate go run go.wasmcloud.dev/wadge/cmd/wadge-bindgen-go
+//go:generate go run go.wasmcloud.dev/wadge/cmd/wadge-bindgen-go -test
 
 package main_test
 
