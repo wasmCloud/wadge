@@ -1,4 +1,4 @@
-//go:generate go run go.wasmcloud.dev/wadge/cmd/wadge-bindgen-go
+//go:generate go run go.wasmcloud.dev/wadge/cmd/wadge-bindgen-go -test
 //go:generate cargo build -p wasi-test-component --target wasm32-wasip1
 //go:generate cp ../../../target/wasm32-wasip1/debug/wasi_test_component.wasm component.wasm
 

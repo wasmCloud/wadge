@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"flag"
 	"fmt"
 	"go/ast"
@@ -19,9 +20,10 @@ import (
 )
 
 var (
-	output  = flag.String("output", "bindings.wadge.go", "output file path from the root of the package directory")
 	gofmt   = flag.Bool("gofmt", true, "whether to format the generated code")
-	pkgName = flag.String("package", "", "package name, defaults to test package at path specified")
+	output  = flag.String("output", "", "output file path from the root of the package directory. Defaults to `bindings.wadge.go` if `test` is not set and `bindings.wadge_test.go` if it is")
+	pkgName = flag.String("package", "", "package name, defaults to package at path specified or the corresponding test package if `test` is set")
+	test    = flag.Bool("test", false, "whether to run in test mode, which will set output and package flags accordingly")
 
 	unsafePointerTy = &ast.SelectorExpr{
 		X:   &ast.Ident{Name: "unsafe"},
@@ -170,7 +172,15 @@ func importType(fs *token.FileSet, imports map[string]*ast.Ident, expr *ast.Expr
 }
 
 func generate(path string) error {
-	fpath := filepath.Join(path, *output)
+	out := *output
+	if out == "" {
+		if *test {
+			out = "bindings.wadge_test.go"
+		} else {
+			out = "bindings.wadge.go"
+		}
+	}
+	fpath := filepath.Join(path, out)
 	if err := os.RemoveAll(fpath); err != nil {
 		return fmt.Errorf("failed to remove file at `%s`: %w", fpath, err)
 	}
@@ -455,7 +465,11 @@ func generate(path string) error {
 	}
 	name := *pkgName
 	if name == "" {
-		name = pkg.Name
+		if *test {
+			name = fmt.Sprintf("%s_test", pkg.Name)
+		} else {
+			name = pkg.Name
+		}
 	}
 	importSpecs := []*ast.ImportSpec{
 		{
@@ -550,6 +564,9 @@ func run() error {
 	args := flag.Args()
 	if len(args) == 0 {
 		args = []string{"."}
+	}
+	if *test && *pkgName != "" && *output != "" {
+		return errors.New("setting `test` to true has no effect, when both `package` and `output` are set")
 	}
 	for _, path := range args {
 		if err := generate(path); err != nil {
