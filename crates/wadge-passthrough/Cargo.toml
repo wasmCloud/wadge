@@ -1,6 +1,6 @@
 [package]
 name = "wadge-passthrough"
-version = "0.2.0"
+version = "0.3.0"
 description = "WebAssembly component, which reexports WASI from the host"
 
 authors.workspace = true
