@@ -1667,7 +1667,7 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
 name = "wadge"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "http",
@@ -1685,7 +1685,7 @@ dependencies = [
 
 [[package]]
 name = "wadge-passthrough"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "wasi-passthrough",
  "wasi-passthrough-ext",
@@ -1752,9 +1752,9 @@ dependencies = [
 
 [[package]]
 name = "wasi-passthrough-logging"
-version = "0.1.1"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e0716d0e57714fbf9a4dfef9cb54fa037905cc82fe528fff126c54f591d9ec92"
+checksum = "2934d8b76d37004983e82b3d9d102340c7bcae8d43dad0741135d474eff77fc5"
 dependencies = [
  "wit-bindgen",
 ]
