@@ -1391,7 +1391,7 @@ dependencies = [
 name = "sync-test-component"
 version = "0.1.0"
 dependencies = [
- "wit-bindgen 0.34.0",
+ "wit-bindgen",
 ]
 
 [[package]]
@@ -1691,7 +1691,7 @@ dependencies = [
  "wasi-passthrough-ext",
  "wasi-passthrough-keyvalue",
  "wasi-passthrough-logging",
- "wit-bindgen 0.34.0",
+ "wit-bindgen",
 ]
 
 [[package]]
@@ -1724,39 +1724,39 @@ checksum = "9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423"
 
 [[package]]
 name = "wasi-passthrough"
-version = "0.3.2"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "330d3c13cddb628bb3fbf698d7ca5768b712fd9c3e4e06177279b04c05417a79"
+checksum = "5f9bf2fb1d7fd72535ba75f47c2354bdbc39562be171eca5bdec01ca6aedde05"
 dependencies = [
- "wit-bindgen 0.32.0",
+ "wit-bindgen",
 ]
 
 [[package]]
 name = "wasi-passthrough-ext"
-version = "0.1.4"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "977613992b50ed021a32390994b0a3c4cecc7bb04951e08d67898e987ea34134"
+checksum = "677324e4c9311ca06a48819ef6f136e77ca390e46ce669a59b1a8bb53be5d818"
 dependencies = [
  "wasi-passthrough",
- "wit-bindgen 0.32.0",
+ "wit-bindgen",
 ]
 
 [[package]]
 name = "wasi-passthrough-keyvalue"
-version = "0.1.1"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9cbc5ec7bddfc9f71fa520834e5e10fd6ae81fae3ee6840e5771df9e64e39e5c"
+checksum = "d2ff4e02ebab8f30ca22a74b5d3b58285c495048deb68e089fce9eabe54c3212"
 dependencies = [
- "wit-bindgen 0.32.0",
+ "wit-bindgen",
 ]
 
 [[package]]
 name = "wasi-passthrough-logging"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2934d8b76d37004983e82b3d9d102340c7bcae8d43dad0741135d474eff77fc5"
+checksum = "943eeb606577f0e1f0cab9928dbf922f25f36a32aba8f37718108d0635ebc084"
 dependencies = [
- "wit-bindgen 0.32.0",
+ "wit-bindgen",
 ]
 
 [[package]]
@@ -1771,7 +1771,7 @@ version = "0.1.0"
 dependencies = [
  "wasi-passthrough",
  "wasi-passthrough-ext",
- "wit-bindgen 0.34.0",
+ "wit-bindgen",
 ]
 
 [[package]]
@@ -2416,33 +2416,12 @@ dependencies = [
 
 [[package]]
 name = "wit-bindgen"
-version = "0.32.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0eb9327b2afd6af02ab39f8fbde6bfc7d369d14bc8c8688311d3defcda3952bd"
-dependencies = [
- "wit-bindgen-rt 0.32.0",
- "wit-bindgen-rust-macro 0.32.0",
-]
-
-[[package]]
-name = "wit-bindgen"
 version = "0.34.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7e11ad55616555605a60a8b2d1d89e006c2076f46c465c892cc2c153b20d4b30"
 dependencies = [
- "wit-bindgen-rt 0.34.0",
- "wit-bindgen-rust-macro 0.34.0",
-]
-
-[[package]]
-name = "wit-bindgen-core"
-version = "0.32.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fc9cfd3f1b4e29e9a90fe04157764f24ae396cfb8530dae5753de140e73f9e56"
-dependencies = [
- "anyhow",
- "heck 0.5.0",
- "wit-parser 0.217.0",
+ "wit-bindgen-rt",
+ "wit-bindgen-rust-macro",
 ]
 
 [[package]]
@@ -2458,36 +2437,11 @@ dependencies = [
 
 [[package]]
 name = "wit-bindgen-rt"
-version = "0.32.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5ca6f307148acf7199e492fd3781cc7b79f8f3eda003c0ac3aa8079449601ccb"
-dependencies = [
- "bitflags",
-]
-
-[[package]]
-name = "wit-bindgen-rt"
 version = "0.34.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "744845cde309b8fa32408d6fb67456449278c66ea4dcd96de29797b302721f02"
 dependencies = [
  "bitflags",
-]
-
-[[package]]
-name = "wit-bindgen-rust"
-version = "0.32.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cf075ae0c89dc391f7d710d70c69bfd018c029c74a54f7ddfd0266dccc8ff0c5"
-dependencies = [
- "anyhow",
- "heck 0.5.0",
- "indexmap",
- "prettyplease",
- "syn",
- "wasm-metadata 0.217.0",
- "wit-bindgen-core 0.32.0",
- "wit-component 0.217.0",
 ]
 
 [[package]]
@@ -2502,23 +2456,8 @@ dependencies = [
  "prettyplease",
  "syn",
  "wasm-metadata 0.219.1",
- "wit-bindgen-core 0.34.0",
+ "wit-bindgen-core",
  "wit-component 0.219.1",
-]
-
-[[package]]
-name = "wit-bindgen-rust-macro"
-version = "0.32.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a2ab28d36e4d326bd43d483512348874d4fffa378d8dc1da6dd6521afe2ec4f6"
-dependencies = [
- "anyhow",
- "prettyplease",
- "proc-macro2",
- "quote",
- "syn",
- "wit-bindgen-core 0.32.0",
- "wit-bindgen-rust 0.32.0",
 ]
 
 [[package]]
@@ -2532,8 +2471,8 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
- "wit-bindgen-core 0.34.0",
- "wit-bindgen-rust 0.34.0",
+ "wit-bindgen-core",
+ "wit-bindgen-rust",
 ]
 
 [[package]]
