@@ -213,7 +213,7 @@ func TestIdentityVariant(t *testing.T) {
 	t.Run("var", func(t *testing.T) {
 		t.Run("empty", func(t *testing.T) {
 			wadge.RunTest(t, func() {
-				expected := sync.VarVar(sync.Rec{})
+				expected := sync.VarSome(sync.Rec{})
 				assert.Equal(t, expected,
 					sync.IdentityVariant(expected),
 				)
@@ -221,7 +221,7 @@ func TestIdentityVariant(t *testing.T) {
 		})
 		t.Run("foo", func(t *testing.T) {
 			wadge.RunTest(t, func() {
-				expected := sync.VarVar(sync.Rec{
+				expected := sync.VarSome(sync.Rec{
 					Nested: sync.RecNested{
 						Foo: "foo",
 					},
@@ -528,7 +528,7 @@ func TestIdentityListVariant(t *testing.T) {
 	})
 	t.Run("[var(empty)]", func(t *testing.T) {
 		wadge.RunTest(t, func() {
-			expected := []sync.Var{sync.VarVar(sync.Rec{})}
+			expected := []sync.Var{sync.VarSome(sync.Rec{})}
 			assert.Equal(t, expected,
 				sync.IdentityListVariant(cm.NewList(unsafe.SliceData(expected), 1)).Slice(),
 			)
@@ -536,7 +536,7 @@ func TestIdentityListVariant(t *testing.T) {
 	})
 	t.Run("[var(foo)]", func(t *testing.T) {
 		wadge.RunTest(t, func() {
-			expected := []sync.Var{sync.VarVar(sync.Rec{
+			expected := []sync.Var{sync.VarSome(sync.Rec{
 				Nested: sync.RecNested{
 					Foo: "foo",
 				},
@@ -549,7 +549,7 @@ func TestIdentityListVariant(t *testing.T) {
 	t.Run("[var(foo), empty]", func(t *testing.T) {
 		wadge.RunTest(t, func() {
 			expected := []sync.Var{
-				sync.VarVar(sync.Rec{
+				sync.VarSome(sync.Rec{
 					Nested: sync.RecNested{
 						Foo: "foo",
 					},
@@ -564,19 +564,19 @@ func TestIdentityListVariant(t *testing.T) {
 	t.Run("[var(foo), empty, var(bar), var(empty), var(baz)]", func(t *testing.T) {
 		wadge.RunTest(t, func() {
 			expected := []sync.Var{
-				sync.VarVar(sync.Rec{
+				sync.VarSome(sync.Rec{
 					Nested: sync.RecNested{
 						Foo: "foo",
 					},
 				}),
 				sync.VarEmpty(),
-				sync.VarVar(sync.Rec{
+				sync.VarSome(sync.Rec{
 					Nested: sync.RecNested{
 						Foo: "bar",
 					},
 				}),
-				sync.VarVar(sync.Rec{}),
-				sync.VarVar(sync.Rec{
+				sync.VarSome(sync.Rec{}),
+				sync.VarSome(sync.Rec{
 					Nested: sync.RecNested{
 						Foo: "baz",
 					},

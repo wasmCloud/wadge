@@ -19,8 +19,8 @@ func lower_Rec(v Rec) (f0 *uint8, f1 uint32) {
 func lower_Var(v Var) (f0 uint32, f1 *uint8, f2 uint32) {
 	f0 = (uint32)(v.Tag())
 	switch f0 {
-	case 0: // var
-		v1, v2 := lower_Rec(*v.Var())
+	case 0: // some
+		v1, v2 := lower_Rec(*v.Some())
 		f1 = (*uint8)(v1)
 		f2 = (uint32)(v2)
 	}
