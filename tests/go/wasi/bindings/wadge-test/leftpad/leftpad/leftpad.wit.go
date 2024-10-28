@@ -8,13 +8,28 @@ import (
 	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams"
 )
 
+// InputStream represents the imported type alias "wadge-test:leftpad/leftpad#input-stream".
+//
+// See [streams.InputStream] for more information.
+type InputStream = streams.InputStream
+
+// OutputStream represents the imported type alias "wadge-test:leftpad/leftpad#output-stream".
+//
+// See [streams.OutputStream] for more information.
+type OutputStream = streams.OutputStream
+
+// StreamError represents the imported type alias "wadge-test:leftpad/leftpad#stream-error".
+//
+// See [streams.StreamError] for more information.
+type StreamError = streams.StreamError
+
 // Leftpad represents the imported function "leftpad".
 //
 //	leftpad: func(in: input-stream, out: borrow<output-stream>, len: u64, c: char)
 //	-> result<_, stream-error>
 //
 //go:nosplit
-func Leftpad(in streams.InputStream, out streams.OutputStream, len_ uint64, c rune) (result cm.Result[streams.StreamError, struct{}, streams.StreamError]) {
+func Leftpad(in InputStream, out OutputStream, len_ uint64, c rune) (result cm.Result[StreamError, struct{}, StreamError]) {
 	in0 := cm.Reinterpret[uint32](in)
 	out0 := cm.Reinterpret[uint32](out)
 	len0 := (uint64)(len_)
@@ -22,7 +37,3 @@ func Leftpad(in streams.InputStream, out streams.OutputStream, len_ uint64, c ru
 	wasmimport_Leftpad((uint32)(in0), (uint32)(out0), (uint64)(len0), (uint32)(c0), &result)
 	return
 }
-
-//go:wasmimport wadge-test:leftpad/leftpad leftpad
-//go:noescape
-func wasmimport_Leftpad(in0 uint32, out0 uint32, len0 uint64, c0 uint32, result *cm.Result[streams.StreamError, struct{}, streams.StreamError])

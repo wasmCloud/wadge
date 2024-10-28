@@ -50,13 +50,13 @@ type Rec struct {
 //	}
 type Var cm.Variant[uint8, Rec, Rec]
 
-// VarVar returns a [Var] of case "var".
-func VarVar(data Rec) Var {
+// VarVar_ returns a [Var] of case "var".
+func VarVar_(data Rec) Var {
 	return cm.New[Var](0, data)
 }
 
-// Var returns a non-nil *[Rec] if [Var] represents the variant case "var".
-func (self *Var) Var() *Rec {
+// Var_ returns a non-nil *[Rec] if [Var] represents the variant case "var".
+func (self *Var) Var_() *Rec {
 	return cm.Case[Rec](self, 0)
 }
 
@@ -69,6 +69,16 @@ func VarEmpty() Var {
 // Empty returns true if [Var] represents the variant case "empty".
 func (self *Var) Empty() bool {
 	return self.Tag() == 1
+}
+
+var stringsVar = [2]string{
+	"var",
+	"empty",
+}
+
+// String implements [fmt.Stringer], returning the variant case name of v.
+func (v Var) String() string {
+	return stringsVar[v.Tag()]
 }
 
 // Foobar represents the enum "wadge-test:sync/sync#foobar".
@@ -144,10 +154,6 @@ func (self Res) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync [resource-drop]res
-//go:noescape
-func wasmimport_ResResourceDrop(self0 uint32)
-
 // NewRes represents the imported constructor for resource "res".
 //
 //	constructor()
@@ -159,10 +165,6 @@ func NewRes() (result Res) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync [constructor]res
-//go:noescape
-func wasmimport_NewRes() (result0 uint32)
-
 // ResMakeList represents the imported static function "make-list".
 //
 //	make-list: static func() -> list<res>
@@ -172,10 +174,6 @@ func ResMakeList() (result cm.List[Res]) {
 	wasmimport_ResMakeList(&result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync [static]res.make-list
-//go:noescape
-func wasmimport_ResMakeList(result *cm.List[Res])
 
 // Foo represents the imported method "foo".
 //
@@ -187,10 +185,6 @@ func (self Res) Foo() (result string) {
 	wasmimport_ResFoo((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync [method]res.foo
-//go:noescape
-func wasmimport_ResFoo(self0 uint32, result *string)
 
 // IdentityBool represents the imported function "identity-bool".
 //
@@ -204,10 +198,6 @@ func IdentityBool(arg bool) (result bool) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-bool
-//go:noescape
-func wasmimport_IdentityBool(arg0 uint32) (result0 uint32)
-
 // IdentityS8 represents the imported function "identity-s8".
 //
 //	identity-s8: func(arg: s8) -> s8
@@ -219,10 +209,6 @@ func IdentityS8(arg int8) (result int8) {
 	result = (int8)((uint32)(result0))
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-s8
-//go:noescape
-func wasmimport_IdentityS8(arg0 uint32) (result0 uint32)
 
 // IdentityU8 represents the imported function "identity-u8".
 //
@@ -236,10 +222,6 @@ func IdentityU8(arg uint8) (result uint8) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-u8
-//go:noescape
-func wasmimport_IdentityU8(arg0 uint32) (result0 uint32)
-
 // IdentityS16 represents the imported function "identity-s16".
 //
 //	identity-s16: func(arg: s16) -> s16
@@ -251,10 +233,6 @@ func IdentityS16(arg int16) (result int16) {
 	result = (int16)((uint32)(result0))
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-s16
-//go:noescape
-func wasmimport_IdentityS16(arg0 uint32) (result0 uint32)
 
 // IdentityU16 represents the imported function "identity-u16".
 //
@@ -268,10 +246,6 @@ func IdentityU16(arg uint16) (result uint16) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-u16
-//go:noescape
-func wasmimport_IdentityU16(arg0 uint32) (result0 uint32)
-
 // IdentityS32 represents the imported function "identity-s32".
 //
 //	identity-s32: func(arg: s32) -> s32
@@ -283,10 +257,6 @@ func IdentityS32(arg int32) (result int32) {
 	result = (int32)((uint32)(result0))
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-s32
-//go:noescape
-func wasmimport_IdentityS32(arg0 uint32) (result0 uint32)
 
 // IdentityU32 represents the imported function "identity-u32".
 //
@@ -300,10 +270,6 @@ func IdentityU32(arg uint32) (result uint32) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-u32
-//go:noescape
-func wasmimport_IdentityU32(arg0 uint32) (result0 uint32)
-
 // IdentityS64 represents the imported function "identity-s64".
 //
 //	identity-s64: func(arg: s64) -> s64
@@ -315,10 +281,6 @@ func IdentityS64(arg int64) (result int64) {
 	result = (int64)((uint64)(result0))
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-s64
-//go:noescape
-func wasmimport_IdentityS64(arg0 uint64) (result0 uint64)
 
 // IdentityU64 represents the imported function "identity-u64".
 //
@@ -332,10 +294,6 @@ func IdentityU64(arg uint64) (result uint64) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-u64
-//go:noescape
-func wasmimport_IdentityU64(arg0 uint64) (result0 uint64)
-
 // IdentityF32 represents the imported function "identity-f32".
 //
 //	identity-f32: func(arg: f32) -> f32
@@ -347,10 +305,6 @@ func IdentityF32(arg float32) (result float32) {
 	result = (float32)((float32)(result0))
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-f32
-//go:noescape
-func wasmimport_IdentityF32(arg0 float32) (result0 float32)
 
 // IdentityF64 represents the imported function "identity-f64".
 //
@@ -364,10 +318,6 @@ func IdentityF64(arg float64) (result float64) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-f64
-//go:noescape
-func wasmimport_IdentityF64(arg0 float64) (result0 float64)
-
 // IdentityChar represents the imported function "identity-char".
 //
 //	identity-char: func(arg: char) -> char
@@ -380,10 +330,6 @@ func IdentityChar(arg rune) (result rune) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-char
-//go:noescape
-func wasmimport_IdentityChar(arg0 uint32) (result0 uint32)
-
 // IdentityString represents the imported function "identity-string".
 //
 //	identity-string: func(arg: string) -> string
@@ -394,10 +340,6 @@ func IdentityString(arg string) (result string) {
 	wasmimport_IdentityString((*uint8)(arg0), (uint32)(arg1), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-string
-//go:noescape
-func wasmimport_IdentityString(arg0 *uint8, arg1 uint32, result *string)
 
 // IdentityFlags represents the imported function "identity-flags".
 //
@@ -411,10 +353,6 @@ func IdentityFlags(arg Abc) (result Abc) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-flags
-//go:noescape
-func wasmimport_IdentityFlags(arg0 uint32) (result0 uint32)
-
 // IdentityEnum represents the imported function "identity-enum".
 //
 //	identity-enum: func(arg: foobar) -> foobar
@@ -427,10 +365,6 @@ func IdentityEnum(arg Foobar) (result Foobar) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-enum
-//go:noescape
-func wasmimport_IdentityEnum(arg0 uint32) (result0 uint32)
-
 // IdentityVariant represents the imported function "identity-variant".
 //
 //	identity-variant: func(arg: var) -> var
@@ -441,10 +375,6 @@ func IdentityVariant(arg Var) (result Var) {
 	wasmimport_IdentityVariant((uint32)(arg0), (*uint8)(arg1), (uint32)(arg2), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-variant
-//go:noescape
-func wasmimport_IdentityVariant(arg0 uint32, arg1 *uint8, arg2 uint32, result *Var)
 
 // IdentityOptionString represents the imported function "identity-option-string".
 //
@@ -457,10 +387,6 @@ func IdentityOptionString(arg cm.Option[string]) (result cm.Option[string]) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-option-string
-//go:noescape
-func wasmimport_IdentityOptionString(arg0 uint32, arg1 *uint8, arg2 uint32, result *cm.Option[string])
-
 // IdentityResultString represents the imported function "identity-result-string".
 //
 //	identity-result-string: func(arg: result<string>) -> result<string>
@@ -471,10 +397,6 @@ func IdentityResultString(arg cm.Result[string, string, struct{}]) (result cm.Re
 	wasmimport_IdentityResultString((uint32)(arg0), (*uint8)(arg1), (uint32)(arg2), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-result-string
-//go:noescape
-func wasmimport_IdentityResultString(arg0 uint32, arg1 *uint8, arg2 uint32, result *cm.Result[string, string, struct{}])
 
 // IdentityRecordPrimitives represents the imported function "identity-record-primitives".
 //
@@ -487,10 +409,6 @@ func IdentityRecordPrimitives(arg Primitives) (result Primitives) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-record-primitives
-//go:noescape
-func wasmimport_IdentityRecordPrimitives(arg0 uint32, arg1 uint32, arg2 uint32, arg3 uint64, arg4 uint32, arg5 uint32, arg6 uint32, arg7 uint64, arg8 float32, arg9 float64, arg10 uint32, arg11 uint32, arg12 *uint8, arg13 uint32, result *Primitives)
-
 // IdentityRecordRec represents the imported function "identity-record-rec".
 //
 //	identity-record-rec: func(arg: rec) -> rec
@@ -501,10 +419,6 @@ func IdentityRecordRec(arg Rec) (result Rec) {
 	wasmimport_IdentityRecordRec((*uint8)(arg0), (uint32)(arg1), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-record-rec
-//go:noescape
-func wasmimport_IdentityRecordRec(arg0 *uint8, arg1 uint32, result *Rec)
 
 // IdentityTuple represents the imported function "identity-tuple".
 //
@@ -519,10 +433,6 @@ func IdentityTuple(arg cm.Tuple13[uint8, uint16, uint32, uint64, int8, int16, in
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-tuple
-//go:noescape
-func wasmimport_IdentityTuple(arg0 uint32, arg1 uint32, arg2 uint32, arg3 uint64, arg4 uint32, arg5 uint32, arg6 uint32, arg7 uint64, arg8 float32, arg9 float64, arg10 uint32, arg11 uint32, arg12 *uint8, arg13 uint32, result *cm.Tuple13[uint8, uint16, uint32, uint64, int8, int16, int32, int64, float32, float64, bool, rune, string])
-
 // IdentityListBool represents the imported function "identity-list-bool".
 //
 //	identity-list-bool: func(arg: list<bool>) -> list<bool>
@@ -533,10 +443,6 @@ func IdentityListBool(arg cm.List[bool]) (result cm.List[bool]) {
 	wasmimport_IdentityListBool((*bool)(arg0), (uint32)(arg1), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-list-bool
-//go:noescape
-func wasmimport_IdentityListBool(arg0 *bool, arg1 uint32, result *cm.List[bool])
 
 // IdentityListU16 represents the imported function "identity-list-u16".
 //
@@ -549,10 +455,6 @@ func IdentityListU16(arg cm.List[uint16]) (result cm.List[uint16]) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-list-u16
-//go:noescape
-func wasmimport_IdentityListU16(arg0 *uint16, arg1 uint32, result *cm.List[uint16])
-
 // IdentityListString represents the imported function "identity-list-string".
 //
 //	identity-list-string: func(arg: list<string>) -> list<string>
@@ -563,10 +465,6 @@ func IdentityListString(arg cm.List[string]) (result cm.List[string]) {
 	wasmimport_IdentityListString((*string)(arg0), (uint32)(arg1), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-list-string
-//go:noescape
-func wasmimport_IdentityListString(arg0 *string, arg1 uint32, result *cm.List[string])
 
 // IdentityListEnum represents the imported function "identity-list-enum".
 //
@@ -579,10 +477,6 @@ func IdentityListEnum(arg cm.List[Foobar]) (result cm.List[Foobar]) {
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-list-enum
-//go:noescape
-func wasmimport_IdentityListEnum(arg0 *Foobar, arg1 uint32, result *cm.List[Foobar])
-
 // IdentityListFlags represents the imported function "identity-list-flags".
 //
 //	identity-list-flags: func(arg: list<abc>) -> list<abc>
@@ -593,10 +487,6 @@ func IdentityListFlags(arg cm.List[Abc]) (result cm.List[Abc]) {
 	wasmimport_IdentityListFlags((*Abc)(arg0), (uint32)(arg1), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-list-flags
-//go:noescape
-func wasmimport_IdentityListFlags(arg0 *Abc, arg1 uint32, result *cm.List[Abc])
 
 // IdentityListRecordPrimitives represents the imported function "identity-list-record-primitives".
 //
@@ -609,10 +499,6 @@ func IdentityListRecordPrimitives(arg cm.List[Primitives]) (result cm.List[Primi
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-list-record-primitives
-//go:noescape
-func wasmimport_IdentityListRecordPrimitives(arg0 *Primitives, arg1 uint32, result *cm.List[Primitives])
-
 // IdentityListVariant represents the imported function "identity-list-variant".
 //
 //	identity-list-variant: func(arg: list<var>) -> list<var>
@@ -623,10 +509,6 @@ func IdentityListVariant(arg cm.List[Var]) (result cm.List[Var]) {
 	wasmimport_IdentityListVariant((*Var)(arg0), (uint32)(arg1), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-list-variant
-//go:noescape
-func wasmimport_IdentityListVariant(arg0 *Var, arg1 uint32, result *cm.List[Var])
 
 // IdentityListOptionString represents the imported function "identity-list-option-string".
 //
@@ -639,10 +521,6 @@ func IdentityListOptionString(arg cm.List[cm.Option[string]]) (result cm.List[cm
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-list-option-string
-//go:noescape
-func wasmimport_IdentityListOptionString(arg0 *cm.Option[string], arg1 uint32, result *cm.List[cm.Option[string]])
-
 // IdentityListResultString represents the imported function "identity-list-result-string".
 //
 //	identity-list-result-string: func(arg: list<result<string>>) -> list<result<string>>
@@ -654,10 +532,6 @@ func IdentityListResultString(arg cm.List[cm.Result[string, string, struct{}]]) 
 	return
 }
 
-//go:wasmimport wadge-test:sync/sync identity-list-result-string
-//go:noescape
-func wasmimport_IdentityListResultString(arg0 *cm.Result[string, string, struct{}], arg1 uint32, result *cm.List[cm.Result[string, string, struct{}]])
-
 // IdentityListListString represents the imported function "identity-list-list-string".
 //
 //	identity-list-list-string: func(arg: list<list<string>>) -> list<list<string>>
@@ -668,10 +542,6 @@ func IdentityListListString(arg cm.List[cm.List[string]]) (result cm.List[cm.Lis
 	wasmimport_IdentityListListString((*cm.List[string])(arg0), (uint32)(arg1), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-list-list-string
-//go:noescape
-func wasmimport_IdentityListListString(arg0 *cm.List[string], arg1 uint32, result *cm.List[cm.List[string]])
 
 // IdentityPrimitives represents the imported function "identity-primitives".
 //
@@ -697,7 +567,3 @@ func IdentityPrimitives(a uint8, b uint16, c uint32, d uint64, e int8, f int16, 
 	wasmimport_IdentityPrimitives((uint32)(a0), (uint32)(b0), (uint32)(c0), (uint64)(d0), (uint32)(e0), (uint32)(f0), (uint32)(g0), (uint64)(h0), (float32)(i0), (float64)(j0), (uint32)(k0), (uint32)(l0), (*uint8)(m0), (uint32)(m1), &result)
 	return
 }
-
-//go:wasmimport wadge-test:sync/sync identity-primitives
-//go:noescape
-func wasmimport_IdentityPrimitives(a0 uint32, b0 uint32, c0 uint32, d0 uint64, e0 uint32, f0 uint32, g0 uint32, h0 uint64, i0 float32, j0 float64, k0 uint32, l0 uint32, m0 *uint8, m1 uint32, result *cm.Tuple13[uint8, uint16, uint32, uint64, int8, int16, int32, int64, float32, float64, bool, rune, string])

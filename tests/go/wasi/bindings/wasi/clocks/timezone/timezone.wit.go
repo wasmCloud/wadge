@@ -8,6 +8,11 @@ import (
 	wallclock "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/clocks/wall-clock"
 )
 
+// DateTime represents the type alias "wasi:clocks/timezone@0.2.1#datetime".
+//
+// See [wallclock.DateTime] for more information.
+type DateTime = wallclock.DateTime
+
 // TimezoneDisplay represents the record "wasi:clocks/timezone@0.2.1#timezone-display".
 //
 // Information useful for displaying the timezone of a specific `datetime`.
@@ -63,15 +68,11 @@ type TimezoneDisplay struct {
 //	display: func(when: datetime) -> timezone-display
 //
 //go:nosplit
-func Display(when wallclock.DateTime) (result TimezoneDisplay) {
+func Display(when DateTime) (result TimezoneDisplay) {
 	when0, when1 := lower_DateTime(when)
 	wasmimport_Display((uint64)(when0), (uint32)(when1), &result)
 	return
 }
-
-//go:wasmimport wasi:clocks/timezone@0.2.1 display
-//go:noescape
-func wasmimport_Display(when0 uint64, when1 uint32, result *TimezoneDisplay)
 
 // UtcOffset represents the imported function "utc-offset".
 //
@@ -80,13 +81,9 @@ func wasmimport_Display(when0 uint64, when1 uint32, result *TimezoneDisplay)
 //	utc-offset: func(when: datetime) -> s32
 //
 //go:nosplit
-func UtcOffset(when wallclock.DateTime) (result int32) {
+func UtcOffset(when DateTime) (result int32) {
 	when0, when1 := lower_DateTime(when)
 	result0 := wasmimport_UtcOffset((uint64)(when0), (uint32)(when1))
 	result = (int32)((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:clocks/timezone@0.2.1 utc-offset
-//go:noescape
-func wasmimport_UtcOffset(when0 uint64, when1 uint32) (result0 uint32)

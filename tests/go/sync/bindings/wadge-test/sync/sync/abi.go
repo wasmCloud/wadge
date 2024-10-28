@@ -4,13 +4,7 @@ package sync
 
 import (
 	"github.com/bytecodealliance/wasm-tools-go/cm"
-	"unsafe"
 )
-
-// RecShape is used for storage in variant or result types.
-type RecShape struct {
-	shape [unsafe.Sizeof(Rec{})]byte
-}
 
 func lower_RecNested(v RecNested) (f0 *uint8, f1 uint32) {
 	f0, f1 = cm.LowerString(v.Foo)

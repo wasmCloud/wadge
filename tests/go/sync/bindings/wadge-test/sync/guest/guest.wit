@@ -1,0 +1,65 @@
+package wadge-test:sync;
+
+interface sync {
+	flags abc { a, b, c }
+	record rec-nested { foo: string }
+	record rec { nested: rec-nested }
+	variant var { var(rec), empty }
+	enum foobar { foo, bar }
+	record primitives {
+		a: u8,
+		b: u16,
+		c: u32,
+		d: u64,
+		e: s8,
+		f: s16,
+		g: s32,
+		h: s64,
+		i: f32,
+		j: f64,
+		k: bool,
+		l: char,
+		m: string,
+	}
+	resource res {
+		constructor();
+		foo: func() -> string;
+		make-list: static func() -> list<res>;
+	}
+	identity-bool: func(arg: bool) -> bool;
+	identity-s8: func(arg: s8) -> s8;
+	identity-u8: func(arg: u8) -> u8;
+	identity-s16: func(arg: s16) -> s16;
+	identity-u16: func(arg: u16) -> u16;
+	identity-s32: func(arg: s32) -> s32;
+	identity-u32: func(arg: u32) -> u32;
+	identity-s64: func(arg: s64) -> s64;
+	identity-u64: func(arg: u64) -> u64;
+	identity-f32: func(arg: f32) -> f32;
+	identity-f64: func(arg: f64) -> f64;
+	identity-char: func(arg: char) -> char;
+	identity-string: func(arg: string) -> string;
+	identity-flags: func(arg: abc) -> abc;
+	identity-enum: func(arg: foobar) -> foobar;
+	identity-variant: func(arg: var) -> var;
+	identity-option-string: func(arg: option<string>) -> option<string>;
+	identity-result-string: func(arg: result<string>) -> result<string>;
+	identity-record-primitives: func(arg: primitives) -> primitives;
+	identity-record-rec: func(arg: rec) -> rec;
+	identity-tuple: func(arg: tuple<u8, u16, u32, u64, s8, s16, s32, s64, f32, f64, bool, char, string>) -> tuple<u8, u16, u32, u64, s8, s16, s32, s64, f32, f64, bool, char, string>;
+	identity-list-bool: func(arg: list<bool>) -> list<bool>;
+	identity-list-u16: func(arg: list<u16>) -> list<u16>;
+	identity-list-string: func(arg: list<string>) -> list<string>;
+	identity-list-enum: func(arg: list<foobar>) -> list<foobar>;
+	identity-list-flags: func(arg: list<abc>) -> list<abc>;
+	identity-list-record-primitives: func(arg: list<primitives>) -> list<primitives>;
+	identity-list-variant: func(arg: list<var>) -> list<var>;
+	identity-list-option-string: func(arg: list<option<string>>) -> list<option<string>>;
+	identity-list-result-string: func(arg: list<result<string>>) -> list<result<string>>;
+	identity-list-list-string: func(arg: list<list<string>>) -> list<list<string>>;
+	identity-primitives: func(a: u8, b: u16, c: u32, d: u64, e: s8, f: s16, g: s32, h: s64, i: f32, j: f64, k: bool, l: char, m: string) -> tuple<u8, u16, u32, u64, s8, s16, s32, s64, f32, f64, bool, char, string>;
+}
+
+world guest {
+	import sync;
+}
