@@ -8,32 +8,44 @@ import (
 	"go.wasmcloud.dev/wadge/bindings/wasi/http/types"
 )
 
+// ResponseOutparam represents the imported type alias "wasiext:http/ext@0.1.0#response-outparam".
+//
+// See [types.ResponseOutparam] for more information.
+type ResponseOutparam = types.ResponseOutparam
+
+// FutureIncomingResponse represents the imported type alias "wasiext:http/ext@0.1.0#future-incoming-response".
+//
+// See [types.FutureIncomingResponse] for more information.
+type FutureIncomingResponse = types.FutureIncomingResponse
+
+// IncomingRequest represents the imported type alias "wasiext:http/ext@0.1.0#incoming-request".
+//
+// See [types.IncomingRequest] for more information.
+type IncomingRequest = types.IncomingRequest
+
+// OutgoingRequest represents the imported type alias "wasiext:http/ext@0.1.0#outgoing-request".
+//
+// See [types.OutgoingRequest] for more information.
+type OutgoingRequest = types.OutgoingRequest
+
 // NewResponseOutparam represents the imported function "new-response-outparam".
 //
 //	new-response-outparam: func() -> tuple<response-outparam, future-incoming-response>
 //
 //go:nosplit
-func NewResponseOutparam() (result cm.Tuple[types.ResponseOutparam, types.FutureIncomingResponse]) {
+func NewResponseOutparam() (result cm.Tuple[ResponseOutparam, FutureIncomingResponse]) {
 	wasmimport_NewResponseOutparam(&result)
 	return
 }
-
-//go:wasmimport wasiext:http/ext@0.1.0 new-response-outparam
-//go:noescape
-func wasmimport_NewResponseOutparam(result *cm.Tuple[types.ResponseOutparam, types.FutureIncomingResponse])
 
 // NewIncomingRequest represents the imported function "new-incoming-request".
 //
 //	new-incoming-request: func(req: outgoing-request) -> incoming-request
 //
 //go:nosplit
-func NewIncomingRequest(req types.OutgoingRequest) (result types.IncomingRequest) {
+func NewIncomingRequest(req OutgoingRequest) (result IncomingRequest) {
 	req0 := cm.Reinterpret[uint32](req)
 	result0 := wasmimport_NewIncomingRequest((uint32)(req0))
-	result = cm.Reinterpret[types.IncomingRequest]((uint32)(result0))
+	result = cm.Reinterpret[IncomingRequest]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasiext:http/ext@0.1.0 new-incoming-request
-//go:noescape
-func wasmimport_NewIncomingRequest(req0 uint32) (result0 uint32)

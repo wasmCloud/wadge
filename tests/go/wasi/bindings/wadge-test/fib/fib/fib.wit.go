@@ -14,7 +14,3 @@ func Fib(n uint32) (result uint64) {
 	result = (uint64)((uint64)(result0))
 	return
 }
-
-//go:wasmimport wadge-test:fib/fib fib
-//go:noescape
-func wasmimport_Fib(n0 uint32) (result0 uint64)

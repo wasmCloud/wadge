@@ -61,7 +61,7 @@ type wasmImport struct {
 }
 
 func importType(fs *token.FileSet, imports map[string]*ast.Ident, expr *ast.Expr, ty types.Type) error {
-	switch ty := ty.(type) {
+	switch ty := types.Unalias(ty).(type) {
 	case *types.Basic:
 		return nil
 	case *types.Pointer:

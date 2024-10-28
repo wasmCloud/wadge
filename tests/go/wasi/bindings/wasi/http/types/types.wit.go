@@ -15,6 +15,31 @@ import (
 	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams"
 )
 
+// Duration represents the type alias "wasi:http/types@0.2.1#duration".
+//
+// See [monotonicclock.Duration] for more information.
+type Duration = monotonicclock.Duration
+
+// InputStream represents the imported type alias "wasi:http/types@0.2.1#input-stream".
+//
+// See [streams.InputStream] for more information.
+type InputStream = streams.InputStream
+
+// OutputStream represents the imported type alias "wasi:http/types@0.2.1#output-stream".
+//
+// See [streams.OutputStream] for more information.
+type OutputStream = streams.OutputStream
+
+// IOError represents the imported type alias "wasi:http/types@0.2.1#io-error".
+//
+// See [ioerror.Error] for more information.
+type IOError = ioerror.Error
+
+// Pollable represents the imported type alias "wasi:http/types@0.2.1#pollable".
+//
+// See [poll.Pollable] for more information.
+type Pollable = poll.Pollable
+
 // Method represents the variant "wasi:http/types@0.2.1#method".
 //
 // This type corresponds to HTTP standard Methods.
@@ -142,6 +167,24 @@ func (self *Method) Other() *string {
 	return cm.Case[string](self, 9)
 }
 
+var stringsMethod = [10]string{
+	"get",
+	"head",
+	"post",
+	"put",
+	"delete",
+	"connect",
+	"options",
+	"trace",
+	"patch",
+	"other",
+}
+
+// String implements [fmt.Stringer], returning the variant case name of v.
+func (v Method) String() string {
+	return stringsMethod[v.Tag()]
+}
+
 // Scheme represents the variant "wasi:http/types@0.2.1#scheme".
 //
 // This type corresponds to HTTP standard Related Schemes.
@@ -183,6 +226,17 @@ func SchemeOther(data string) Scheme {
 // Other returns a non-nil *[string] if [Scheme] represents the variant case "other".
 func (self *Scheme) Other() *string {
 	return cm.Case[string](self, 2)
+}
+
+var stringsScheme = [3]string{
+	"HTTP",
+	"HTTPS",
+	"other",
+}
+
+// String implements [fmt.Stringer], returning the variant case name of v.
+func (v Scheme) String() string {
+	return stringsScheme[v.Tag()]
 }
 
 // DNSErrorPayload represents the record "wasi:http/types@0.2.1#DNS-error-payload".
@@ -695,6 +749,53 @@ func (self *ErrorCode) InternalError() *cm.Option[string] {
 	return cm.Case[cm.Option[string]](self, 38)
 }
 
+var stringsErrorCode = [39]string{
+	"DNS-timeout",
+	"DNS-error",
+	"destination-not-found",
+	"destination-unavailable",
+	"destination-IP-prohibited",
+	"destination-IP-unroutable",
+	"connection-refused",
+	"connection-terminated",
+	"connection-timeout",
+	"connection-read-timeout",
+	"connection-write-timeout",
+	"connection-limit-reached",
+	"TLS-protocol-error",
+	"TLS-certificate-error",
+	"TLS-alert-received",
+	"HTTP-request-denied",
+	"HTTP-request-length-required",
+	"HTTP-request-body-size",
+	"HTTP-request-method-invalid",
+	"HTTP-request-URI-invalid",
+	"HTTP-request-URI-too-long",
+	"HTTP-request-header-section-size",
+	"HTTP-request-header-size",
+	"HTTP-request-trailer-section-size",
+	"HTTP-request-trailer-size",
+	"HTTP-response-incomplete",
+	"HTTP-response-header-section-size",
+	"HTTP-response-header-size",
+	"HTTP-response-body-size",
+	"HTTP-response-trailer-section-size",
+	"HTTP-response-trailer-size",
+	"HTTP-response-transfer-coding",
+	"HTTP-response-content-coding",
+	"HTTP-response-timeout",
+	"HTTP-upgrade-failed",
+	"HTTP-protocol-error",
+	"loop-detected",
+	"configuration-error",
+	"internal-error",
+}
+
+// String implements [fmt.Stringer], returning the variant case name of v.
+func (v ErrorCode) String() string {
+	return stringsErrorCode[v.Tag()]
+}
+
 // HeaderError represents the variant "wasi:http/types@0.2.1#header-error".
 //
 // This type enumerates the different kinds of errors that may occur when
@@ -776,10 +877,6 @@ func (self Fields) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]fields
-//go:noescape
-func wasmimport_FieldsResourceDrop(self0 uint32)
-
 // NewFields represents the imported constructor for resource "fields".
 //
 // Construct an empty HTTP Fields.
@@ -794,10 +891,6 @@ func NewFields() (result Fields) {
 	result = cm.Reinterpret[Fields]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [constructor]fields
-//go:noescape
-func wasmimport_NewFields() (result0 uint32)
 
 // FieldsFromList represents the imported static function "from-list".
 //
@@ -825,10 +918,6 @@ func FieldsFromList(entries cm.List[cm.Tuple[FieldKey, FieldValue]]) (result cm.
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [static]fields.from-list
-//go:noescape
-func wasmimport_FieldsFromList(entries0 *cm.Tuple[FieldKey, FieldValue], entries1 uint32, result *cm.Result[Fields, Fields, HeaderError])
-
 // Append represents the imported method "append".
 //
 // Append a value for a key. Does not change or delete any existing
@@ -850,10 +939,6 @@ func (self Fields) Append(name FieldKey, value FieldValue) (result cm.Result[Hea
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]fields.append
-//go:noescape
-func wasmimport_FieldsAppend(self0 uint32, name0 *uint8, name1 uint32, value0 *uint8, value1 uint32, result *cm.Result[HeaderError, struct{}, HeaderError])
-
 // Clone represents the imported method "clone".
 //
 // Make a deep copy of the Fields. Equivalent in behavior to calling the
@@ -869,10 +954,6 @@ func (self Fields) Clone() (result Fields) {
 	result = cm.Reinterpret[Fields]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]fields.clone
-//go:noescape
-func wasmimport_FieldsClone(self0 uint32) (result0 uint32)
 
 // Delete represents the imported method "delete".
 //
@@ -894,10 +975,6 @@ func (self Fields) Delete(name FieldKey) (result cm.Result[HeaderError, struct{}
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]fields.delete
-//go:noescape
-func wasmimport_FieldsDelete(self0 uint32, name0 *uint8, name1 uint32, result *cm.Result[HeaderError, struct{}, HeaderError])
-
 // Entries represents the imported method "entries".
 //
 // Retrieve the full set of keys and values in the Fields. Like the
@@ -916,10 +993,6 @@ func (self Fields) Entries() (result cm.List[cm.Tuple[FieldKey, FieldValue]]) {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]fields.entries
-//go:noescape
-func wasmimport_FieldsEntries(self0 uint32, result *cm.List[cm.Tuple[FieldKey, FieldValue]])
-
 // Get represents the imported method "get".
 //
 // Get all of the values corresponding to a key. If the key is not present
@@ -937,10 +1010,6 @@ func (self Fields) Get(name FieldKey) (result cm.List[FieldValue]) {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]fields.get
-//go:noescape
-func wasmimport_FieldsGet(self0 uint32, name0 *uint8, name1 uint32, result *cm.List[FieldValue])
-
 // Has represents the imported method "has".
 //
 // Returns `true` when the key is present in this `fields`. If the key is
@@ -956,10 +1025,6 @@ func (self Fields) Has(name FieldKey) (result bool) {
 	result = cm.U32ToBool((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]fields.has
-//go:noescape
-func wasmimport_FieldsHas(self0 uint32, name0 *uint8, name1 uint32) (result0 uint32)
 
 // Set represents the imported method "set".
 //
@@ -982,9 +1047,15 @@ func (self Fields) Set(name FieldKey, value cm.List[FieldValue]) (result cm.Resu
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]fields.set
-//go:noescape
-func wasmimport_FieldsSet(self0 uint32, name0 *uint8, name1 uint32, value0 *FieldValue, value1 uint32, result *cm.Result[HeaderError, struct{}, HeaderError])
+// Headers represents the imported type alias "wasi:http/types@0.2.1#headers".
+//
+// See [Fields] for more information.
+type Headers = Fields
+
+// Trailers represents the imported type alias "wasi:http/types@0.2.1#trailers".
+//
+// See [Fields] for more information.
+type Trailers = Fields
 
 // IncomingRequest represents the imported resource "wasi:http/types@0.2.1#incoming-request".
 //
@@ -1004,10 +1075,6 @@ func (self IncomingRequest) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]incoming-request
-//go:noescape
-func wasmimport_IncomingRequestResourceDrop(self0 uint32)
-
 // Authority represents the imported method "authority".
 //
 // Returns the authority of the Request's target URI, if present.
@@ -1020,10 +1087,6 @@ func (self IncomingRequest) Authority() (result cm.Option[string]) {
 	wasmimport_IncomingRequestAuthority((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]incoming-request.authority
-//go:noescape
-func wasmimport_IncomingRequestAuthority(self0 uint32, result *cm.Option[string])
 
 // Consume represents the imported method "consume".
 //
@@ -1039,10 +1102,6 @@ func (self IncomingRequest) Consume() (result cm.Result[IncomingBody, IncomingBo
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]incoming-request.consume
-//go:noescape
-func wasmimport_IncomingRequestConsume(self0 uint32, result *cm.Result[IncomingBody, IncomingBody, struct{}])
-
 // Headers represents the imported method "headers".
 //
 // Get the `headers` associated with the request.
@@ -1057,16 +1116,12 @@ func wasmimport_IncomingRequestConsume(self0 uint32, result *cm.Result[IncomingB
 //	headers: func() -> headers
 //
 //go:nosplit
-func (self IncomingRequest) Headers() (result Fields) {
+func (self IncomingRequest) Headers() (result Headers) {
 	self0 := cm.Reinterpret[uint32](self)
 	result0 := wasmimport_IncomingRequestHeaders((uint32)(self0))
-	result = cm.Reinterpret[Fields]((uint32)(result0))
+	result = cm.Reinterpret[Headers]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]incoming-request.headers
-//go:noescape
-func wasmimport_IncomingRequestHeaders(self0 uint32) (result0 uint32)
 
 // Method represents the imported method "method".
 //
@@ -1081,10 +1136,6 @@ func (self IncomingRequest) Method() (result Method) {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]incoming-request.method
-//go:noescape
-func wasmimport_IncomingRequestMethod(self0 uint32, result *Method)
-
 // PathWithQuery represents the imported method "path-with-query".
 //
 // Returns the path with query parameters from the request, as a string.
@@ -1098,10 +1149,6 @@ func (self IncomingRequest) PathWithQuery() (result cm.Option[string]) {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]incoming-request.path-with-query
-//go:noescape
-func wasmimport_IncomingRequestPathWithQuery(self0 uint32, result *cm.Option[string])
-
 // Scheme represents the imported method "scheme".
 //
 // Returns the protocol scheme from the request.
@@ -1114,10 +1161,6 @@ func (self IncomingRequest) Scheme() (result cm.Option[Scheme]) {
 	wasmimport_IncomingRequestScheme((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]incoming-request.scheme
-//go:noescape
-func wasmimport_IncomingRequestScheme(self0 uint32, result *cm.Option[Scheme])
 
 // OutgoingRequest represents the imported resource "wasi:http/types@0.2.1#outgoing-request".
 //
@@ -1137,10 +1180,6 @@ func (self OutgoingRequest) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]outgoing-request
-//go:noescape
-func wasmimport_OutgoingRequestResourceDrop(self0 uint32)
-
 // NewOutgoingRequest represents the imported constructor for resource "outgoing-request".
 //
 // Construct a new `outgoing-request` with a default `method` of `GET`, and
@@ -1157,16 +1196,12 @@ func wasmimport_OutgoingRequestResourceDrop(self0 uint32)
 //	constructor(headers: headers)
 //
 //go:nosplit
-func NewOutgoingRequest(headers Fields) (result OutgoingRequest) {
+func NewOutgoingRequest(headers Headers) (result OutgoingRequest) {
 	headers0 := cm.Reinterpret[uint32](headers)
 	result0 := wasmimport_NewOutgoingRequest((uint32)(headers0))
 	result = cm.Reinterpret[OutgoingRequest]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [constructor]outgoing-request
-//go:noescape
-func wasmimport_NewOutgoingRequest(headers0 uint32) (result0 uint32)
 
 // Authority represents the imported method "authority".
 //
@@ -1182,10 +1217,6 @@ func (self OutgoingRequest) Authority() (result cm.Option[string]) {
 	wasmimport_OutgoingRequestAuthority((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-request.authority
-//go:noescape
-func wasmimport_OutgoingRequestAuthority(self0 uint32, result *cm.Option[string])
 
 // Body represents the imported method "body".
 //
@@ -1205,10 +1236,6 @@ func (self OutgoingRequest) Body() (result cm.Result[OutgoingBody, OutgoingBody,
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-request.body
-//go:noescape
-func wasmimport_OutgoingRequestBody(self0 uint32, result *cm.Result[OutgoingBody, OutgoingBody, struct{}])
-
 // Headers represents the imported method "headers".
 //
 // Get the headers associated with the Request.
@@ -1223,16 +1250,12 @@ func wasmimport_OutgoingRequestBody(self0 uint32, result *cm.Result[OutgoingBody
 //	headers: func() -> headers
 //
 //go:nosplit
-func (self OutgoingRequest) Headers() (result Fields) {
+func (self OutgoingRequest) Headers() (result Headers) {
 	self0 := cm.Reinterpret[uint32](self)
 	result0 := wasmimport_OutgoingRequestHeaders((uint32)(self0))
-	result = cm.Reinterpret[Fields]((uint32)(result0))
+	result = cm.Reinterpret[Headers]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-request.headers
-//go:noescape
-func wasmimport_OutgoingRequestHeaders(self0 uint32) (result0 uint32)
 
 // Method represents the imported method "method".
 //
@@ -1246,10 +1269,6 @@ func (self OutgoingRequest) Method() (result Method) {
 	wasmimport_OutgoingRequestMethod((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-request.method
-//go:noescape
-func wasmimport_OutgoingRequestMethod(self0 uint32, result *Method)
 
 // PathWithQuery represents the imported method "path-with-query".
 //
@@ -1265,10 +1284,6 @@ func (self OutgoingRequest) PathWithQuery() (result cm.Option[string]) {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-request.path-with-query
-//go:noescape
-func wasmimport_OutgoingRequestPathWithQuery(self0 uint32, result *cm.Option[string])
-
 // Scheme represents the imported method "scheme".
 //
 // Get the HTTP Related Scheme for the Request. When `none`, the
@@ -1282,10 +1297,6 @@ func (self OutgoingRequest) Scheme() (result cm.Option[Scheme]) {
 	wasmimport_OutgoingRequestScheme((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-request.scheme
-//go:noescape
-func wasmimport_OutgoingRequestScheme(self0 uint32, result *cm.Option[Scheme])
 
 // SetAuthority represents the imported method "set-authority".
 //
@@ -1305,10 +1316,6 @@ func (self OutgoingRequest) SetAuthority(authority cm.Option[string]) (result cm
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-request.set-authority
-//go:noescape
-func wasmimport_OutgoingRequestSetAuthority(self0 uint32, authority0 uint32, authority1 *uint8, authority2 uint32) (result0 uint32)
-
 // SetMethod represents the imported method "set-method".
 //
 // Set the Method for the Request. Fails if the string present in a
@@ -1324,10 +1331,6 @@ func (self OutgoingRequest) SetMethod(method Method) (result cm.BoolResult) {
 	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-request.set-method
-//go:noescape
-func wasmimport_OutgoingRequestSetMethod(self0 uint32, method0 uint32, method1 *uint8, method2 uint32) (result0 uint32)
 
 // SetPathWithQuery represents the imported method "set-path-with-query".
 //
@@ -1346,10 +1349,6 @@ func (self OutgoingRequest) SetPathWithQuery(pathWithQuery cm.Option[string]) (r
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-request.set-path-with-query
-//go:noescape
-func wasmimport_OutgoingRequestSetPathWithQuery(self0 uint32, pathWithQuery0 uint32, pathWithQuery1 *uint8, pathWithQuery2 uint32) (result0 uint32)
-
 // SetScheme represents the imported method "set-scheme".
 //
 // Set the HTTP Related Scheme for the Request. When `none`, the
@@ -1366,10 +1365,6 @@ func (self OutgoingRequest) SetScheme(scheme cm.Option[Scheme]) (result cm.BoolR
 	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-request.set-scheme
-//go:noescape
-func wasmimport_OutgoingRequestSetScheme(self0 uint32, scheme0 uint32, scheme1 uint32, scheme2 *uint8, scheme3 uint32) (result0 uint32)
 
 // RequestOptions represents the imported resource "wasi:http/types@0.2.1#request-options".
 //
@@ -1394,10 +1389,6 @@ func (self RequestOptions) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]request-options
-//go:noescape
-func wasmimport_RequestOptionsResourceDrop(self0 uint32)
-
 // NewRequestOptions represents the imported constructor for resource "request-options".
 //
 // Construct a default `request-options` value.
@@ -1411,10 +1402,6 @@ func NewRequestOptions() (result RequestOptions) {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [constructor]request-options
-//go:noescape
-func wasmimport_NewRequestOptions() (result0 uint32)
-
 // BetweenBytesTimeout represents the imported method "between-bytes-timeout".
 //
 // The timeout for receiving subsequent chunks of bytes in the Response
@@ -1423,15 +1410,11 @@ func wasmimport_NewRequestOptions() (result0 uint32)
 //	between-bytes-timeout: func() -> option<duration>
 //
 //go:nosplit
-func (self RequestOptions) BetweenBytesTimeout() (result cm.Option[monotonicclock.Duration]) {
+func (self RequestOptions) BetweenBytesTimeout() (result cm.Option[Duration]) {
 	self0 := cm.Reinterpret[uint32](self)
 	wasmimport_RequestOptionsBetweenBytesTimeout((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]request-options.between-bytes-timeout
-//go:noescape
-func wasmimport_RequestOptionsBetweenBytesTimeout(self0 uint32, result *cm.Option[monotonicclock.Duration])
 
 // ConnectTimeout represents the imported method "connect-timeout".
 //
@@ -1440,15 +1423,11 @@ func wasmimport_RequestOptionsBetweenBytesTimeout(self0 uint32, result *cm.Optio
 //	connect-timeout: func() -> option<duration>
 //
 //go:nosplit
-func (self RequestOptions) ConnectTimeout() (result cm.Option[monotonicclock.Duration]) {
+func (self RequestOptions) ConnectTimeout() (result cm.Option[Duration]) {
 	self0 := cm.Reinterpret[uint32](self)
 	wasmimport_RequestOptionsConnectTimeout((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]request-options.connect-timeout
-//go:noescape
-func wasmimport_RequestOptionsConnectTimeout(self0 uint32, result *cm.Option[monotonicclock.Duration])
 
 // FirstByteTimeout represents the imported method "first-byte-timeout".
 //
@@ -1457,15 +1436,11 @@ func wasmimport_RequestOptionsConnectTimeout(self0 uint32, result *cm.Option[mon
 //	first-byte-timeout: func() -> option<duration>
 //
 //go:nosplit
-func (self RequestOptions) FirstByteTimeout() (result cm.Option[monotonicclock.Duration]) {
+func (self RequestOptions) FirstByteTimeout() (result cm.Option[Duration]) {
 	self0 := cm.Reinterpret[uint32](self)
 	wasmimport_RequestOptionsFirstByteTimeout((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]request-options.first-byte-timeout
-//go:noescape
-func wasmimport_RequestOptionsFirstByteTimeout(self0 uint32, result *cm.Option[monotonicclock.Duration])
 
 // SetBetweenBytesTimeout represents the imported method "set-between-bytes-timeout".
 //
@@ -1476,17 +1451,13 @@ func wasmimport_RequestOptionsFirstByteTimeout(self0 uint32, result *cm.Option[m
 //	set-between-bytes-timeout: func(duration: option<duration>) -> result
 //
 //go:nosplit
-func (self RequestOptions) SetBetweenBytesTimeout(duration cm.Option[monotonicclock.Duration]) (result cm.BoolResult) {
+func (self RequestOptions) SetBetweenBytesTimeout(duration cm.Option[Duration]) (result cm.BoolResult) {
 	self0 := cm.Reinterpret[uint32](self)
 	duration0, duration1 := lower_OptionDuration(duration)
 	result0 := wasmimport_RequestOptionsSetBetweenBytesTimeout((uint32)(self0), (uint32)(duration0), (uint64)(duration1))
 	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]request-options.set-between-bytes-timeout
-//go:noescape
-func wasmimport_RequestOptionsSetBetweenBytesTimeout(self0 uint32, duration0 uint32, duration1 uint64) (result0 uint32)
 
 // SetConnectTimeout represents the imported method "set-connect-timeout".
 //
@@ -1496,17 +1467,13 @@ func wasmimport_RequestOptionsSetBetweenBytesTimeout(self0 uint32, duration0 uin
 //	set-connect-timeout: func(duration: option<duration>) -> result
 //
 //go:nosplit
-func (self RequestOptions) SetConnectTimeout(duration cm.Option[monotonicclock.Duration]) (result cm.BoolResult) {
+func (self RequestOptions) SetConnectTimeout(duration cm.Option[Duration]) (result cm.BoolResult) {
 	self0 := cm.Reinterpret[uint32](self)
 	duration0, duration1 := lower_OptionDuration(duration)
 	result0 := wasmimport_RequestOptionsSetConnectTimeout((uint32)(self0), (uint32)(duration0), (uint64)(duration1))
 	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]request-options.set-connect-timeout
-//go:noescape
-func wasmimport_RequestOptionsSetConnectTimeout(self0 uint32, duration0 uint32, duration1 uint64) (result0 uint32)
 
 // SetFirstByteTimeout represents the imported method "set-first-byte-timeout".
 //
@@ -1516,17 +1483,13 @@ func wasmimport_RequestOptionsSetConnectTimeout(self0 uint32, duration0 uint32, 
 //	set-first-byte-timeout: func(duration: option<duration>) -> result
 //
 //go:nosplit
-func (self RequestOptions) SetFirstByteTimeout(duration cm.Option[monotonicclock.Duration]) (result cm.BoolResult) {
+func (self RequestOptions) SetFirstByteTimeout(duration cm.Option[Duration]) (result cm.BoolResult) {
 	self0 := cm.Reinterpret[uint32](self)
 	duration0, duration1 := lower_OptionDuration(duration)
 	result0 := wasmimport_RequestOptionsSetFirstByteTimeout((uint32)(self0), (uint32)(duration0), (uint64)(duration1))
 	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]request-options.set-first-byte-timeout
-//go:noescape
-func wasmimport_RequestOptionsSetFirstByteTimeout(self0 uint32, duration0 uint32, duration1 uint64) (result0 uint32)
 
 // ResponseOutparam represents the imported resource "wasi:http/types@0.2.1#response-outparam".
 //
@@ -1550,10 +1513,6 @@ func (self ResponseOutparam) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]response-outparam
-//go:noescape
-func wasmimport_ResponseOutparamResourceDrop(self0 uint32)
-
 // ResponseOutparamSet represents the imported static function "set".
 //
 // Set the value of the `response-outparam` to either send a response,
@@ -1576,10 +1535,6 @@ func ResponseOutparamSet(param ResponseOutparam, response cm.Result[ErrorCodeSha
 	wasmimport_ResponseOutparamSet((uint32)(param0), (uint32)(response0), (uint32)(response1), (uint32)(response2), (uint64)(response3), (uint32)(response4), (uint32)(response5), (uint32)(response6), (uint32)(response7))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [static]response-outparam.set
-//go:noescape
-func wasmimport_ResponseOutparamSet(param0 uint32, response0 uint32, response1 uint32, response2 uint32, response3 uint64, response4 uint32, response5 uint32, response6 uint32, response7 uint32)
 
 // StatusCode represents the u16 "wasi:http/types@0.2.1#status-code".
 //
@@ -1606,10 +1561,6 @@ func (self IncomingResponse) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]incoming-response
-//go:noescape
-func wasmimport_IncomingResponseResourceDrop(self0 uint32)
-
 // Consume represents the imported method "consume".
 //
 // Returns the incoming body. May be called at most once. Returns error
@@ -1624,10 +1575,6 @@ func (self IncomingResponse) Consume() (result cm.Result[IncomingBody, IncomingB
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]incoming-response.consume
-//go:noescape
-func wasmimport_IncomingResponseConsume(self0 uint32, result *cm.Result[IncomingBody, IncomingBody, struct{}])
-
 // Headers represents the imported method "headers".
 //
 // Returns the headers from the incoming response.
@@ -1641,16 +1588,12 @@ func wasmimport_IncomingResponseConsume(self0 uint32, result *cm.Result[Incoming
 //	headers: func() -> headers
 //
 //go:nosplit
-func (self IncomingResponse) Headers() (result Fields) {
+func (self IncomingResponse) Headers() (result Headers) {
 	self0 := cm.Reinterpret[uint32](self)
 	result0 := wasmimport_IncomingResponseHeaders((uint32)(self0))
-	result = cm.Reinterpret[Fields]((uint32)(result0))
+	result = cm.Reinterpret[Headers]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]incoming-response.headers
-//go:noescape
-func wasmimport_IncomingResponseHeaders(self0 uint32) (result0 uint32)
 
 // Status represents the imported method "status".
 //
@@ -1665,10 +1608,6 @@ func (self IncomingResponse) Status() (result StatusCode) {
 	result = (StatusCode)((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]incoming-response.status
-//go:noescape
-func wasmimport_IncomingResponseStatus(self0 uint32) (result0 uint32)
 
 // IncomingBody represents the imported resource "wasi:http/types@0.2.1#incoming-body".
 //
@@ -1695,10 +1634,6 @@ func (self IncomingBody) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]incoming-body
-//go:noescape
-func wasmimport_IncomingBodyResourceDrop(self0 uint32)
-
 // IncomingBodyFinish represents the imported static function "finish".
 //
 // Takes ownership of `incoming-body`, and returns a `future-trailers`.
@@ -1713,10 +1648,6 @@ func IncomingBodyFinish(this IncomingBody) (result FutureTrailers) {
 	result = cm.Reinterpret[FutureTrailers]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [static]incoming-body.finish
-//go:noescape
-func wasmimport_IncomingBodyFinish(this0 uint32) (result0 uint32)
 
 // Stream represents the imported method "stream".
 //
@@ -1739,15 +1670,11 @@ func wasmimport_IncomingBodyFinish(this0 uint32) (result0 uint32)
 //	%stream: func() -> result<input-stream>
 //
 //go:nosplit
-func (self IncomingBody) Stream() (result cm.Result[streams.InputStream, streams.InputStream, struct{}]) {
+func (self IncomingBody) Stream() (result cm.Result[InputStream, InputStream, struct{}]) {
 	self0 := cm.Reinterpret[uint32](self)
 	wasmimport_IncomingBodyStream((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]incoming-body.stream
-//go:noescape
-func wasmimport_IncomingBodyStream(self0 uint32, result *cm.Result[streams.InputStream, streams.InputStream, struct{}])
 
 // FutureTrailers represents the imported resource "wasi:http/types@0.2.1#future-trailers".
 //
@@ -1770,10 +1697,6 @@ func (self FutureTrailers) ResourceDrop() {
 	wasmimport_FutureTrailersResourceDrop((uint32)(self0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]future-trailers
-//go:noescape
-func wasmimport_FutureTrailersResourceDrop(self0 uint32)
 
 // Get represents the imported method "get".
 //
@@ -1800,15 +1723,11 @@ func wasmimport_FutureTrailersResourceDrop(self0 uint32)
 //	get: func() -> option<result<result<option<trailers>, error-code>>>
 //
 //go:nosplit
-func (self FutureTrailers) Get() (result cm.Option[cm.Result[cm.Result[ErrorCodeShape, cm.Option[Fields], ErrorCode], cm.Result[ErrorCodeShape, cm.Option[Fields], ErrorCode], struct{}]]) {
+func (self FutureTrailers) Get() (result cm.Option[cm.Result[cm.Result[ErrorCodeShape, cm.Option[Trailers], ErrorCode], cm.Result[ErrorCodeShape, cm.Option[Trailers], ErrorCode], struct{}]]) {
 	self0 := cm.Reinterpret[uint32](self)
 	wasmimport_FutureTrailersGet((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]future-trailers.get
-//go:noescape
-func wasmimport_FutureTrailersGet(self0 uint32, result *cm.Option[cm.Result[cm.Result[ErrorCodeShape, cm.Option[Fields], ErrorCode], cm.Result[ErrorCodeShape, cm.Option[Fields], ErrorCode], struct{}]])
 
 // Subscribe represents the imported method "subscribe".
 //
@@ -1819,16 +1738,12 @@ func wasmimport_FutureTrailersGet(self0 uint32, result *cm.Option[cm.Result[cm.R
 //	subscribe: func() -> pollable
 //
 //go:nosplit
-func (self FutureTrailers) Subscribe() (result poll.Pollable) {
+func (self FutureTrailers) Subscribe() (result Pollable) {
 	self0 := cm.Reinterpret[uint32](self)
 	result0 := wasmimport_FutureTrailersSubscribe((uint32)(self0))
-	result = cm.Reinterpret[poll.Pollable]((uint32)(result0))
+	result = cm.Reinterpret[Pollable]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]future-trailers.subscribe
-//go:noescape
-func wasmimport_FutureTrailersSubscribe(self0 uint32) (result0 uint32)
 
 // OutgoingResponse represents the imported resource "wasi:http/types@0.2.1#outgoing-response".
 //
@@ -1848,10 +1763,6 @@ func (self OutgoingResponse) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]outgoing-response
-//go:noescape
-func wasmimport_OutgoingResponseResourceDrop(self0 uint32)
-
 // NewOutgoingResponse represents the imported constructor for resource "outgoing-response".
 //
 // Construct an `outgoing-response`, with a default `status-code` of `200`.
@@ -1863,16 +1774,12 @@ func wasmimport_OutgoingResponseResourceDrop(self0 uint32)
 //	constructor(headers: headers)
 //
 //go:nosplit
-func NewOutgoingResponse(headers Fields) (result OutgoingResponse) {
+func NewOutgoingResponse(headers Headers) (result OutgoingResponse) {
 	headers0 := cm.Reinterpret[uint32](headers)
 	result0 := wasmimport_NewOutgoingResponse((uint32)(headers0))
 	result = cm.Reinterpret[OutgoingResponse]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [constructor]outgoing-response
-//go:noescape
-func wasmimport_NewOutgoingResponse(headers0 uint32) (result0 uint32)
 
 // Body represents the imported method "body".
 //
@@ -1891,10 +1798,6 @@ func (self OutgoingResponse) Body() (result cm.Result[OutgoingBody, OutgoingBody
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-response.body
-//go:noescape
-func wasmimport_OutgoingResponseBody(self0 uint32, result *cm.Result[OutgoingBody, OutgoingBody, struct{}])
-
 // Headers represents the imported method "headers".
 //
 // Get the headers associated with the Request.
@@ -1909,16 +1812,12 @@ func wasmimport_OutgoingResponseBody(self0 uint32, result *cm.Result[OutgoingBod
 //	headers: func() -> headers
 //
 //go:nosplit
-func (self OutgoingResponse) Headers() (result Fields) {
+func (self OutgoingResponse) Headers() (result Headers) {
 	self0 := cm.Reinterpret[uint32](self)
 	result0 := wasmimport_OutgoingResponseHeaders((uint32)(self0))
-	result = cm.Reinterpret[Fields]((uint32)(result0))
+	result = cm.Reinterpret[Headers]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-response.headers
-//go:noescape
-func wasmimport_OutgoingResponseHeaders(self0 uint32) (result0 uint32)
 
 // SetStatusCode represents the imported method "set-status-code".
 //
@@ -1936,10 +1835,6 @@ func (self OutgoingResponse) SetStatusCode(statusCode StatusCode) (result cm.Boo
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-response.set-status-code
-//go:noescape
-func wasmimport_OutgoingResponseSetStatusCode(self0 uint32, statusCode0 uint32) (result0 uint32)
-
 // StatusCode represents the imported method "status-code".
 //
 // Get the HTTP Status Code for the Response.
@@ -1953,10 +1848,6 @@ func (self OutgoingResponse) StatusCode() (result StatusCode) {
 	result = (StatusCode)((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-response.status-code
-//go:noescape
-func wasmimport_OutgoingResponseStatusCode(self0 uint32) (result0 uint32)
 
 // OutgoingBody represents the imported resource "wasi:http/types@0.2.1#outgoing-body".
 //
@@ -1991,10 +1882,6 @@ func (self OutgoingBody) ResourceDrop() {
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]outgoing-body
-//go:noescape
-func wasmimport_OutgoingBodyResourceDrop(self0 uint32)
-
 // OutgoingBodyFinish represents the imported static function "finish".
 //
 // Finalize an outgoing body, optionally providing trailers. This must be
@@ -2011,16 +1898,12 @@ func wasmimport_OutgoingBodyResourceDrop(self0 uint32)
 //	error-code>
 //
 //go:nosplit
-func OutgoingBodyFinish(this OutgoingBody, trailers cm.Option[Fields]) (result cm.Result[ErrorCode, struct{}, ErrorCode]) {
+func OutgoingBodyFinish(this OutgoingBody, trailers cm.Option[Trailers]) (result cm.Result[ErrorCode, struct{}, ErrorCode]) {
 	this0 := cm.Reinterpret[uint32](this)
 	trailers0, trailers1 := lower_OptionTrailers(trailers)
 	wasmimport_OutgoingBodyFinish((uint32)(this0), (uint32)(trailers0), (uint32)(trailers1), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [static]outgoing-body.finish
-//go:noescape
-func wasmimport_OutgoingBodyFinish(this0 uint32, trailers0 uint32, trailers1 uint32, result *cm.Result[ErrorCode, struct{}, ErrorCode])
 
 // Write represents the imported method "write".
 //
@@ -2037,15 +1920,11 @@ func wasmimport_OutgoingBodyFinish(this0 uint32, trailers0 uint32, trailers1 uin
 //	write: func() -> result<output-stream>
 //
 //go:nosplit
-func (self OutgoingBody) Write() (result cm.Result[streams.OutputStream, streams.OutputStream, struct{}]) {
+func (self OutgoingBody) Write() (result cm.Result[OutputStream, OutputStream, struct{}]) {
 	self0 := cm.Reinterpret[uint32](self)
 	wasmimport_OutgoingBodyWrite((uint32)(self0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]outgoing-body.write
-//go:noescape
-func wasmimport_OutgoingBodyWrite(self0 uint32, result *cm.Result[streams.OutputStream, streams.OutputStream, struct{}])
 
 // FutureIncomingResponse represents the imported resource "wasi:http/types@0.2.1#future-incoming-response".
 //
@@ -2068,10 +1947,6 @@ func (self FutureIncomingResponse) ResourceDrop() {
 	wasmimport_FutureIncomingResponseResourceDrop((uint32)(self0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [resource-drop]future-incoming-response
-//go:noescape
-func wasmimport_FutureIncomingResponseResourceDrop(self0 uint32)
 
 // Get represents the imported method "get".
 //
@@ -2099,10 +1974,6 @@ func (self FutureIncomingResponse) Get() (result cm.Option[cm.Result[cm.Result[E
 	return
 }
 
-//go:wasmimport wasi:http/types@0.2.1 [method]future-incoming-response.get
-//go:noescape
-func wasmimport_FutureIncomingResponseGet(self0 uint32, result *cm.Option[cm.Result[cm.Result[ErrorCodeShape, IncomingResponse, ErrorCode], cm.Result[ErrorCodeShape, IncomingResponse, ErrorCode], struct{}]])
-
 // Subscribe represents the imported method "subscribe".
 //
 // Returns a pollable which becomes ready when either the Response has
@@ -2112,16 +1983,12 @@ func wasmimport_FutureIncomingResponseGet(self0 uint32, result *cm.Option[cm.Res
 //	subscribe: func() -> pollable
 //
 //go:nosplit
-func (self FutureIncomingResponse) Subscribe() (result poll.Pollable) {
+func (self FutureIncomingResponse) Subscribe() (result Pollable) {
 	self0 := cm.Reinterpret[uint32](self)
 	result0 := wasmimport_FutureIncomingResponseSubscribe((uint32)(self0))
-	result = cm.Reinterpret[poll.Pollable]((uint32)(result0))
+	result = cm.Reinterpret[Pollable]((uint32)(result0))
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 [method]future-incoming-response.subscribe
-//go:noescape
-func wasmimport_FutureIncomingResponseSubscribe(self0 uint32) (result0 uint32)
 
 // HTTPErrorCode represents the imported function "http-error-code".
 //
@@ -2140,12 +2007,8 @@ func wasmimport_FutureIncomingResponseSubscribe(self0 uint32) (result0 uint32)
 //	http-error-code: func(err: borrow<io-error>) -> option<error-code>
 //
 //go:nosplit
-func HTTPErrorCode(err ioerror.Error) (result cm.Option[ErrorCode]) {
+func HTTPErrorCode(err IOError) (result cm.Option[ErrorCode]) {
 	err0 := cm.Reinterpret[uint32](err)
 	wasmimport_HTTPErrorCode((uint32)(err0), &result)
 	return
 }
-
-//go:wasmimport wasi:http/types@0.2.1 http-error-code
-//go:noescape
-func wasmimport_HTTPErrorCode(err0 uint32, result *cm.Option[ErrorCode])

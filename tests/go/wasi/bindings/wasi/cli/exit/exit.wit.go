@@ -20,10 +20,6 @@ func Exit(status cm.BoolResult) {
 	return
 }
 
-//go:wasmimport wasi:cli/exit@0.2.1 exit
-//go:noescape
-func wasmimport_Exit(status0 uint32)
-
 // ExitWithCode represents the imported function "exit-with-code".
 //
 // Exit the current instance and any linked instances, reporting the
@@ -43,7 +39,3 @@ func ExitWithCode(statusCode uint8) {
 	wasmimport_ExitWithCode((uint32)(statusCode0))
 	return
 }
-
-//go:wasmimport wasi:cli/exit@0.2.1 exit-with-code
-//go:noescape
-func wasmimport_ExitWithCode(statusCode0 uint32)
