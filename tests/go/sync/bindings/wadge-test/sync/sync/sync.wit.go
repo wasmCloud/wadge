@@ -45,18 +45,18 @@ type Rec struct {
 // Var represents the variant "wadge-test:sync/sync#var".
 //
 //	variant var {
-//		var(rec),
+//		some(rec),
 //		empty,
 //	}
 type Var cm.Variant[uint8, Rec, Rec]
 
-// VarVar_ returns a [Var] of case "var".
-func VarVar_(data Rec) Var {
+// VarSome returns a [Var] of case "some".
+func VarSome(data Rec) Var {
 	return cm.New[Var](0, data)
 }
 
-// Var_ returns a non-nil *[Rec] if [Var] represents the variant case "var".
-func (self *Var) Var_() *Rec {
+// Some returns a non-nil *[Rec] if [Var] represents the variant case "some".
+func (self *Var) Some() *Rec {
 	return cm.Case[Rec](self, 0)
 }
 
@@ -72,7 +72,7 @@ func (self *Var) Empty() bool {
 }
 
 var stringsVar = [2]string{
-	"var",
+	"some",
 	"empty",
 }
 

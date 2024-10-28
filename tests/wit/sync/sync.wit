@@ -16,7 +16,7 @@ interface sync {
     }
 
     variant var {
-        var(rec),
+        some(rec),
         empty,
     }
 

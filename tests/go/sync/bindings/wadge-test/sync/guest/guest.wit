@@ -4,7 +4,7 @@ interface sync {
 	flags abc { a, b, c }
 	record rec-nested { foo: string }
 	record rec { nested: rec-nested }
-	variant var { var(rec), empty }
+	variant var { some(rec), empty }
 	enum foobar { foo, bar }
 	record primitives {
 		a: u8,
