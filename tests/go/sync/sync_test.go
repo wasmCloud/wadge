@@ -12,8 +12,8 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/bytecodealliance/wasm-tools-go/cm"
 	"github.com/stretchr/testify/assert"
+	"go.bytecodealliance.org/cm"
 	"go.wasmcloud.dev/wadge"
 	"go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync"
 )

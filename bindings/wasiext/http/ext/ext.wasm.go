@@ -3,7 +3,7 @@
 package ext
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 )
 
 // This file contains wasmimport and wasmexport declarations for "wasiext:http@0.1.0".

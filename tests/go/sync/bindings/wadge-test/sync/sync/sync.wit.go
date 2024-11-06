@@ -4,7 +4,7 @@
 package sync
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 )
 
 // Abc represents the flags "wadge-test:sync/sync#abc".

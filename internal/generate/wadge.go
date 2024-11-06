@@ -41,7 +41,7 @@ func main() {
 	if err := Run(exec.Command(
 		"go",
 		"run",
-		"github.com/bytecodealliance/wasm-tools-go/cmd/wit-bindgen-go",
+		"go.bytecodealliance.org/cmd/wit-bindgen-go",
 		"generate",
 		"-w",
 		"imports",

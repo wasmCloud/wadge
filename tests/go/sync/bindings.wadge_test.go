@@ -5,7 +5,7 @@
 package sync_test
 
 import (
-	github_com__bytecodealliance__wasm___tools___go__cm "github.com/bytecodealliance/wasm-tools-go/cm"
+	go_bytecodealliance_org__cm "go.bytecodealliance.org/cm"
 	wadge "go.wasmcloud.dev/wadge"
 	go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync "go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync"
 	"runtime"
@@ -69,7 +69,7 @@ func wasmimport_ResResourceDrop(self0 uint32) {
 }
 
 //go:linkname wasmimport_ResMakeList go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_ResMakeList
-func wasmimport_ResMakeList(result *github_com__bytecodealliance__wasm___tools___go__cm.List[go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Res]) {
+func wasmimport_ResMakeList(result *go_bytecodealliance_org__cm.List[go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Res]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -205,7 +205,7 @@ func wasmimport_IdentityFlags(arg0 uint32) (result0 uint32) {
 }
 
 //go:linkname wasmimport_IdentityListBool go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityListBool
-func wasmimport_IdentityListBool(arg0 *bool, arg1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[bool]) {
+func wasmimport_IdentityListBool(arg0 *bool, arg1 uint32, result *go_bytecodealliance_org__cm.List[bool]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -229,7 +229,7 @@ func wasmimport_IdentityListBool(arg0 *bool, arg1 uint32, result *github_com__by
 }
 
 //go:linkname wasmimport_IdentityListEnum go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityListEnum
-func wasmimport_IdentityListEnum(arg0 *go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Foobar, arg1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Foobar]) {
+func wasmimport_IdentityListEnum(arg0 *go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Foobar, arg1 uint32, result *go_bytecodealliance_org__cm.List[go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Foobar]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -253,7 +253,7 @@ func wasmimport_IdentityListEnum(arg0 *go_wasmcloud_dev__wadge__tests__go__sync_
 }
 
 //go:linkname wasmimport_IdentityListFlags go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityListFlags
-func wasmimport_IdentityListFlags(arg0 *go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Abc, arg1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Abc]) {
+func wasmimport_IdentityListFlags(arg0 *go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Abc, arg1 uint32, result *go_bytecodealliance_org__cm.List[go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Abc]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -277,7 +277,7 @@ func wasmimport_IdentityListFlags(arg0 *go_wasmcloud_dev__wadge__tests__go__sync
 }
 
 //go:linkname wasmimport_IdentityListListString go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityListListString
-func wasmimport_IdentityListListString(arg0 *github_com__bytecodealliance__wasm___tools___go__cm.List[string], arg1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[github_com__bytecodealliance__wasm___tools___go__cm.List[string]]) {
+func wasmimport_IdentityListListString(arg0 *go_bytecodealliance_org__cm.List[string], arg1 uint32, result *go_bytecodealliance_org__cm.List[go_bytecodealliance_org__cm.List[string]]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -301,7 +301,7 @@ func wasmimport_IdentityListListString(arg0 *github_com__bytecodealliance__wasm_
 }
 
 //go:linkname wasmimport_IdentityListOptionString go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityListOptionString
-func wasmimport_IdentityListOptionString(arg0 *github_com__bytecodealliance__wasm___tools___go__cm.Option[string], arg1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[github_com__bytecodealliance__wasm___tools___go__cm.Option[string]]) {
+func wasmimport_IdentityListOptionString(arg0 *go_bytecodealliance_org__cm.Option[string], arg1 uint32, result *go_bytecodealliance_org__cm.List[go_bytecodealliance_org__cm.Option[string]]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -325,7 +325,7 @@ func wasmimport_IdentityListOptionString(arg0 *github_com__bytecodealliance__was
 }
 
 //go:linkname wasmimport_IdentityListRecordPrimitives go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityListRecordPrimitives
-func wasmimport_IdentityListRecordPrimitives(arg0 *go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Primitives, arg1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Primitives]) {
+func wasmimport_IdentityListRecordPrimitives(arg0 *go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Primitives, arg1 uint32, result *go_bytecodealliance_org__cm.List[go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Primitives]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -349,7 +349,7 @@ func wasmimport_IdentityListRecordPrimitives(arg0 *go_wasmcloud_dev__wadge__test
 }
 
 //go:linkname wasmimport_IdentityListResultString go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityListResultString
-func wasmimport_IdentityListResultString(arg0 *github_com__bytecodealliance__wasm___tools___go__cm.Result[string, string, struct{}], arg1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[github_com__bytecodealliance__wasm___tools___go__cm.Result[string, string, struct{}]]) {
+func wasmimport_IdentityListResultString(arg0 *go_bytecodealliance_org__cm.Result[string, string, struct{}], arg1 uint32, result *go_bytecodealliance_org__cm.List[go_bytecodealliance_org__cm.Result[string, string, struct{}]]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -373,7 +373,7 @@ func wasmimport_IdentityListResultString(arg0 *github_com__bytecodealliance__was
 }
 
 //go:linkname wasmimport_IdentityListString go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityListString
-func wasmimport_IdentityListString(arg0 *string, arg1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[string]) {
+func wasmimport_IdentityListString(arg0 *string, arg1 uint32, result *go_bytecodealliance_org__cm.List[string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -397,7 +397,7 @@ func wasmimport_IdentityListString(arg0 *string, arg1 uint32, result *github_com
 }
 
 //go:linkname wasmimport_IdentityListU16 go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityListU16
-func wasmimport_IdentityListU16(arg0 *uint16, arg1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[uint16]) {
+func wasmimport_IdentityListU16(arg0 *uint16, arg1 uint32, result *go_bytecodealliance_org__cm.List[uint16]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -421,7 +421,7 @@ func wasmimport_IdentityListU16(arg0 *uint16, arg1 uint32, result *github_com__b
 }
 
 //go:linkname wasmimport_IdentityListVariant go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityListVariant
-func wasmimport_IdentityListVariant(arg0 *go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Var, arg1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.List[go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Var]) {
+func wasmimport_IdentityListVariant(arg0 *go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Var, arg1 uint32, result *go_bytecodealliance_org__cm.List[go_wasmcloud_dev__wadge__tests__go__sync__bindings__wadge___test__sync__sync.Var]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -445,7 +445,7 @@ func wasmimport_IdentityListVariant(arg0 *go_wasmcloud_dev__wadge__tests__go__sy
 }
 
 //go:linkname wasmimport_IdentityOptionString go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityOptionString
-func wasmimport_IdentityOptionString(arg0 uint32, arg1 *uint8, arg2 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Option[string]) {
+func wasmimport_IdentityOptionString(arg0 uint32, arg1 *uint8, arg2 uint32, result *go_bytecodealliance_org__cm.Option[string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -473,7 +473,7 @@ func wasmimport_IdentityOptionString(arg0 uint32, arg1 *uint8, arg2 uint32, resu
 }
 
 //go:linkname wasmimport_IdentityPrimitives go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityPrimitives
-func wasmimport_IdentityPrimitives(a0 uint32, b0 uint32, c0 uint32, d0 uint64, e0 uint32, f0 uint32, g0 uint32, h0 uint64, i0 float32, j0 float64, k0 uint32, l0 uint32, m0 *uint8, m1 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Tuple13[uint8, uint16, uint32, uint64, int8, int16, int32, int64, float32, float64, bool, rune, string]) {
+func wasmimport_IdentityPrimitives(a0 uint32, b0 uint32, c0 uint32, d0 uint64, e0 uint32, f0 uint32, g0 uint32, h0 uint64, i0 float32, j0 float64, k0 uint32, l0 uint32, m0 *uint8, m1 uint32, result *go_bytecodealliance_org__cm.Tuple13[uint8, uint16, uint32, uint64, int8, int16, int32, int64, float32, float64, bool, rune, string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -641,7 +641,7 @@ func wasmimport_IdentityRecordRec(arg0 *uint8, arg1 uint32, result *go_wasmcloud
 }
 
 //go:linkname wasmimport_IdentityResultString go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityResultString
-func wasmimport_IdentityResultString(arg0 uint32, arg1 *uint8, arg2 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Result[string, string, struct{}]) {
+func wasmimport_IdentityResultString(arg0 uint32, arg1 *uint8, arg2 uint32, result *go_bytecodealliance_org__cm.Result[string, string, struct{}]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -773,7 +773,7 @@ func wasmimport_IdentityString(arg0 *uint8, arg1 uint32, result *string) {
 }
 
 //go:linkname wasmimport_IdentityTuple go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_IdentityTuple
-func wasmimport_IdentityTuple(arg0 uint32, arg1 uint32, arg2 uint32, arg3 uint64, arg4 uint32, arg5 uint32, arg6 uint32, arg7 uint64, arg8 float32, arg9 float64, arg10 uint32, arg11 uint32, arg12 *uint8, arg13 uint32, result *github_com__bytecodealliance__wasm___tools___go__cm.Tuple13[uint8, uint16, uint32, uint64, int8, int16, int32, int64, float32, float64, bool, rune, string]) {
+func wasmimport_IdentityTuple(arg0 uint32, arg1 uint32, arg2 uint32, arg3 uint64, arg4 uint32, arg5 uint32, arg6 uint32, arg7 uint64, arg8 float32, arg9 float64, arg10 uint32, arg11 uint32, arg12 *uint8, arg13 uint32, result *go_bytecodealliance_org__cm.Tuple13[uint8, uint16, uint32, uint64, int8, int16, int32, int64, float32, float64, bool, rune, string]) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {

@@ -1,4 +1,4 @@
-//go:generate go run github.com/bytecodealliance/wasm-tools-go/cmd/wit-bindgen-go generate -w service -o bindings ./wit
+//go:generate go run go.bytecodealliance.org/cmd/wit-bindgen-go generate -w service -o bindings ./wit
 
 package wasi
 
@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"strconv"
 
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wadge-test/fib/fib"
 	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wadge-test/leftpad/leftpad"
 	incominghandler "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/http/incoming-handler"

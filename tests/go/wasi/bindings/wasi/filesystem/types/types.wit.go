@@ -29,7 +29,7 @@
 package types
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 	wallclock "go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/clocks/wall-clock"
 	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/io/streams"
 )
