@@ -6,7 +6,7 @@
 package instancenetwork
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 	"go.wasmcloud.dev/wadge/tests/go/wasi/bindings/wasi/sockets/network"
 )
 

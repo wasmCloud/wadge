@@ -1,11 +1,11 @@
-//go:generate go run github.com/bytecodealliance/wasm-tools-go/cmd/wit-bindgen-go generate -w app -o bindings ./wit
+//go:generate go run go.bytecodealliance.org/cmd/wit-bindgen-go generate -w app -o bindings ./wit
 
 package main
 
 import (
 	"unsafe"
 
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 	incominghandler "go.wasmcloud.dev/wadge/examples/go/http/bindings/wasi/http/incoming-handler"
 	"go.wasmcloud.dev/wadge/examples/go/http/bindings/wasi/http/types"
 )

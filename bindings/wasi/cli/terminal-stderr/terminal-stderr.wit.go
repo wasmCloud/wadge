@@ -7,7 +7,7 @@
 package terminalstderr
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 	terminaloutput "go.wasmcloud.dev/wadge/bindings/wasi/cli/terminal-output"
 )
 

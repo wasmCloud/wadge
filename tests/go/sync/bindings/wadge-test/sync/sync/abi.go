@@ -3,7 +3,7 @@
 package sync
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 )
 
 func lower_RecNested(v RecNested) (f0 *uint8, f1 uint32) {

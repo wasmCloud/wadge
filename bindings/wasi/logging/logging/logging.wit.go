@@ -7,7 +7,7 @@
 package logging
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 )
 
 // Level represents the enum "wasi:logging/logging@0.1.0-draft#level".

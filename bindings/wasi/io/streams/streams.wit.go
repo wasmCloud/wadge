@@ -10,7 +10,7 @@
 package streams
 
 import (
-	"github.com/bytecodealliance/wasm-tools-go/cm"
+	"go.bytecodealliance.org/cm"
 	ioerror "go.wasmcloud.dev/wadge/bindings/wasi/io/error"
 	"go.wasmcloud.dev/wadge/bindings/wasi/io/poll"
 )

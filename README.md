@@ -39,7 +39,7 @@ Include the `wadge` bindgen in your `tools.go` like below:
 package main
 
 import (
-	_ "github.com/bytecodealliance/wasm-tools-go/cmd/wit-bindgen-go"
+	_ "go.bytecodealliance.org/cmd/wit-bindgen-go"
 	_ "go.wasmcloud.dev/wadge/cmd/wadge-bindgen-go"
 )
 ```
@@ -158,3 +158,4 @@ func init() {
 	wadge.SetInstance(instance)
 }
 ```
+
