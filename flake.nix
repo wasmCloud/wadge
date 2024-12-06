@@ -85,6 +85,7 @@
         targets.s390x-unknown-linux-gnu = false;
         targets.wasm32-unknown-unknown = false;
         targets.wasm32-wasip1 = false;
+        targets.wasm32-wasip2 = false;
 
         clippy.deny = ["warnings"];
         clippy.workspace = true;
@@ -97,51 +98,26 @@
           pkgsCross ? pkgs,
           ...
         }: {
-          buildInputs ? [],
-          depsBuildBuild ? [],
-          nativeBuildInputs ? [],
           nativeCheckInputs ? [],
           preCheck ? "",
           ...
         } @ args:
-          with pkgs.lib; let
-            darwin2darwin = pkgs.stdenv.hostPlatform.isDarwin && pkgsCross.stdenv.hostPlatform.isDarwin;
+          optionalAttrs (args ? cargoArtifacts) {
+            preCheck =
+              ''
+                export GOCACHE=$TMPDIR/gocache
+                export GOMODCACHE=$TMPDIR/gomod
+                export GOPATH=$TMPDIR/go
+                export HOME=$TMPDIR/home
+              ''
+              + preCheck;
 
-            depsBuildBuild' =
-              depsBuildBuild
-              ++ optional pkgs.stdenv.hostPlatform.isDarwin pkgs.darwin.apple_sdk.frameworks.SystemConfiguration
-              ++ optional darwin2darwin pkgs.xcbuild.xcrun;
-          in
-            {
-              buildInputs =
-                buildInputs
-                ++ optional pkgs.stdenv.hostPlatform.isDarwin pkgs.libiconv;
-
-              depsBuildBuild = depsBuildBuild';
-            }
-            // optionalAttrs (args ? cargoArtifacts) {
-              preCheck =
-                ''
-                  export GOCACHE=$TMPDIR/gocache
-                  export GOMODCACHE=$TMPDIR/gomod
-                  export GOPATH=$TMPDIR/go
-                  export HOME=$TMPDIR/home
-                ''
-                + preCheck;
-
-              depsBuildBuild =
-                depsBuildBuild'
-                ++ optionals darwin2darwin [
-                  pkgs.darwin.apple_sdk.frameworks.CoreFoundation
-                  pkgs.darwin.apple_sdk.frameworks.CoreServices
-                ];
-
-              nativeCheckInputs =
-                nativeCheckInputs
-                ++ [
-                  pkgs.pkgsUnstable.go
-                ];
-            };
+            nativeCheckInputs =
+              nativeCheckInputs
+              ++ [
+                pkgs.pkgsUnstable.go
+              ];
+          };
 
         withPackages = {
           hostRustToolchain,
