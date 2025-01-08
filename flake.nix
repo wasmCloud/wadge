@@ -24,129 +24,127 @@
   inputs.wit-deps.inputs.nixlib.follows = "nixlib";
   inputs.wit-deps.url = "github:bytecodealliance/wit-deps/v0.4.0";
 
-  outputs = {
-    nixify,
-    nixlib,
-    nixpkgs-unstable,
-    wit-deps,
-    ...
-  }:
+  outputs =
+    {
+      nixify,
+      nixlib,
+      nixpkgs-unstable,
+      wit-deps,
+      ...
+    }:
     with builtins;
     with nixlib.lib;
     with nixify.lib;
-      rust.mkFlake {
-        src = ./.;
-        name = "wadge";
+    rust.mkFlake {
+      src = ./.;
+      name = "wadge";
 
-        overlays = [
-          wit-deps.overlays.fenix
-          wit-deps.overlays.default
-          (
-            final: prev: {
-              pkgsUnstable = import nixpkgs-unstable {
-                inherit
-                  (final.stdenv.hostPlatform)
-                  system
-                  ;
+      overlays = [
+        wit-deps.overlays.fenix
+        wit-deps.overlays.default
+        (final: prev: {
+          pkgsUnstable = import nixpkgs-unstable {
+            inherit (final.stdenv.hostPlatform)
+              system
+              ;
 
-                inherit
-                  (final)
-                  config
-                  ;
-              };
-            }
-          )
-        ];
+            inherit (final)
+              config
+              ;
+          };
+        })
+      ];
 
-        excludePaths = [
-          ".envrc"
-          ".github"
-          ".gitignore"
-          "ADOPTERS.md"
-          "CODE_OF_CONDUCT.md"
-          "CONTRIBUTING.md"
-          "flake.nix"
-          "LICENSE"
-          "README.md"
-          "SECURITY.md"
-        ];
+      excludePaths = [
+        ".envrc"
+        ".github"
+        ".gitignore"
+        "ADOPTERS.md"
+        "CODE_OF_CONDUCT.md"
+        "CONTRIBUTING.md"
+        "flake.nix"
+        "LICENSE"
+        "README.md"
+        "SECURITY.md"
+      ];
 
-        doCheck = false; # testing is performed in checks via `nextest`
+      doCheck = false; # testing is performed in checks via `nextest`
 
-        build.packages = [
-          "wadge-sys"
-        ];
+      build.packages = [
+        "wadge-sys"
+      ];
 
-        targets.arm-unknown-linux-gnueabihf = false;
-        targets.arm-unknown-linux-musleabihf = false;
-        targets.armv7-unknown-linux-gnueabihf = false;
-        targets.armv7-unknown-linux-musleabihf = false;
-        targets.powerpc64le-unknown-linux-gnu = false;
-        targets.s390x-unknown-linux-gnu = false;
-        targets.wasm32-unknown-unknown = false;
-        targets.wasm32-wasip1 = false;
-        targets.wasm32-wasip2 = false;
+      targets.arm-unknown-linux-gnueabihf = false;
+      targets.arm-unknown-linux-musleabihf = false;
+      targets.armv7-unknown-linux-gnueabihf = false;
+      targets.armv7-unknown-linux-musleabihf = false;
+      targets.powerpc64le-unknown-linux-gnu = false;
+      targets.s390x-unknown-linux-gnu = false;
+      targets.wasm32-unknown-unknown = false;
+      targets.wasm32-wasip1 = false;
+      targets.wasm32-wasip2 = false;
 
-        clippy.deny = ["warnings"];
-        clippy.workspace = true;
+      clippy.deny = [ "warnings" ];
+      clippy.workspace = true;
 
-        test.allTargets = true;
-        test.workspace = true;
+      test.allTargets = true;
+      test.workspace = true;
 
-        buildOverrides = {
+      buildOverrides =
+        {
           pkgs,
           pkgsCross ? pkgs,
           ...
-        }: {
-          nativeCheckInputs ? [],
+        }:
+        {
+          nativeCheckInputs ? [ ],
           preCheck ? "",
           ...
-        } @ args:
-          optionalAttrs (args ? cargoArtifacts) {
-            preCheck =
-              ''
-                export GOCACHE=$TMPDIR/gocache
-                export GOMODCACHE=$TMPDIR/gomod
-                export GOPATH=$TMPDIR/go
-                export HOME=$TMPDIR/home
-              ''
-              + preCheck;
+        }@args:
+        optionalAttrs (args ? cargoArtifacts) {
+          preCheck =
+            ''
+              export GOCACHE=$TMPDIR/gocache
+              export GOMODCACHE=$TMPDIR/gomod
+              export GOPATH=$TMPDIR/go
+              export HOME=$TMPDIR/home
+            ''
+            + preCheck;
 
-            nativeCheckInputs =
-              nativeCheckInputs
-              ++ [
-                pkgs.pkgsUnstable.go
-              ];
-          };
+          nativeCheckInputs = nativeCheckInputs ++ [
+            pkgs.pkgsUnstable.go
+          ];
+        };
 
-        withPackages = {
+      withPackages =
+        {
           hostRustToolchain,
           packages,
           ...
         }:
-          packages
-          // {
-            rust = hostRustToolchain;
-          };
+        packages
+        // {
+          rust = hostRustToolchain;
+        };
 
-        withDevShells = {
+      withDevShells =
+        {
           devShells,
           pkgs,
           ...
         }:
-          extendDerivations {
-            buildInputs = [
-              pkgs.wit-deps
+        extendDerivations {
+          buildInputs = [
+            pkgs.wit-deps
 
-              pkgs.pkgsUnstable.binaryen
-              pkgs.pkgsUnstable.cargo-audit
-              pkgs.pkgsUnstable.cargo-nextest
-              pkgs.pkgsUnstable.gh
-              pkgs.pkgsUnstable.go
-              pkgs.pkgsUnstable.wasm-tools
-              pkgs.pkgsUnstable.wasmtime
-            ];
-          }
-          devShells;
-      };
+            pkgs.pkgsUnstable.binaryen
+            pkgs.pkgsUnstable.cargo-audit
+            pkgs.pkgsUnstable.cargo-nextest
+            pkgs.pkgsUnstable.gh
+            pkgs.pkgsUnstable.go
+            pkgs.pkgsUnstable.wasm-tools
+            pkgs.pkgsUnstable.wasmtime
+          ];
+        } devShells;
+    };
 }
