@@ -69,7 +69,7 @@ jobs:
           MACOSX_DEPLOYMENT_TARGET: ${{ matrix.config.sdk }}
       - run: mkdir -p artifact/lib
       - run: mv target/${{ matrix.config.target }}/release/libwadge_sys.a artifact/lib/libwadge_sys.a
-      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+      - uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         with:
           name: wadge-${{ matrix.config.target }}
           path: artifact
@@ -85,7 +85,7 @@ jobs:
       - run: nix profile install --inputs-from . '.#rust' 'nixpkgs#wasm-tools'
       - run: cargo build -p wadge-passthrough --target wasm32-unknown-unknown --release
       - run: wasm-tools component new target/wasm32-unknown-unknown/release/wadge_passthrough.wasm -o lib/passthrough.wasm
-      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+      - uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         with:
           name: passthrough
           path: lib/passthrough.wasm
