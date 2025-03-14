@@ -2,4 +2,4 @@ go 1.23.0
 
 use ./.
 
-replace go.wasmcloud.dev/wadge v0.5.0 => ./.
+replace go.wasmcloud.dev/wadge v0.8.0 => ./.
