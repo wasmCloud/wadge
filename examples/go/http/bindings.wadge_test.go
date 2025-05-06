@@ -20,7 +20,7 @@ const _ string = runtime.Compiler
 var _ unsafe.Pointer
 
 //go:linkname wasmimport_errorContextDebugMessage go.bytecodealliance.org/cm.wasmimport_errorContextDebugMessage
-func wasmimport_errorContextDebugMessage(err go_bytecodealliance_org__cm.errorContext, msg unsafe.Pointer) {
+func wasmimport_errorContextDebugMessage(err uint32, msg unsafe.Pointer) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
@@ -40,7 +40,7 @@ func wasmimport_errorContextDebugMessage(err go_bytecodealliance_org__cm.errorCo
 }
 
 //go:linkname wasmimport_errorContextDrop go.bytecodealliance.org/cm.wasmimport_errorContextDrop
-func wasmimport_errorContextDrop(err go_bytecodealliance_org__cm.errorContext) {
+func wasmimport_errorContextDrop(err uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
