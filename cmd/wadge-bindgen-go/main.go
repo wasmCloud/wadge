@@ -98,6 +98,12 @@ func importType(fs *token.FileSet, imports map[string]*ast.Ident, expr *ast.Expr
 		switch e := (*expr).(type) {
 		case *ast.Ident:
 			if pkg != nil {
+				if pkg.Path() == "go.bytecodealliance.org/cm" && e.Name == "errorContext" {
+					*expr = &ast.Ident{
+						Name: "uint32",
+					}
+					return nil
+				}
 				*expr = &ast.SelectorExpr{
 					X:   imports[pkg.Path()],
 					Sel: e,
@@ -155,7 +161,7 @@ func importType(fs *token.FileSet, imports map[string]*ast.Ident, expr *ast.Expr
 				pos := fs.Position(e.Pos())
 				return fmt.Errorf("%s:%d: mismatched type argument count %d in index list AST expression for type %s", pos.Filename, pos.Line, len(e.Indices), ty)
 			}
-			for i := 0; i < n; i++ {
+			for i := range n {
 				if err := importType(fs, imports, &e.Indices[i], tys.At(i)); err != nil {
 					return err
 				}
