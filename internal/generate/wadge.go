@@ -40,7 +40,7 @@ func main() {
 	}
 	if err := Run(exec.Command(
 		"go",
-		"run",
+		"tool",
 		"go.bytecodealliance.org/cmd/wit-bindgen-go",
 		"generate",
 		"-w",
