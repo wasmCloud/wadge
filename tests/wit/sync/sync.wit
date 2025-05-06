@@ -1,4 +1,4 @@
-package wadge-test:sync;
+package wadge-test:sync@0.1.0;
 
 interface sync {
     flags abc {

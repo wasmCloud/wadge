@@ -6,8 +6,8 @@ import (
 	"go.bytecodealliance.org/cm"
 )
 
-// This file contains wasmimport and wasmexport declarations for "wadge-test:leftpad".
+// This file contains wasmimport and wasmexport declarations for "wadge-test:leftpad@0.1.0".
 
-//go:wasmimport wadge-test:leftpad/leftpad leftpad
+//go:wasmimport wadge-test:leftpad/leftpad@0.1.0 leftpad
 //go:noescape
 func wasmimport_Leftpad(in0 uint32, out0 uint32, len0 uint64, c0 uint32, result *cm.Result[StreamError, struct{}, StreamError])

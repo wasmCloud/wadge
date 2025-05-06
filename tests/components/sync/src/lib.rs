@@ -5,7 +5,7 @@ mod bindings {
         world: "host",
         path: "../../wit/sync",
         with: {
-            "wadge-test:sync/sync": generate,
+            "wadge-test:sync/sync@0.1.0": generate,
         }
     });
     export!(Handler);

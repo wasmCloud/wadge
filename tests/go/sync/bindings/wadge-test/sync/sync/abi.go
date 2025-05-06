@@ -20,7 +20,7 @@ func lower_Var(v Var) (f0 uint32, f1 *uint8, f2 uint32) {
 	f0 = (uint32)(v.Tag())
 	switch f0 {
 	case 0: // some
-		v1, v2 := lower_Rec(*v.Some())
+		v1, v2 := lower_Rec(*cm.Case[Rec](&v, 0))
 		f1 = (*uint8)(v1)
 		f2 = (uint32)(v2)
 	}
@@ -60,7 +60,7 @@ func lower_Primitives(v Primitives) (f0 uint32, f1 uint32, f2 uint32, f3 uint64,
 	f7 = (uint64)(v.H)
 	f8 = (float32)(v.I)
 	f9 = (float64)(v.J)
-	f10 = cm.BoolToU32(v.K)
+	f10 = (uint32)(cm.BoolToU32(v.K))
 	f11 = (uint32)(v.L)
 	f12, f13 = cm.LowerString(v.M)
 	return
@@ -77,7 +77,7 @@ func lower_TupleU8U16U32U64S8S16S32S64F32F64BoolCharString(v cm.Tuple13[uint8, u
 	f7 = (uint64)(v.F7)
 	f8 = (float32)(v.F8)
 	f9 = (float64)(v.F9)
-	f10 = cm.BoolToU32(v.F10)
+	f10 = (uint32)(cm.BoolToU32(v.F10))
 	f11 = (uint32)(v.F11)
 	f12, f13 = cm.LowerString(v.F12)
 	return
