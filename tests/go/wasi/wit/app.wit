@@ -1,4 +1,4 @@
-package wadge-test:wasi;
+package wadge-test:wasi@0.1.0;
 
 world service {
     export wasi:http/incoming-handler@0.2.1;
@@ -6,6 +6,6 @@ world service {
     // Import all CLI interfaces, which are used by Go libraries
     include wasi:cli/imports@0.2.1;
 
-    include wadge-test:fib/guest;
-    include wadge-test:leftpad/guest;
+    include wadge-test:fib/guest@0.1.0;
+    include wadge-test:leftpad/guest@0.1.0;
 }

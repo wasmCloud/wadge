@@ -3,8 +3,8 @@ mod bindings {
 
     wit_bindgen::generate!({
         with: {
-            "wadge-test:fib/fib": generate,
-            "wadge-test:leftpad/leftpad": generate,
+            "wadge-test:fib/fib@0.1.0": generate,
+            "wadge-test:leftpad/leftpad@0.1.0": generate,
             "wasi:io/error@0.2.1": wasi_passthrough::bindings::exports::wasi::io::error,
             "wasi:io/poll@0.2.1": wasi_passthrough::bindings::exports::wasi::io::poll,
             "wasi:io/streams@0.2.1": wasi_passthrough::bindings::exports::wasi::io::streams,

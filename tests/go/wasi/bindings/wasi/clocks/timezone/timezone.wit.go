@@ -26,7 +26,7 @@ type DateTime = wallclock.DateTime
 //		in-daylight-saving-time: bool,
 //	}
 type TimezoneDisplay struct {
-	_ cm.HostLayout
+	_ cm.HostLayout `json:"-"`
 	// The number of seconds difference between UTC time and the local
 	// time of the timezone.
 	//
@@ -35,7 +35,7 @@ type TimezoneDisplay struct {
 	//
 	// In implementations that do not expose an actual time zone, this
 	// should return 0.
-	UtcOffset int32
+	UtcOffset int32 `json:"utc-offset"`
 
 	// The abbreviated name of the timezone to display to a user. The name
 	// `UTC` indicates Coordinated Universal Time. Otherwise, this should
@@ -46,13 +46,13 @@ type TimezoneDisplay struct {
 	//
 	// In time zones that do not have an applicable name, a formatted
 	// representation of the UTC offset may be returned, such as `-04:00`.
-	Name string
+	Name string `json:"name"`
 
 	// Whether daylight saving time is active.
 	//
 	// In implementations that do not expose an actual time zone, this
 	// should return false.
-	InDaylightSavingTime bool
+	InDaylightSavingTime bool `json:"in-daylight-saving-time"`
 }
 
 // Display represents the imported function "display".

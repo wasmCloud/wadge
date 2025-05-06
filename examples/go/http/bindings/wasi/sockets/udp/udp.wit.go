@@ -43,11 +43,11 @@ type IPAddressFamily = network.IPAddressFamily
 //		remote-address: ip-socket-address,
 //	}
 type IncomingDatagram struct {
-	_ cm.HostLayout
+	_ cm.HostLayout `json:"-"`
 	// The payload.
 	//
 	// Theoretical max size: ~64 KiB. In practice, typically less than 1500 bytes.
-	Data cm.List[uint8]
+	Data cm.List[uint8] `json:"data"`
 
 	// The source address.
 	//
@@ -55,7 +55,7 @@ type IncomingDatagram struct {
 	// with, if any.
 	//
 	// Equivalent to the `src_addr` out parameter of `recvfrom`.
-	RemoteAddress IPSocketAddress
+	RemoteAddress IPSocketAddress `json:"remote-address"`
 }
 
 // OutgoingDatagram represents the record "wasi:sockets/udp@0.2.0#outgoing-datagram".
@@ -67,9 +67,9 @@ type IncomingDatagram struct {
 //		remote-address: option<ip-socket-address>,
 //	}
 type OutgoingDatagram struct {
-	_ cm.HostLayout
+	_ cm.HostLayout `json:"-"`
 	// The payload.
-	Data cm.List[uint8]
+	Data cm.List[uint8] `json:"data"`
 
 	// The destination address.
 	//
@@ -80,7 +80,7 @@ type OutgoingDatagram struct {
 	//
 	// If this value is None, the send operation is equivalent to `send` in POSIX. Otherwise
 	// it is equivalent to `sendto`.
-	RemoteAddress cm.Option[IPSocketAddress]
+	RemoteAddress cm.Option[IPSocketAddress] `json:"remote-address"`
 }
 
 // UDPSocket represents the imported resource "wasi:sockets/udp@0.2.0#udp-socket".
@@ -321,10 +321,10 @@ func (self UDPSocket) StartBind(network_ Network, localAddress IPSocketAddress) 
 // The POSIX equivalent in pseudo-code is:
 //
 //	if (was previously connected) {
-//	connect(s, AF_UNSPEC)
+//		connect(s, AF_UNSPEC)
 //	}
 //	if (remote_address is Some) {
-//	connect(s, remote_address)
+//		connect(s, remote_address)
 //	}
 //
 // Unlike in POSIX, the socket must already be explicitly bound.

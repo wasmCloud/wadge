@@ -16,12 +16,48 @@ const _ string = runtime.Compiler
 
 var _ unsafe.Pointer
 
+//go:linkname wasmimport_errorContextDebugMessage go.bytecodealliance.org/cm.wasmimport_errorContextDebugMessage
+func wasmimport_errorContextDebugMessage(err go_bytecodealliance_org__cm.errorContext, msg unsafe.Pointer) {
+	var __p runtime.Pinner
+	defer __p.Unpin()
+	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
+		return __instance.Call("canon", "error-context.debug-message", func() unsafe.Pointer {
+			ptr := unsafe.Pointer(&err)
+			__p.Pin(ptr)
+			return ptr
+		}(), func() unsafe.Pointer {
+			ptr := unsafe.Pointer(&msg)
+			__p.Pin(ptr)
+			return ptr
+		}())
+	}); __err != nil {
+		wadge.CurrentErrorHandler()(__err)
+	}
+	return
+}
+
+//go:linkname wasmimport_errorContextDrop go.bytecodealliance.org/cm.wasmimport_errorContextDrop
+func wasmimport_errorContextDrop(err go_bytecodealliance_org__cm.errorContext) {
+	var __p runtime.Pinner
+	defer __p.Unpin()
+	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
+		return __instance.Call("canon", "error-context.drop", func() unsafe.Pointer {
+			ptr := unsafe.Pointer(&err)
+			__p.Pin(ptr)
+			return ptr
+		}())
+	}); __err != nil {
+		wadge.CurrentErrorHandler()(__err)
+	}
+	return
+}
+
 //go:linkname wasmimport_NewRes go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_NewRes
 func wasmimport_NewRes() (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "[constructor]res", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "[constructor]res", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&result0)
 			__p.Pin(ptr)
 			return ptr
@@ -37,7 +73,7 @@ func wasmimport_ResFoo(self0 uint32, result *string) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "[method]res.foo", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "[method]res.foo", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -57,7 +93,7 @@ func wasmimport_ResResourceDrop(self0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "[resource-drop]res", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "[resource-drop]res", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&self0)
 			__p.Pin(ptr)
 			return ptr
@@ -73,7 +109,7 @@ func wasmimport_ResMakeList(result *go_bytecodealliance_org__cm.List[go_wasmclou
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "[static]res.make-list", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "[static]res.make-list", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(result)
 			__p.Pin(ptr)
 			return ptr
@@ -89,7 +125,7 @@ func wasmimport_IdentityBool(arg0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-bool", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-bool", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -109,7 +145,7 @@ func wasmimport_IdentityChar(arg0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-char", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-char", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -129,7 +165,7 @@ func wasmimport_IdentityEnum(arg0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-enum", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-enum", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -149,7 +185,7 @@ func wasmimport_IdentityF32(arg0 float32) (result0 float32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-f32", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-f32", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -169,7 +205,7 @@ func wasmimport_IdentityF64(arg0 float64) (result0 float64) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-f64", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-f64", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -189,7 +225,7 @@ func wasmimport_IdentityFlags(arg0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-flags", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-flags", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -209,7 +245,7 @@ func wasmimport_IdentityListBool(arg0 *bool, arg1 uint32, result *go_bytecodeall
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-list-bool", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-list-bool", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -233,7 +269,7 @@ func wasmimport_IdentityListEnum(arg0 *go_wasmcloud_dev__wadge__tests__go__sync_
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-list-enum", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-list-enum", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -257,7 +293,7 @@ func wasmimport_IdentityListFlags(arg0 *go_wasmcloud_dev__wadge__tests__go__sync
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-list-flags", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-list-flags", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -281,7 +317,7 @@ func wasmimport_IdentityListListString(arg0 *go_bytecodealliance_org__cm.List[st
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-list-list-string", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-list-list-string", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -305,7 +341,7 @@ func wasmimport_IdentityListOptionString(arg0 *go_bytecodealliance_org__cm.Optio
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-list-option-string", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-list-option-string", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -329,7 +365,7 @@ func wasmimport_IdentityListRecordPrimitives(arg0 *go_wasmcloud_dev__wadge__test
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-list-record-primitives", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-list-record-primitives", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -353,7 +389,7 @@ func wasmimport_IdentityListResultString(arg0 *go_bytecodealliance_org__cm.Resul
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-list-result-string", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-list-result-string", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -377,7 +413,7 @@ func wasmimport_IdentityListString(arg0 *string, arg1 uint32, result *go_bytecod
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-list-string", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-list-string", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -401,7 +437,7 @@ func wasmimport_IdentityListU16(arg0 *uint16, arg1 uint32, result *go_bytecodeal
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-list-u16", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-list-u16", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -425,7 +461,7 @@ func wasmimport_IdentityListVariant(arg0 *go_wasmcloud_dev__wadge__tests__go__sy
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-list-variant", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-list-variant", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -449,7 +485,7 @@ func wasmimport_IdentityOptionString(arg0 uint32, arg1 *uint8, arg2 uint32, resu
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-option-string", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-option-string", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -477,7 +513,7 @@ func wasmimport_IdentityPrimitives(a0 uint32, b0 uint32, c0 uint32, d0 uint64, e
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-primitives", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-primitives", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&a0)
 			__p.Pin(ptr)
 			return ptr
@@ -549,7 +585,7 @@ func wasmimport_IdentityRecordPrimitives(arg0 uint32, arg1 uint32, arg2 uint32, 
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-record-primitives", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-record-primitives", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -621,7 +657,7 @@ func wasmimport_IdentityRecordRec(arg0 *uint8, arg1 uint32, result *go_wasmcloud
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-record-rec", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-record-rec", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -645,7 +681,7 @@ func wasmimport_IdentityResultString(arg0 uint32, arg1 *uint8, arg2 uint32, resu
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-result-string", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-result-string", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -673,7 +709,7 @@ func wasmimport_IdentityS16(arg0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-s16", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-s16", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -693,7 +729,7 @@ func wasmimport_IdentityS32(arg0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-s32", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-s32", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -713,7 +749,7 @@ func wasmimport_IdentityS64(arg0 uint64) (result0 uint64) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-s64", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-s64", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -733,7 +769,7 @@ func wasmimport_IdentityS8(arg0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-s8", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-s8", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -753,7 +789,7 @@ func wasmimport_IdentityString(arg0 *uint8, arg1 uint32, result *string) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-string", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-string", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -777,7 +813,7 @@ func wasmimport_IdentityTuple(arg0 uint32, arg1 uint32, arg2 uint32, arg3 uint64
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-tuple", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-tuple", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -849,7 +885,7 @@ func wasmimport_IdentityU16(arg0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-u16", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-u16", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -869,7 +905,7 @@ func wasmimport_IdentityU32(arg0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-u32", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-u32", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -889,7 +925,7 @@ func wasmimport_IdentityU64(arg0 uint64) (result0 uint64) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-u64", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-u64", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -909,7 +945,7 @@ func wasmimport_IdentityU8(arg0 uint32) (result0 uint32) {
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-u8", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-u8", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr
@@ -929,7 +965,7 @@ func wasmimport_IdentityVariant(arg0 uint32, arg1 *uint8, arg2 uint32, result *g
 	var __p runtime.Pinner
 	defer __p.Unpin()
 	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wadge-test:sync/sync", "identity-variant", func() unsafe.Pointer {
+		return __instance.Call("wadge-test:sync/sync@0.1.0", "identity-variant", func() unsafe.Pointer {
 			ptr := unsafe.Pointer(&arg0)
 			__p.Pin(ptr)
 			return ptr

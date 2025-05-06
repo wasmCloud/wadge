@@ -2,8 +2,8 @@
 
 package fib
 
-// This file contains wasmimport and wasmexport declarations for "wadge-test:fib".
+// This file contains wasmimport and wasmexport declarations for "wadge-test:fib@0.1.0".
 
-//go:wasmimport wadge-test:fib/fib fib
+//go:wasmimport wadge-test:fib/fib@0.1.0 fib
 //go:noescape
 func wasmimport_Fib(n0 uint32) (result0 uint64)

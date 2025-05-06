@@ -167,7 +167,7 @@ func (self *Method) Other() *string {
 	return cm.Case[string](self, 9)
 }
 
-var stringsMethod = [10]string{
+var _MethodStrings = [10]string{
 	"get",
 	"head",
 	"post",
@@ -182,7 +182,7 @@ var stringsMethod = [10]string{
 
 // String implements [fmt.Stringer], returning the variant case name of v.
 func (v Method) String() string {
-	return stringsMethod[v.Tag()]
+	return _MethodStrings[v.Tag()]
 }
 
 // Scheme represents the variant "wasi:http/types@0.2.1#scheme".
@@ -228,7 +228,7 @@ func (self *Scheme) Other() *string {
 	return cm.Case[string](self, 2)
 }
 
-var stringsScheme = [3]string{
+var _SchemeStrings = [3]string{
 	"HTTP",
 	"HTTPS",
 	"other",
@@ -236,7 +236,7 @@ var stringsScheme = [3]string{
 
 // String implements [fmt.Stringer], returning the variant case name of v.
 func (v Scheme) String() string {
-	return stringsScheme[v.Tag()]
+	return _SchemeStrings[v.Tag()]
 }
 
 // DNSErrorPayload represents the record "wasi:http/types@0.2.1#DNS-error-payload".
@@ -248,9 +248,9 @@ func (v Scheme) String() string {
 //		info-code: option<u16>,
 //	}
 type DNSErrorPayload struct {
-	_        cm.HostLayout
-	Rcode    cm.Option[string]
-	InfoCode cm.Option[uint16]
+	_        cm.HostLayout     `json:"-"`
+	Rcode    cm.Option[string] `json:"rcode"`
+	InfoCode cm.Option[uint16] `json:"info-code"`
 }
 
 // TLSAlertReceivedPayload represents the record "wasi:http/types@0.2.1#TLS-alert-received-payload".
@@ -262,9 +262,9 @@ type DNSErrorPayload struct {
 //		alert-message: option<string>,
 //	}
 type TLSAlertReceivedPayload struct {
-	_            cm.HostLayout
-	AlertID      cm.Option[uint8]
-	AlertMessage cm.Option[string]
+	_            cm.HostLayout     `json:"-"`
+	AlertID      cm.Option[uint8]  `json:"alert-id"`
+	AlertMessage cm.Option[string] `json:"alert-message"`
 }
 
 // FieldSizePayload represents the record "wasi:http/types@0.2.1#field-size-payload".
@@ -276,9 +276,9 @@ type TLSAlertReceivedPayload struct {
 //		field-size: option<u32>,
 //	}
 type FieldSizePayload struct {
-	_         cm.HostLayout
-	FieldName cm.Option[string]
-	FieldSize cm.Option[uint32]
+	_         cm.HostLayout     `json:"-"`
+	FieldName cm.Option[string] `json:"field-name"`
+	FieldSize cm.Option[uint32] `json:"field-size"`
 }
 
 // ErrorCode represents the variant "wasi:http/types@0.2.1#error-code".
@@ -749,7 +749,7 @@ func (self *ErrorCode) InternalError() *cm.Option[string] {
 	return cm.Case[cm.Option[string]](self, 38)
 }
 
-var stringsErrorCode = [39]string{
+var _ErrorCodeStrings = [39]string{
 	"DNS-timeout",
 	"DNS-error",
 	"destination-not-found",
@@ -793,7 +793,7 @@ var stringsErrorCode = [39]string{
 
 // String implements [fmt.Stringer], returning the variant case name of v.
 func (v ErrorCode) String() string {
-	return stringsErrorCode[v.Tag()]
+	return _ErrorCodeStrings[v.Tag()]
 }
 
 // HeaderError represents the variant "wasi:http/types@0.2.1#header-error".
@@ -823,7 +823,7 @@ const (
 	HeaderErrorImmutable
 )
 
-var stringsHeaderError = [3]string{
+var _HeaderErrorStrings = [3]string{
 	"invalid-syntax",
 	"forbidden",
 	"immutable",
@@ -831,8 +831,21 @@ var stringsHeaderError = [3]string{
 
 // String implements [fmt.Stringer], returning the enum case name of e.
 func (e HeaderError) String() string {
-	return stringsHeaderError[e]
+	return _HeaderErrorStrings[e]
 }
+
+// MarshalText implements [encoding.TextMarshaler].
+func (e HeaderError) MarshalText() ([]byte, error) {
+	return []byte(e.String()), nil
+}
+
+// UnmarshalText implements [encoding.TextUnmarshaler], unmarshaling into an enum
+// case. Returns an error if the supplied text is not one of the enum cases.
+func (e *HeaderError) UnmarshalText(text []byte) error {
+	return _HeaderErrorUnmarshalCase(e, text)
+}
+
+var _HeaderErrorUnmarshalCase = cm.CaseUnmarshaler[HeaderError](_HeaderErrorStrings[:])
 
 // FieldKey represents the string "wasi:http/types@0.2.1#field-key".
 //
@@ -1022,7 +1035,7 @@ func (self Fields) Has(name FieldKey) (result bool) {
 	self0 := cm.Reinterpret[uint32](self)
 	name0, name1 := cm.LowerString(name)
 	result0 := wasmimport_FieldsHas((uint32)(self0), (*uint8)(name0), (uint32)(name1))
-	result = cm.U32ToBool((uint32)(result0))
+	result = (bool)(cm.U32ToBool((uint32)(result0)))
 	return
 }
 
@@ -1312,7 +1325,7 @@ func (self OutgoingRequest) SetAuthority(authority cm.Option[string]) (result cm
 	self0 := cm.Reinterpret[uint32](self)
 	authority0, authority1, authority2 := lower_OptionString(authority)
 	result0 := wasmimport_OutgoingRequestSetAuthority((uint32)(self0), (uint32)(authority0), (*uint8)(authority1), (uint32)(authority2))
-	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
+	result = (cm.BoolResult)((bool)(cm.U32ToBool((uint32)(result0))))
 	return
 }
 
@@ -1328,7 +1341,7 @@ func (self OutgoingRequest) SetMethod(method Method) (result cm.BoolResult) {
 	self0 := cm.Reinterpret[uint32](self)
 	method0, method1, method2 := lower_Method(method)
 	result0 := wasmimport_OutgoingRequestSetMethod((uint32)(self0), (uint32)(method0), (*uint8)(method1), (uint32)(method2))
-	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
+	result = (cm.BoolResult)((bool)(cm.U32ToBool((uint32)(result0))))
 	return
 }
 
@@ -1345,7 +1358,7 @@ func (self OutgoingRequest) SetPathWithQuery(pathWithQuery cm.Option[string]) (r
 	self0 := cm.Reinterpret[uint32](self)
 	pathWithQuery0, pathWithQuery1, pathWithQuery2 := lower_OptionString(pathWithQuery)
 	result0 := wasmimport_OutgoingRequestSetPathWithQuery((uint32)(self0), (uint32)(pathWithQuery0), (*uint8)(pathWithQuery1), (uint32)(pathWithQuery2))
-	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
+	result = (cm.BoolResult)((bool)(cm.U32ToBool((uint32)(result0))))
 	return
 }
 
@@ -1362,7 +1375,7 @@ func (self OutgoingRequest) SetScheme(scheme cm.Option[Scheme]) (result cm.BoolR
 	self0 := cm.Reinterpret[uint32](self)
 	scheme0, scheme1, scheme2, scheme3 := lower_OptionScheme(scheme)
 	result0 := wasmimport_OutgoingRequestSetScheme((uint32)(self0), (uint32)(scheme0), (uint32)(scheme1), (*uint8)(scheme2), (uint32)(scheme3))
-	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
+	result = (cm.BoolResult)((bool)(cm.U32ToBool((uint32)(result0))))
 	return
 }
 
@@ -1455,7 +1468,7 @@ func (self RequestOptions) SetBetweenBytesTimeout(duration cm.Option[Duration]) 
 	self0 := cm.Reinterpret[uint32](self)
 	duration0, duration1 := lower_OptionDuration(duration)
 	result0 := wasmimport_RequestOptionsSetBetweenBytesTimeout((uint32)(self0), (uint32)(duration0), (uint64)(duration1))
-	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
+	result = (cm.BoolResult)((bool)(cm.U32ToBool((uint32)(result0))))
 	return
 }
 
@@ -1471,7 +1484,7 @@ func (self RequestOptions) SetConnectTimeout(duration cm.Option[Duration]) (resu
 	self0 := cm.Reinterpret[uint32](self)
 	duration0, duration1 := lower_OptionDuration(duration)
 	result0 := wasmimport_RequestOptionsSetConnectTimeout((uint32)(self0), (uint32)(duration0), (uint64)(duration1))
-	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
+	result = (cm.BoolResult)((bool)(cm.U32ToBool((uint32)(result0))))
 	return
 }
 
@@ -1487,7 +1500,7 @@ func (self RequestOptions) SetFirstByteTimeout(duration cm.Option[Duration]) (re
 	self0 := cm.Reinterpret[uint32](self)
 	duration0, duration1 := lower_OptionDuration(duration)
 	result0 := wasmimport_RequestOptionsSetFirstByteTimeout((uint32)(self0), (uint32)(duration0), (uint64)(duration1))
-	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
+	result = (cm.BoolResult)((bool)(cm.U32ToBool((uint32)(result0))))
 	return
 }
 
@@ -1831,7 +1844,7 @@ func (self OutgoingResponse) SetStatusCode(statusCode StatusCode) (result cm.Boo
 	self0 := cm.Reinterpret[uint32](self)
 	statusCode0 := (uint32)(statusCode)
 	result0 := wasmimport_OutgoingResponseSetStatusCode((uint32)(self0), (uint32)(statusCode0))
-	result = (cm.BoolResult)(cm.U32ToBool((uint32)(result0)))
+	result = (cm.BoolResult)((bool)(cm.U32ToBool((uint32)(result0))))
 	return
 }
 
