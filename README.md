@@ -7,6 +7,20 @@
 
 Currently, `wadge` supports Go applications written for compilation to WebAssembly components.
 
+## Development
+
+For quick iterations:
+
+```
+go generate -tags=dev ./... && go test ./...
+```
+
+Release build:
+
+```
+go generate ./... && go test ./...
+```
+
 ## Bridging Wasm functions and native code
 
 In the testing case, when you write a component using [WebAssembly Interface Type (WIT)](https://component-model.bytecodealliance.org/design/wit.html) interfaces, standard Go tools like `go test` don’t know how to natively stub the interfaces.
