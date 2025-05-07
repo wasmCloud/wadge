@@ -28,8 +28,8 @@ wasmtime = { workspace = true, features = [
     "runtime",
     "wat",
 ] }
+wasmtime-cabish = { workspace = true }
 wasmtime-wasi = { workspace = true }
 wasmtime-wasi-http = { workspace = true }
 wasmtime-wasi-keyvalue = { workspace = true }
-wasmtime-wasi-runtime-config = { workspace = true }
 wit-component = { workspace = true }
