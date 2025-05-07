@@ -28,7 +28,7 @@ http = { version = "1", default-features = false }
 tokio = { version = "1", default-features = false }
 tracing = { version = "0.1", default-features = false }
 tracing-subscriber = { version = "0.3", default-features = false }
-wadge = { version = "0.4", path = "./crates/wadge" }
+wadge = { version = "0.5", path = "./crates/wadge" }
 wasi-passthrough = { version = "0.4", default-features = false }
 wasi-passthrough-ext = { version = "0.2", default-features = false }
 wasi-passthrough-keyvalue = { version = "0.2", default-features = false }
