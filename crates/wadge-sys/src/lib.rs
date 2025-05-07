@@ -8,8 +8,7 @@ use anyhow::{bail, ensure, Context as _};
 use tracing::{instrument, trace_span};
 use tracing_subscriber::EnvFilter;
 use wasmtime::component::{Resource, ResourceAny, Val};
-use wasmtime_cabish::{deref_arg, lift_params, lower_results};
-use wasmtime_wasi::WasiView;
+use wasmtime_cabish::{deref_arg, lift_params, lower_results, CabishView};
 
 mod ffi;
 
@@ -80,7 +79,9 @@ fn call(
         let (rep, _) = deref_arg::<u32>(args)?;
         let rep = unsafe { rep.read() };
         let store = inst.store();
-        let res = WasiView::table(store.data_mut())
+        let res = store
+            .data_mut()
+            .table()
             .delete::<ResourceAny>(Resource::new_own(rep))
             .with_context(|| format!("failed to delete `{ty}` from table"))?;
         res.resource_drop(store)
@@ -89,7 +90,11 @@ fn call(
         let mut func = inst
             .func(instance, name)
             .context("failed to lookup function")?;
-        let tys = func.params();
+        let tys = func
+            .params()
+            .iter()
+            .map(|(_, ty)| ty.clone())
+            .collect::<Vec<_>>();
         let (params, args) =
             lift_params(func.store(), &tys, args).context("failed to lift parameters")?;
         let results_ty = func.results();

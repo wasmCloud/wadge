@@ -7,11 +7,11 @@ use wasi_preview1_component_adapter_provider::{
 };
 use wasmtime::component::{Component, Linker, Resource, ResourceTable, Type, TypedFunc, Val};
 use wasmtime::{AsContext as _, AsContextMut as _, Engine, Store};
-use wasmtime_wasi::{WasiCtx, WasiCtxBuilder, WasiView};
+use wasmtime_cabish::CabishView;
+use wasmtime_wasi::{IoView, WasiCtx, WasiCtxBuilder, WasiView};
 use wasmtime_wasi_http::types::HostIncomingRequest;
 use wasmtime_wasi_http::{WasiHttpCtx, WasiHttpView};
 use wasmtime_wasi_keyvalue::{WasiKeyValue, WasiKeyValueCtx};
-use wasmtime_wasi_runtime_config::{WasiRuntimeConfig, WasiRuntimeConfigVariables};
 
 mod bindings {
     wasmtime::component::bindgen!({
@@ -31,25 +31,30 @@ struct Ctx {
     wasi: WasiCtx,
     http: WasiHttpCtx,
     kv: WasiKeyValueCtx,
-    conf: WasiRuntimeConfigVariables,
     table: ResourceTable,
+}
+
+impl IoView for Ctx {
+    fn table(&mut self) -> &mut ResourceTable {
+        &mut self.table
+    }
+}
+
+impl CabishView for Ctx {
+    fn table(&mut self) -> &mut ResourceTable {
+        &mut self.table
+    }
 }
 
 impl WasiView for Ctx {
     fn ctx(&mut self) -> &mut WasiCtx {
         &mut self.wasi
     }
-    fn table(&mut self) -> &mut ResourceTable {
-        &mut self.table
-    }
 }
 
 impl WasiHttpView for Ctx {
     fn ctx(&mut self) -> &mut WasiHttpCtx {
         &mut self.http
-    }
-    fn table(&mut self) -> &mut ResourceTable {
-        &mut self.table
     }
 }
 
@@ -77,7 +82,8 @@ impl bindings::wasiext::http::ext::Host for Ctx {
         let (res_tx, res_rx) = tokio::sync::oneshot::channel();
         let out = WasiHttpView::new_response_outparam(self, res_tx)
             .context("failed to construct `response-outparam`")?;
-        let res = WasiHttpView::table(self)
+        let res = self
+            .table
             .push(
                 wasmtime_wasi_http::types::HostFutureIncomingResponse::Pending(
                     wasmtime_wasi::runtime::spawn(async {
@@ -108,7 +114,8 @@ impl bindings::wasiext::http::ext::Host for Ctx {
             path_with_query,
             headers,
             body,
-        } = WasiHttpView::table(self)
+        } = self
+            .table
             .delete(req)
             .context("failed to delete outgoing request")?;
 
@@ -182,7 +189,7 @@ impl bindings::wasiext::http::ext::Host for Ctx {
             }),
         )
         .context("failed to construct `incoming-request`")?;
-        WasiHttpView::table(self)
+        self.table
             .push(req)
             .context("failed to push `incoming-request` into resource table")
     }
@@ -200,7 +207,7 @@ pub struct Func<'a> {
 
 impl Func<'_> {
     #[must_use]
-    pub fn params(&self) -> Box<[Type]> {
+    pub fn params(&self) -> Box<[(String, Type)]> {
         self.func.params(self.store.as_context())
     }
 
@@ -218,7 +225,7 @@ impl Func<'_> {
             .context("failed to invoke `post-return`")
     }
 
-    pub fn store(&mut self) -> &mut Store<impl WasiView + WasiHttpView> {
+    pub fn store(&mut self) -> &mut Store<impl CabishView + WasiView + WasiHttpView> {
         self.store
     }
 }
@@ -278,7 +285,7 @@ impl Instance {
             .context("failed to call function")
     }
 
-    pub fn store(&mut self) -> &mut Store<impl WasiView + WasiHttpView> {
+    pub fn store(&mut self) -> &mut Store<impl CabishView + WasiView + WasiHttpView> {
         &mut self.store
     }
 }
@@ -310,8 +317,6 @@ pub fn instantiate(Config { engine, wasm }: Config) -> anyhow::Result<Instance> 
         WasiKeyValue::new(&cx.kv, &mut cx.table)
     })
     .context("failed to link `wasi:keyvalue`")?;
-    wasmtime_wasi_runtime_config::add_to_linker(&mut linker, |cx| WasiRuntimeConfig::new(&cx.conf))
-        .context("failed to link `wasi:keyvalue`")?;
     bindings::wasiext::http::ext::add_to_linker(&mut linker, |cx| cx)
         .context("failed to link `wasiext:http/ext`")?;
     bindings::wasi::logging::logging::add_to_linker(&mut linker, |cx| cx)
@@ -325,7 +330,6 @@ pub fn instantiate(Config { engine, wasm }: Config) -> anyhow::Result<Instance> 
         .build();
     let http = WasiHttpCtx::new();
     let kv = WasiKeyValueCtx::builder().build();
-    let conf = WasiRuntimeConfigVariables::default();
     let table = ResourceTable::new();
     let mut store = Store::new(
         &engine,
@@ -333,7 +337,6 @@ pub fn instantiate(Config { engine, wasm }: Config) -> anyhow::Result<Instance> 
             wasi,
             http,
             kv,
-            conf,
             table,
         },
     );
