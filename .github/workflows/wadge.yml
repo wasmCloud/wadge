@@ -82,7 +82,7 @@ jobs:
       - uses: ./.github/actions/install-nix
         with:
           cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix profile install --inputs-from . '.#rust' 'nixpkgs#wasm-tools'
+      - run: nix profile install --inputs-from . '.#rust' 'nixpkgs-unstable#wasm-tools'
       - run: cargo build -p wadge-passthrough --target wasm32-unknown-unknown --release
       - run: wasm-tools component new target/wasm32-unknown-unknown/release/wadge_passthrough.wasm -o lib/passthrough.wasm
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
