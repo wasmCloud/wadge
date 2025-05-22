@@ -24,6 +24,8 @@ wasmtime = { workspace = true, features = [
     "cranelift",
     "demangle",
     "gc",
+    "gc-drc",
+    "gc-null",
     "parallel-compilation",
     "runtime",
     "wat",
