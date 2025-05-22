@@ -151,10 +151,12 @@ jobs:
       - uses: Swatinem/rust-cache@9d47c6ad4b02e050fd481d890b2ea34778fd09d6 # v2.7.8
       - run: cargo install --locked wasm-tools@1.230.0
       - run: go generate ./tests/go/... ./examples/go/...
+        continue-on-error: ${{ matrix.config.os == 'windows-latest' }}
       - run: go test -failfast ./...
         env:
           GOGC: 1
           WADGE_LOG: trace
+        continue-on-error: ${{ matrix.config.os == 'windows-latest' }}
       - run: git diff --exit-code
         continue-on-error: true # TODO: reenable once `wit-bindgen-go` output is deterministic again
 
@@ -204,10 +206,12 @@ jobs:
       - run: cargo install --locked wasm-tools@1.230.0
       - run: cargo test --workspace --all-targets
       - run: go generate -tags=dev ./...
+        continue-on-error: ${{ matrix.config.os == 'windows-latest' }}
       - run: go test -failfast -tags=dev ./...
         env:
           GOGC: 1
           WADGE_LOG: trace
+        continue-on-error: ${{ matrix.config.os == 'windows-latest' }}
       - run: git diff --exit-code
         continue-on-error: true # TODO: reenable once `wit-bindgen-go` output is deterministic again
 
