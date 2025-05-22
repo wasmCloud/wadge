@@ -40,6 +40,5 @@ wasmtime-cabish = { version = "0.3", default-features = false }
 wasmtime-wasi = { version = "32", default-features = false }
 wasmtime-wasi-http = { version = "32", default-features = false }
 wasmtime-wasi-keyvalue = { version = "32", default-features = false }
-wasmtime-wasi-runtime-config = { version = "26", default-features = false }
-wit-bindgen = { version = "0.34", default-features = false }
+wit-bindgen = { version = "0.42", default-features = false }
 wit-component = { version = "0.217", default-features = false }
