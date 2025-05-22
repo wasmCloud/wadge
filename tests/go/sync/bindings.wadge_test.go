@@ -16,42 +16,6 @@ const _ string = runtime.Compiler
 
 var _ unsafe.Pointer
 
-//go:linkname wasmimport_errorContextDebugMessage go.bytecodealliance.org/cm.wasmimport_errorContextDebugMessage
-func wasmimport_errorContextDebugMessage(err uint32, msg unsafe.Pointer) {
-	var __p runtime.Pinner
-	defer __p.Unpin()
-	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("canon", "error-context.debug-message", func() unsafe.Pointer {
-			ptr := unsafe.Pointer(&err)
-			__p.Pin(ptr)
-			return ptr
-		}(), func() unsafe.Pointer {
-			ptr := unsafe.Pointer(&msg)
-			__p.Pin(ptr)
-			return ptr
-		}())
-	}); __err != nil {
-		wadge.CurrentErrorHandler()(__err)
-	}
-	return
-}
-
-//go:linkname wasmimport_errorContextDrop go.bytecodealliance.org/cm.wasmimport_errorContextDrop
-func wasmimport_errorContextDrop(err uint32) {
-	var __p runtime.Pinner
-	defer __p.Unpin()
-	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("canon", "error-context.drop", func() unsafe.Pointer {
-			ptr := unsafe.Pointer(&err)
-			__p.Pin(ptr)
-			return ptr
-		}())
-	}); __err != nil {
-		wadge.CurrentErrorHandler()(__err)
-	}
-	return
-}
-
 //go:linkname wasmimport_NewRes go.wasmcloud.dev/wadge/tests/go/sync/bindings/wadge-test/sync/sync.wasmimport_NewRes
 func wasmimport_NewRes() (result0 uint32) {
 	var __p runtime.Pinner
