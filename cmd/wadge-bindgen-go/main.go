@@ -259,7 +259,7 @@ func generate(path string) error {
 					pos := pkg.Fset.Position(dir.Pos())
 					return fmt.Errorf("%s:%d: unexpected `go:wasmimport` directive format: %s", pos.Filename, pos.Line, dir.Text)
 				}
-				if instance == "gojs" {
+				if instance == "gojs" || instance == "canon" {
 					continue
 				}
 
