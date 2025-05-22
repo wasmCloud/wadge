@@ -47,7 +47,7 @@ const (
 	LevelCritical
 )
 
-var stringsLevel = [6]string{
+var _LevelStrings = [6]string{
 	"trace",
 	"debug",
 	"info",
@@ -58,8 +58,21 @@ var stringsLevel = [6]string{
 
 // String implements [fmt.Stringer], returning the enum case name of e.
 func (e Level) String() string {
-	return stringsLevel[e]
+	return _LevelStrings[e]
 }
+
+// MarshalText implements [encoding.TextMarshaler].
+func (e Level) MarshalText() ([]byte, error) {
+	return []byte(e.String()), nil
+}
+
+// UnmarshalText implements [encoding.TextUnmarshaler], unmarshaling into an enum
+// case. Returns an error if the supplied text is not one of the enum cases.
+func (e *Level) UnmarshalText(text []byte) error {
+	return _LevelUnmarshalCase(e, text)
+}
+
+var _LevelUnmarshalCase = cm.CaseUnmarshaler[Level](_LevelStrings[:])
 
 // Log represents the imported function "log".
 //

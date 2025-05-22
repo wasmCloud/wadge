@@ -23,7 +23,6 @@ mod bindings {
             "wasi:http/types@0.2.1/outgoing-request": wasmtime_wasi_http::bindings::http::types::OutgoingRequest,
             "wasi:http/types@0.2.1/response-outparam": wasmtime_wasi_http::bindings::http::types::ResponseOutparam,
         },
-        world: "imports",
     });
 }
 

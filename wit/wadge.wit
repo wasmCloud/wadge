@@ -1,6 +1,6 @@
 package wadge:wadge@0.1.0;
 
-world imports {
+world importsx {
     include wasiext:http/imports@0.1.0;
 
     import wasi:logging/logging@0.1.0-draft;

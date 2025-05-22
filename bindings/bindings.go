@@ -1511,42 +1511,6 @@ func wasmimport_ErrorToDebugString(self0 uint32, result *string) {
 	return
 }
 
-//go:linkname wasmimport_ErrorToDebugString go.wasmcloud.dev/wadge/bindings/wasi/io/error.wasmimport_ErrorToDebugString
-func wasmimport_ErrorToDebugString(self0 uint32, result *string) {
-	var __p runtime.Pinner
-	defer __p.Unpin()
-	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wasi:io/error@0.2.1", "[method]error.to-debug-string", func() unsafe.Pointer {
-			ptr := unsafe.Pointer(&self0)
-			__p.Pin(ptr)
-			return ptr
-		}(), func() unsafe.Pointer {
-			ptr := unsafe.Pointer(result)
-			__p.Pin(ptr)
-			return ptr
-		}())
-	}); __err != nil {
-		wadge.CurrentErrorHandler()(__err)
-	}
-	return
-}
-
-//go:linkname wasmimport_ErrorResourceDrop go.wasmcloud.dev/wadge/bindings/wasi/io/error.wasmimport_ErrorResourceDrop
-func wasmimport_ErrorResourceDrop(self0 uint32) {
-	var __p runtime.Pinner
-	defer __p.Unpin()
-	if __err := wadge.WithCurrentInstance(func(__instance *wadge.Instance) error {
-		return __instance.Call("wasi:io/error@0.2.1", "[resource-drop]error", func() unsafe.Pointer {
-			ptr := unsafe.Pointer(&self0)
-			__p.Pin(ptr)
-			return ptr
-		}())
-	}); __err != nil {
-		wadge.CurrentErrorHandler()(__err)
-	}
-	return
-}
-
 //go:linkname wasmimport_ErrorResourceDrop go.wasmcloud.dev/wadge/bindings/wasi/io/error.wasmimport_ErrorResourceDrop
 func wasmimport_ErrorResourceDrop(self0 uint32) {
 	var __p runtime.Pinner

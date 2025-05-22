@@ -11,8 +11,8 @@ package streams
 
 import (
 	"go.bytecodealliance.org/cm"
-	ioerror "go.wasmcloud.dev/wadge/bindings/wasi/io/error"
-	"go.wasmcloud.dev/wadge/bindings/wasi/io/poll"
+	ioerror "go.wasmcloud.dev/wadge/internal/generate/bindings/wasi/io/error"
+	"go.wasmcloud.dev/wadge/internal/generate/bindings/wasi/io/poll"
 )
 
 // Error represents the imported type alias "wasi:io/streams@0.2.1#error".
