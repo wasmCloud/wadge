@@ -158,7 +158,6 @@ jobs:
           WADGE_LOG: trace
         continue-on-error: ${{ matrix.config.os == 'windows-latest' }}
       - run: git diff --exit-code
-        continue-on-error: true # TODO: reenable once `wit-bindgen-go` output is deterministic again
 
   test-dev:
     strategy:
@@ -213,7 +212,6 @@ jobs:
           WADGE_LOG: trace
         continue-on-error: ${{ matrix.config.os == 'windows-latest' }}
       - run: git diff --exit-code
-        continue-on-error: true # TODO: reenable once `wit-bindgen-go` output is deterministic again
 
   gofmt:
     if: ${{ !startsWith(github.ref, 'refs/tags/crates/') }}
