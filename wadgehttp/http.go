@@ -41,27 +41,27 @@ func NewOutgoingRequest(req *http.Request) (types.OutgoingRequest, func(func(pol
 	}
 	res := types.NewOutgoingRequest(NewFields(req.Header))
 	if s := req.URL.RequestURI(); s != "" {
-		if res.SetPathWithQuery(cm.Some(s)) {
+		if res.SetPathWithQuery(cm.Some(s)) == cm.ResultErr {
 			return 0, nil, fmt.Errorf("failed to set path with query to `%s`", s)
 		}
 	}
 	if s := req.URL.Hostname(); s != "" {
-		if res.SetAuthority(cm.Some(s)) {
+		if res.SetAuthority(cm.Some(s)) == cm.ResultErr {
 			return 0, nil, fmt.Errorf("failed to set authority to `%s`", s)
 		}
 	}
 	if s := req.URL.Scheme; s != "" {
 		switch s {
 		case "http":
-			if res.SetScheme(cm.Some(types.SchemeHTTP())) {
+			if res.SetScheme(cm.Some(types.SchemeHTTP())) == cm.ResultErr {
 				return 0, nil, errors.New("failed to set scheme to HTTP")
 			}
 		case "https":
-			if res.SetScheme(cm.Some(types.SchemeHTTPS())) {
+			if res.SetScheme(cm.Some(types.SchemeHTTPS())) == cm.ResultErr {
 				return 0, nil, errors.New("failed to set scheme to HTTPS")
 			}
 		default:
-			if res.SetScheme(cm.Some(types.SchemeOther(s))) {
+			if res.SetScheme(cm.Some(types.SchemeOther(s))) == cm.ResultErr {
 				return 0, nil, fmt.Errorf("failed to set scheme to `%s`", s)
 			}
 		}
@@ -69,43 +69,43 @@ func NewOutgoingRequest(req *http.Request) (types.OutgoingRequest, func(func(pol
 
 	switch req.Method {
 	case "", http.MethodGet:
-		if res.SetMethod(types.MethodGet()) {
+		if res.SetMethod(types.MethodGet()) == cm.ResultErr {
 			return 0, nil, errors.New("failed to set method to GET")
 		}
 	case http.MethodHead:
-		if res.SetMethod(types.MethodHead()) {
+		if res.SetMethod(types.MethodHead()) == cm.ResultErr {
 			return 0, nil, errors.New("failed to set method to HEAD")
 		}
 	case http.MethodPost:
-		if res.SetMethod(types.MethodPost()) {
+		if res.SetMethod(types.MethodPost()) == cm.ResultErr {
 			return 0, nil, errors.New("failed to set method to POST")
 		}
 	case http.MethodPut:
-		if res.SetMethod(types.MethodPut()) {
+		if res.SetMethod(types.MethodPut()) == cm.ResultErr {
 			return 0, nil, errors.New("failed to set method to PUT")
 		}
 	case http.MethodPatch:
-		if res.SetMethod(types.MethodPatch()) {
+		if res.SetMethod(types.MethodPatch()) == cm.ResultErr {
 			return 0, nil, errors.New("failed to set method to PATCH")
 		}
 	case http.MethodDelete:
-		if res.SetMethod(types.MethodDelete()) {
+		if res.SetMethod(types.MethodDelete()) == cm.ResultErr {
 			return 0, nil, errors.New("failed to set method to DELETE")
 		}
 	case http.MethodConnect:
-		if res.SetMethod(types.MethodConnect()) {
+		if res.SetMethod(types.MethodConnect()) == cm.ResultErr {
 			return 0, nil, errors.New("failed to set method to CONNECT")
 		}
 	case http.MethodOptions:
-		if res.SetMethod(types.MethodOptions()) {
+		if res.SetMethod(types.MethodOptions()) == cm.ResultErr {
 			return 0, nil, errors.New("failed to set method to OPTIONS")
 		}
 	case http.MethodTrace:
-		if res.SetMethod(types.MethodTrace()) {
+		if res.SetMethod(types.MethodTrace()) == cm.ResultErr {
 			return 0, nil, errors.New("failed to set method to TRACE")
 		}
 	default:
-		if res.SetMethod(types.MethodOther(req.Method)) {
+		if res.SetMethod(types.MethodOther(req.Method)) == cm.ResultErr {
 			return 0, nil, fmt.Errorf("failed to set method to `%s`", req.Method)
 		}
 	}
