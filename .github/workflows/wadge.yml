@@ -149,7 +149,7 @@ jobs:
           go-version-file: go.mod
       - run: rustup show
       - uses: Swatinem/rust-cache@9d47c6ad4b02e050fd481d890b2ea34778fd09d6 # v2.7.8
-      - run: cargo install wasm-tools@1.217.0
+      - run: cargo install wasm-tools@1.230.0
       - run: go generate ./tests/go/... ./examples/go/...
       - run: go test -failfast ./...
         env:
@@ -201,7 +201,7 @@ jobs:
       - run: rustup show
 
       - uses: Swatinem/rust-cache@9d47c6ad4b02e050fd481d890b2ea34778fd09d6 # v2.7.8
-      - run: cargo install wasm-tools@1.217.0
+      - run: cargo install wasm-tools@1.230.0
       - run: cargo test --workspace --all-targets
       - run: go generate -tags=dev ./...
       - run: go test -failfast -tags=dev ./...
@@ -238,7 +238,7 @@ jobs:
       - uses: ./.github/actions/install-nix
         with:
           cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      - run: nix profile install -L --inputs-from . 'nixpkgs-unstable#go'
+      - run: nix profile install --inputs-from . 'nixpkgs-unstable#go'
       - run: go work vendor -e -v
         if: ${{ matrix.check }} == "nextest" 
       - run: git add .
