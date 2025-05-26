@@ -4,7 +4,7 @@ go 1.24
 
 require (
 	github.com/stretchr/testify v1.10.0
-	go.bytecodealliance.org/cm v0.2.3-0.20250520224056-999af0bcfafa
+	go.bytecodealliance.org/cm v0.3.0
 	golang.org/x/tools v0.33.0
 )
 
