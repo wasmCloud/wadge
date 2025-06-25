@@ -1959,9 +1959,9 @@ dependencies = [
 
 [[package]]
 name = "wasi-preview1-component-adapter-provider"
-version = "32.0.0"
+version = "32.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b39db85426b37034c166ac9acd7f94d808d9e9633b5d22ba5596c392e45b7549"
+checksum = "a96ddf1e113fa4ca8c8162fd93089b1c59e0e5038585fbeedda67b40c63ca2e7"
 
 [[package]]
 name = "wasi-test-component"
