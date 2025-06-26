@@ -2457,9 +2457,9 @@ dependencies = [
 
 [[package]]
 name = "wasmtime-wasi-keyvalue"
-version = "32.0.0"
+version = "32.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "63b5d70487f0b10ec032c6c468e4fa7b907717729009f061d292b18b4bb4e417"
+checksum = "d75a0a2fd6041fe7182d7553b36351525bd0e70605b5259ebf5cfd9fb58e40a9"
 dependencies = [
  "anyhow",
  "wasmtime",
