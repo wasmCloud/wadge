@@ -38,7 +38,7 @@ jobs:
     name: wadge-${{ matrix.target }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/install-nix
         with:
           cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
@@ -61,7 +61,7 @@ jobs:
     name: wadge-${{ matrix.config.target }}
     runs-on: ${{ matrix.config.os }}
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - run: rustup show
       - uses: Swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 # v2.8.0
       - run: cargo build -p wadge-sys --release --target ${{ matrix.config.target }}
@@ -78,7 +78,7 @@ jobs:
     name: passthrough.wasm
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/install-nix
         with:
           cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
@@ -135,7 +135,7 @@ jobs:
       - run: git config --global core.autocrlf input
         if: matrix.config.os == 'windows-latest'
 
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
         with:
           name: passthrough
@@ -192,7 +192,7 @@ jobs:
       - run: git config --global core.autocrlf input
         if: matrix.config.os == 'windows-latest'
 
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
         with:
           go-version-file: go.mod
@@ -217,7 +217,7 @@ jobs:
     if: ${{ !startsWith(github.ref, 'refs/tags/crates/') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
         with:
           go-version-file: go.mod
@@ -236,7 +236,7 @@ jobs:
     name: cargo ${{ matrix.check }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/install-nix
         with:
           cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
@@ -268,7 +268,7 @@ jobs:
       - cargo
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Extract tag context
         id: ctx
@@ -304,7 +304,7 @@ jobs:
     if: ${{ !startsWith(github.ref, 'refs/tags/crates/') }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: ./.github/actions/install-nix
         with:
           cachixAuthToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
@@ -350,7 +350,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Extract tag context
         id: ctx
