@@ -3,7 +3,7 @@ module go.wasmcloud.dev/wadge
 go 1.24
 
 require (
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.1
 	go.bytecodealliance.org/cm v0.3.0
 	golang.org/x/tools v0.36.0
 )
