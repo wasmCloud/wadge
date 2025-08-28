@@ -18,7 +18,7 @@ require (
 	github.com/regclient/regclient v0.8.3 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/tetratelabs/wazero v1.9.0 // indirect
-	github.com/ulikunitz/xz v0.5.12 // indirect
+	github.com/ulikunitz/xz v0.5.14 // indirect
 	github.com/urfave/cli/v3 v3.3.3 // indirect
 	go.bytecodealliance.org v0.6.3-0.20250520224056-999af0bcfafa // indirect
 	golang.org/x/mod v0.27.0 // indirect
