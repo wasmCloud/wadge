@@ -32,6 +32,6 @@ wasmtime = { workspace = true, features = [
 ] }
 wasmtime-cabish = { workspace = true }
 wasmtime-wasi = { workspace = true }
-wasmtime-wasi-http = { workspace = true }
+wasmtime-wasi-http = { workspace = true, features = ["default-send-request"] }
 wasmtime-wasi-keyvalue = { workspace = true }
 wit-component = { workspace = true }

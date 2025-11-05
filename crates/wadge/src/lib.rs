@@ -5,17 +5,19 @@ use tracing::{info, instrument};
 use wasi_preview1_component_adapter_provider::{
     WASI_SNAPSHOT_PREVIEW1_ADAPTER_NAME, WASI_SNAPSHOT_PREVIEW1_REACTOR_ADAPTER,
 };
-use wasmtime::component::{Component, Linker, Resource, ResourceTable, Type, TypedFunc, Val};
+use wasmtime::component::{
+    Component, HasSelf, Linker, Resource, ResourceTable, Type, TypedFunc, Val,
+};
 use wasmtime::{AsContext as _, AsContextMut as _, Engine, Store};
 use wasmtime_cabish::CabishView;
-use wasmtime_wasi::{IoView, WasiCtx, WasiCtxBuilder, WasiView};
+use wasmtime_wasi::{WasiCtx, WasiCtxBuilder, WasiCtxView, WasiView};
 use wasmtime_wasi_http::types::HostIncomingRequest;
 use wasmtime_wasi_http::{WasiHttpCtx, WasiHttpView};
 use wasmtime_wasi_keyvalue::{WasiKeyValue, WasiKeyValueCtx};
 
 mod bindings {
     wasmtime::component::bindgen!({
-        trappable_imports: true,
+        imports: { default: trappable },
         with: {
             "wasi:http/types@0.2.1/fields": wasmtime_wasi_http::bindings::http::types::Fields,
             "wasi:http/types@0.2.1/future-incoming-response": wasmtime_wasi_http::bindings::http::types::FutureIncomingResponse,
@@ -33,27 +35,28 @@ struct Ctx {
     table: ResourceTable,
 }
 
-impl IoView for Ctx {
+impl WasiView for Ctx {
+    fn ctx(&mut self) -> WasiCtxView<'_> {
+        WasiCtxView {
+            ctx: &mut self.wasi,
+            table: &mut self.table,
+        }
+    }
+}
+
+impl WasiHttpView for Ctx {
     fn table(&mut self) -> &mut ResourceTable {
         &mut self.table
+    }
+
+    fn ctx(&mut self) -> &mut WasiHttpCtx {
+        &mut self.http
     }
 }
 
 impl CabishView for Ctx {
     fn table(&mut self) -> &mut ResourceTable {
         &mut self.table
-    }
-}
-
-impl WasiView for Ctx {
-    fn ctx(&mut self) -> &mut WasiCtx {
-        &mut self.wasi
-    }
-}
-
-impl WasiHttpView for Ctx {
-    fn ctx(&mut self) -> &mut WasiHttpCtx {
-        &mut self.http
     }
 }
 
@@ -235,12 +238,12 @@ pub struct Instance {
 }
 
 impl Instance {
-    pub fn func(&mut self, instance: &str, name: &str) -> anyhow::Result<Func> {
-        let idx = self
+    pub fn func(&mut self, instance: &str, name: &str) -> anyhow::Result<Func<'_>> {
+        let (_, idx) = self
             .instance
             .get_export(&mut self.store, None, instance)
             .with_context(|| format!("export `{instance}` not found"))?;
-        let idx = self
+        let (_, idx) = self
             .instance
             .get_export(&mut self.store, Some(&idx), name)
             .with_context(|| format!("export `{name}` not found"))?;
@@ -309,16 +312,16 @@ pub fn instantiate(Config { engine, wasm }: Config) -> anyhow::Result<Instance> 
     let wasm = Component::new(&engine, wasm).context("failed to compile component")?;
 
     let mut linker = Linker::<Ctx>::new(&engine);
-    wasmtime_wasi::add_to_linker_sync(&mut linker).context("failed to link WASI")?;
+    wasmtime_wasi::p2::add_to_linker_sync(&mut linker).context("failed to link WASI")?;
     wasmtime_wasi_http::add_only_http_to_linker_sync(&mut linker)
         .context("failed to link `wasi:http`")?;
     wasmtime_wasi_keyvalue::add_to_linker(&mut linker, |cx| {
         WasiKeyValue::new(&cx.kv, &mut cx.table)
     })
     .context("failed to link `wasi:keyvalue`")?;
-    bindings::wasiext::http::ext::add_to_linker(&mut linker, |cx| cx)
+    bindings::wasiext::http::ext::add_to_linker::<_, HasSelf<Ctx>>(&mut linker, |cx| cx)
         .context("failed to link `wasiext:http/ext`")?;
-    bindings::wasi::logging::logging::add_to_linker(&mut linker, |cx| cx)
+    bindings::wasi::logging::logging::add_to_linker::<_, HasSelf<Ctx>>(&mut linker, |cx| cx)
         .context("failed to link `wasi:logging/logging`")?;
 
     let wasi = WasiCtxBuilder::new()
