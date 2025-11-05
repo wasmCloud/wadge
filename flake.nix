@@ -39,6 +39,8 @@
       src = ./.;
       name = "wadge";
 
+      nixpkgsConfig.allowUnfree = true;
+
       overlays = [
         wit-deps.overlays.fenix
         wit-deps.overlays.default
