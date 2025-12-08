@@ -8,7 +8,7 @@ use wasi_preview1_component_adapter_provider::{
 use wasmtime::component::{
     Component, HasSelf, Linker, Resource, ResourceTable, Type, TypedFunc, Val,
 };
-use wasmtime::{AsContext as _, AsContextMut as _, Engine, Store};
+use wasmtime::{AsContextMut as _, Engine, Store};
 use wasmtime_cabish::CabishView;
 use wasmtime_wasi::{WasiCtx, WasiCtxBuilder, WasiCtxView, WasiView};
 use wasmtime_wasi_http::types::HostIncomingRequest;
@@ -19,11 +19,11 @@ mod bindings {
     wasmtime::component::bindgen!({
         imports: { default: trappable },
         with: {
-            "wasi:http/types@0.2.1/fields": wasmtime_wasi_http::bindings::http::types::Fields,
-            "wasi:http/types@0.2.1/future-incoming-response": wasmtime_wasi_http::bindings::http::types::FutureIncomingResponse,
-            "wasi:http/types@0.2.1/incoming-request": wasmtime_wasi_http::bindings::http::types::IncomingRequest,
-            "wasi:http/types@0.2.1/outgoing-request": wasmtime_wasi_http::bindings::http::types::OutgoingRequest,
-            "wasi:http/types@0.2.1/response-outparam": wasmtime_wasi_http::bindings::http::types::ResponseOutparam,
+            "wasi:http/types@0.2.1.fields": wasmtime_wasi_http::bindings::http::types::Fields,
+            "wasi:http/types@0.2.1.future-incoming-response": wasmtime_wasi_http::bindings::http::types::FutureIncomingResponse,
+            "wasi:http/types@0.2.1.incoming-request": wasmtime_wasi_http::bindings::http::types::IncomingRequest,
+            "wasi:http/types@0.2.1.outgoing-request": wasmtime_wasi_http::bindings::http::types::OutgoingRequest,
+            "wasi:http/types@0.2.1.response-outparam": wasmtime_wasi_http::bindings::http::types::ResponseOutparam,
         },
     });
 }
@@ -209,13 +209,17 @@ pub struct Func<'a> {
 
 impl Func<'_> {
     #[must_use]
-    pub fn params(&self) -> Box<[(String, Type)]> {
-        self.func.params(self.store.as_context())
+    pub fn params(&self) -> Box<[(Box<str>, Type)]> {
+        self.func
+            .ty(&self.store)
+            .params()
+            .map(|(name, ty)| (name.into(), ty))
+            .collect()
     }
 
     #[must_use]
     pub fn results(&self) -> Box<[Type]> {
-        self.func.results(self.store.as_context())
+        self.func.ty(&self.store).results().collect()
     }
 
     pub fn call(&mut self, params: &[Val], results: &mut [Val]) -> anyhow::Result<()> {
