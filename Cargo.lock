@@ -1794,7 +1794,7 @@ dependencies = [
  "tokio",
  "tracing",
  "wasi-preview1-component-adapter-provider",
- "wasmparser 0.241.2",
+ "wasmparser 0.243.0",
  "wasmtime",
  "wasmtime-cabish",
  "wasmtime-wasi",
@@ -2091,15 +2091,6 @@ dependencies = [
  "indexmap",
  "semver",
  "serde",
-]
-
-[[package]]
-name = "wasmparser"
-version = "0.241.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "46d90019b1afd4b808c263e428de644f3003691f243387d30d673211ee0cb8e8"
-dependencies = [
- "bitflags",
 ]
 
 [[package]]
