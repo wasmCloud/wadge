@@ -41,4 +41,4 @@ wasmtime-wasi = { version = "39", default-features = false }
 wasmtime-wasi-http = { version = "39", default-features = false }
 wasmtime-wasi-keyvalue = { version = "39", default-features = false }
 wit-bindgen = { version = "0.42", default-features = false }
-wit-component = { version = "0.217", default-features = false }
+wit-component = { version = "0.230", default-features = false }
