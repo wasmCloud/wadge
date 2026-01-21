@@ -44,7 +44,7 @@ func main() {
 		"go.bytecodealliance.org/cmd/wit-bindgen-go",
 		"generate",
 		"-w",
-		"importsx",
+		"imports",
 		"-o",
 		"bindings",
 		filepath.Join(Root, "wit"),
