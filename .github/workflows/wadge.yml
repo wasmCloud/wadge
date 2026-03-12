@@ -63,7 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - run: rustup show
-      - uses: Swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5 # v2.8.2
+      - uses: Swatinem/rust-cache@c676846f29d98ff6b0106d3608c7ffd4048af17b # v2.9.0
       - run: cargo build -p wadge-sys --release --target ${{ matrix.config.target }}
         env:
           MACOSX_DEPLOYMENT_TARGET: ${{ matrix.config.sdk }}
@@ -148,7 +148,7 @@ jobs:
         with:
           go-version-file: go.mod
       - run: rustup show
-      - uses: Swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5 # v2.8.2
+      - uses: Swatinem/rust-cache@c676846f29d98ff6b0106d3608c7ffd4048af17b # v2.9.0
       - run: cargo install --locked wasm-tools@1.230.0
       - run: go generate ./tests/go/... ./examples/go/...
         continue-on-error: ${{ matrix.config.os == 'windows-latest' }}
@@ -201,7 +201,7 @@ jobs:
         if: matrix.config.os == 'windows-latest'
       - run: rustup show
 
-      - uses: Swatinem/rust-cache@779680da715d629ac1d338a641029a2f4372abb5 # v2.8.2
+      - uses: Swatinem/rust-cache@c676846f29d98ff6b0106d3608c7ffd4048af17b # v2.9.0
       - run: cargo install --locked wasm-tools@1.230.0
       - run: cargo test --workspace --all-targets
       - run: go generate -tags=dev ./...
