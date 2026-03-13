@@ -146,7 +146,7 @@ impl bindings::wasiext::http::ext::Host for Ctx {
         let uri = uri.build().context("failed to build URI")?;
         let mut req = http::Request::builder();
         if let Some(h) = req.headers_mut() {
-            *h = headers;
+            *h = headers.into_inner();
         }
         let req = match &method {
             wasmtime_wasi_http::bindings::http::types::Method::Get => req.method(http::Method::GET),
@@ -182,13 +182,19 @@ impl bindings::wasiext::http::ext::Host for Ctx {
             .context("failed to build HTTP request")?;
         let (parts, ()) = req.into_parts();
 
+        let field_size_limit = 2 << 30; // match wasmtime-wasi-http default
         let req = HostIncomingRequest::new(
             self,
             parts,
             scheme.unwrap_or(wasmtime_wasi_http::bindings::http::types::Scheme::Http),
             body.map(|body| {
-                wasmtime_wasi_http::body::HostIncomingBody::new(body, Duration::from_secs(1))
+                wasmtime_wasi_http::body::HostIncomingBody::new(
+                    body,
+                    Duration::from_secs(1),
+                    field_size_limit,
+                )
             }),
+            field_size_limit,
         )
         .context("failed to construct `incoming-request`")?;
         self.table
