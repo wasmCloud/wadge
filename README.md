@@ -1,3 +1,7 @@
+> [!WARNING]
+> This repository is archived and is no longer maintained. It receives no bug fixes or security updates.
+> The source, tags, and existing releases are retained for historical reference.
+
 # `wadge`: a WebAssembly bridge
 
 `wadge` is a WebAssembly "bridge" enabling native applications to invoke Wasm functions that are ordinarily provided by a Wasm runtime. Use cases for this project include:
