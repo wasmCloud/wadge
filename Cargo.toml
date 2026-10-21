@@ -39,6 +39,6 @@ wasmtime = { version = "41", default-features = false }
 wasmtime-cabish = { version = "0.9", default-features = false }
 wasmtime-wasi = { version = "41", default-features = false }
 wasmtime-wasi-http = { version = "41", default-features = false }
-wasmtime-wasi-keyvalue = { version = "41", default-features = false }
+wasmtime-wasi-keyvalue = { version = "43", default-features = false }
 wit-bindgen = { version = "0.42", default-features = false }
 wit-component = { version = "0.217", default-features = false }
