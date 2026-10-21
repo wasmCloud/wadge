@@ -45,7 +45,14 @@ func NewOutgoingRequest(req *http.Request) (types.OutgoingRequest, func(func(pol
 			return 0, nil, fmt.Errorf("failed to set path with query to `%s`", s)
 		}
 	}
-	if s := req.URL.Hostname(); s != "" {
+	if s := req.Host; s == "" {
+		s = req.URL.Host
+		if s != "" {
+			if res.SetAuthority(cm.Some(s)) == cm.ResultErr {
+				return 0, nil, fmt.Errorf("failed to set authority to `%s`", s)
+			}
+		}
+	} else {
 		if res.SetAuthority(cm.Some(s)) == cm.ResultErr {
 			return 0, nil, fmt.Errorf("failed to set authority to `%s`", s)
 		}
